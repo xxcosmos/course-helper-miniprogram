@@ -1,0 +1,45 @@
+<block wx:if="{{course.courseType==1}}">
+  <van-panel title="{{course.courseName}}" desc="课程代码：{{course.courseCode}}" status="必修" use-footer-slot>
+
+    <van-cell-group title="课程信息">
+      <van-cell icon="smile-o" title="学分：" value="{{course.courseCredit}}" />
+      <van-cell icon="smile-o" title="总学时：" value="{{course.courseHour}}" />
+      <van-cell icon="smile-o" title="课程类别：" value="{{course.courseTypeName}}" />
+      <van-cell icon="smile-o" title="开课单位： " value="{{course.unitName}}" />
+    </van-cell-group>
+
+    <van-cell-group title="授课教师信息">
+      <block wx:for="{{teacherList}}">
+        <van-cell icon="smile-o" title="姓名：" value="平均分：{{item.average}}" label="{{item.teacherName}}" />
+      </block>
+    </van-cell-group>
+    
+    <view slot="footer">
+
+    </view>
+  </van-panel>
+</block>
+
+
+
+
+
+<block wx:else>
+  <van-panel title="{{course.courseName}}" desc="课程代码：{{course.courseCode}}" status="选修" use-footer-slot>
+    <van-cell-group title="课程信息">
+      <van-cell icon="smile-o" title="学分：" value="{{course.courseCredit}}" />
+      <van-cell icon="smile-o" title="总学时:" value="{{course.courseHour}}" />
+      <van-cell icon="smile-o" title="课程类别：" value="{{course.courseTypeName}}" />
+      <van-cell icon="smile-o" title="开课单位：" value="{{course.unitName}}" />
+    </van-cell-group>
+
+    <van-cell-group title="授课教师信息">
+      <block wx:for="{{teacherList}}">
+        <van-cell icon="smile-o" title="姓名：" value="平均分：{{item.average}}" label="{{item.teacherName}}" />
+      </block>
+    </van-cell-group>
+    <view slot="footer ">
+
+    </view>
+  </van-panel>
+</block>
