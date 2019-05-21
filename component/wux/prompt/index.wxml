@@ -1,0 +1,41 @@
+<wux-animation-group classNames="{{ classNames }}" in="{{ visible }}" wux-class="{{ classes.wrap }}">
+    <view class="{{ classes.bd }}">
+        <image class="{{ classes.icon }}" src="{{ icon }}" wx:if="{{ icon }}"/>
+        <view class="{{ classes.title }}" wx:if="{{ title }}">{{ title }}</view>
+        <view class="{{ classes.text }}" wx:if="{{ text }}">{{ text }}</view>
+        <view class="{{ classes.buttons }}" wx:if="{{ buttons && !!buttons.length }}">
+            <block wx:for="{{ buttons }}" wx:for-item="button" wx:key="index">
+                <button
+                        app-parameter="{{ button.appParameter }}"
+                        bindcontact="bindcontact"
+                        binderror="onError"
+                        bindgetphonenumber="bindgetphonenumber"
+                        bindgetuserinfo="bindgetuserinfo"
+                        bindopensetting="bindopensetting"
+                        bindtap="onTap"
+                        class="{{ classes.button[index].wrap }}"
+                        data-index="{{ index }}"
+                        disabled="{{ button.disabled }}"
+                        form-type="{{ button.formType }}"
+                        hover-class="{{ !button.disabled ? classes.button[index].hover : 'none' }}"
+                        hover-start-time="{{ button.hoverStartTime }}"
+                        hover-stay-time="{{ button.hoverStayTime }}"
+                        hover-stop-propagation="{{ button.hoverStopPropagation }}"
+                        lang="{{ button.lang }}"
+                        loading="{{ button.loading }}"
+                        open-type="{{ button.openType }}"
+                        plain="{{ button.plain }}"
+                        send-message-img="{{ button.sendMessageImg }}"
+                        send-message-path="{{ button.sendMessagePath }}"
+                        send-message-title="{{ button.sendMessageTitle }}"
+                        session-from="{{ button.sessionFrom }}"
+                        show-message-card="{{ button.showMessageCard }}"
+                        size="{{ button.size || 'default' }}"
+                        type="{{ button.type || 'default' }}"
+                >
+                    {{ button.text }}
+                </button>
+            </block>
+        </view>
+    </view>
+</wux-animation-group>

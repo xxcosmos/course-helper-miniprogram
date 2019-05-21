@@ -1,0 +1,37 @@
+<wux-popup bind:close="onPopupClose" position="bottom" visible="{{ visible }}">
+    <view class="wux-class {{ classes.wrap }}">
+        <view class="{{ classes.hd }}">
+            <view class="{{ classes.title }}" wx:if="{{ title }}">{{ title }}</view>
+            <view class="{{ classes.menus }}" wx:if="{{ activeOptions.length }}">
+                <block wx:for="{{ activeOptions }}" wx:key="">
+                    <view bindtap="onMenuClick"
+                          class="{{ classes.menu }} {{ activeIndex === index ? prefixCls + '__menu--active' : '' }}"
+                          data-menu-index="{{ index }}">{{ item[fieldNames['label']] }}
+                    </view>
+                </block>
+            </view>
+        </view>
+        <view class="{{ classes.bd }}" style="{{ bodyStyle }}">
+            <block wx:for="{{ showOptions }}" wx:for-index="optionIndex" wx:for-item="option" wx:key="">
+                <view class="{{ classes.inner }}">
+                    <scroll-view class="wux-scroll-view-class {{ classes.scrollView }}" scroll-y>
+                        <view class="{{ classes.option }}">
+                            <block wx:for="{{ option }}" wx:key="">
+                                <view
+                                        bindtap="onItemSelect"
+                                        class="{{ classes.item }} {{ activeValue[optionIndex] === item[fieldNames['value']] ? prefixCls + '__item--active' : '' }} {{ item.disabled ? prefixCls + '__item--disabled' : '' }}"
+                                        data-item="{{ item }}"
+                                        data-option-index="{{ optionIndex }}"
+                                >
+                                    <text>{{ item[fieldNames['label']] }}</text>
+                                    <icon class="{{ classes.icon }}" color="#ef473a" size="16" type="success_no_circle"
+                                          wx:if="{{ activeValue[optionIndex] === item[fieldNames['value']] }}"/>
+                                </view>
+                            </block>
+                        </view>
+                    </scroll-view>
+                </view>
+            </block>
+        </view>
+    </view>
+</wux-popup>

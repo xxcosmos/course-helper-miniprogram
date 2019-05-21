@@ -1,0 +1,11 @@
+<van-tabbar active="{{active}}" active-color="{{activeColor}}" bind:change="onChange">
+
+    <van-tabbar-item>
+        <image mode="aspectFit" slot="icon" src="{{ tab[0].icon.normal }}"/>
+        <image mode="aspectFit" slot="icon-active" src="{{ tab[0].icon.active }}"/>
+        {{tab[0].text}}
+    </van-tabbar-item>
+    <van-tabbar-item dot icon="search">{{tab[1].text}}</van-tabbar-item>
+    <van-tabbar-item icon="friends-o" info="{{tab[2].info}}">{{tab[2].text}}</van-tabbar-item>
+    <van-tabbar-item dot icon="setting-o">{{tab[3].text}}</van-tabbar-item>
+</van-tabbar>

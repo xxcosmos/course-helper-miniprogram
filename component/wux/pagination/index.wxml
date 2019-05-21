@@ -1,0 +1,22 @@
+<view class="wux-class {{ classes.wrap }}">
+    <view class="{{ classes.prev }}" wx:if="{{ mode === 'button' }}">
+        <wux-button bind:click="onPrev" disabled="{{ activeIndex <= 1 }}" type="light" wux-class="{{ classes.button }}">
+            <slot name="prev"></slot>
+        </wux-button>
+    </view>
+    <view class="{{ classes.number }}" wx:if="{{ mode !== 'pointer' && !simple }}">
+        <view class="{{ classes.active }}">{{ activeIndex }}</view>
+        /{{ total }}
+    </view>
+    <view class="{{ classes.pointer }}" wx:if="{{ mode === 'pointer' }}">
+        <block wx:for="{{ total }}" wx:key="">
+            <view class="{{ classes.dot }} {{ index + 1 === activeIndex ? prefixCls + '__dot--active' : '' }}"></view>
+        </block>
+    </view>
+    <view class="{{ classes.next }}" wx:if="{{ mode === 'button' }}">
+        <wux-button bind:click="onNext" disabled="{{ activeIndex >= total }}" type="light"
+                    wux-class="{{ classes.button }}">
+            <slot name="next"></slot>
+        </wux-button>
+    </view>
+</view>

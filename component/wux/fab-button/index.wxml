@@ -1,0 +1,38 @@
+<view class="{{ classes.backdrop }}" wx:if="{{ backdrop && buttonVisible }}"></view>
+<view catchtap="onToggle" class="wux-class {{ classes.wrap }}">
+    <view class="{{ classes.action }}" hover-class="{{ classes.hover }}">
+        <image class="{{ classes.text }}" src="{{ action }}" wx:if="{{ action }}"/>
+        <slot name="action" wx:else></slot>
+    </view>
+    <block wx:for="{{ buttons }}" wx:for-item="button" wx:key="index">
+        <button
+                app-parameter="{{ button.appParameter }}"
+                bindcontact="bindcontact"
+                binderror="onError"
+                bindgetphonenumber="bindgetphonenumber"
+                bindgetuserinfo="bindgetuserinfo"
+                bindopensetting="bindopensetting"
+                catchtap="onTap"
+                class="{{ classes.button[index].wrap }}"
+                data-index="{{ index }}"
+                data-label="{{ button.label }}"
+                data-value="{{ button }}"
+                disabled="{{ button.disabled }}"
+                hover-class="{{ !button.disabled ? classes.button[index].hover : 'none' }}"
+                hover-start-time="{{ button.hoverStartTime }}"
+                hover-stay-time="{{ button.hoverStayTime }}"
+                hover-stop-propagation="{{ button.hoverStopPropagation }}"
+                lang="{{ button.lang }}"
+                open-type="{{ button.openType }}"
+                send-message-img="{{ button.sendMessageImg }}"
+                send-message-path="{{ button.sendMessagePath }}"
+                send-message-title="{{ button.sendMessageTitle }}"
+                session-from="{{ button.sessionFrom }}"
+                show-message-card="{{ button.showMessageCard }}"
+                style="{{ buttonStyle[index] }}"
+        >
+            <image class="{{ classes.icon }}" src="{{ button.icon }}"/>
+            <view class="{{ classes.label }}" wx:if="{{ button.label }}">{{ button.label }}</view>
+        </button>
+    </block>
+</view>

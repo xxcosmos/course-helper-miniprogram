@@ -1,72 +1,80 @@
 const api = require('../../common/api.js')
 const utils = require('../../common/utils.js')
+
 Page({
 
-  /**
-   * 页面的初始数据
-   */
   data: {
     courseList: null,
     focus: true
   },
-  
-  onCancel: function(e){
+
+    onCancel: function (e) {
     wx.navigateBack({
       url: "../index/index"
     })
   },
-  goToCourse: function(e){
-    console.log(e)
+
+    goToCourse: function (e) {
     let courseCode = e.currentTarget.dataset.code
     wx.navigateTo({
-      url: "../course/course"+"?courseCode="+courseCode,
+        url: "../course/course" + "?courseCode=" + courseCode,
     })
-    
   },
-  onSearch: function(e){
+
+    onSearch: function (e) {
     let that = this
     let keyword = e.detail
-    
-    //处理为空的情况
-    if(keyword == null){
+
+        //处理为空的情况
+        if (utils.IsNull(keyword)) {
       utils.ErrorToast("请输入搜索内容")
-    }
-    
-    let token = wx.getStorageSync('token')
-    //处理token为空的情况
-    if(token==null||token==''){
-      utils.Login()
-    }else{
-      wx.request({
-        url: api.CourseSearch,
-        method: "GET",
-        header: {
-          "authorization": token,
-          'content-type': 'application/x-www-form-urlencoded'
-        },
-        data: {
-          keyword: keyword
-        },
-        success: res => {
-          if (res.data.code == 200) {
-            that.setData({
-              courseList: res.data.data
-            })
-          } else {
-            if (utils.IsSignExpired(res.data.message)) {
-              utils.Login()
-            } else {
-              utils.ErrorToast(res.data.message)
-            }
-          }
-        },
-        fail: res => {
-          utils.ErrorToast("网络请求失败，请稍后再试")
-        }
-      })
+            return
     }
 
-   
+    let token = wx.getStorageSync('token')
+
+    //处理token为空的情况
+        if (utils.IsNull(token)) {
+      utils.Login()
+            return
+        }
+
+        wx.request({
+            url: api.CourseSearch,
+            method: "GET",
+            header: {
+                "authorization": token,
+                'content-type': 'application/x-www-form-urlencoded'
+            },
+            data: {
+                keyword: keyword
+            },
+            success: res => {
+
+                if (res.statusCode != 200) {
+                    utils.ErrorToast("服务器出现问题")
+                    return
+                }
+                if (res.data.code != 200) {
+                    //返回不正常
+                    if (utils.IsSignExpired(res.data.message)) {
+                        //token失效
+                        utils.Login()
+                        return
+                    }
+                    //其他错误
+                    utils.ErrorToast(res.data.message)
+                    return
+                }
+                //返回正常
+                that.setData({
+                    courseList: res.data.data
+                })
+            }
+        })
+
+
+
 
   },
 

@@ -1,0 +1,7 @@
+<scroll-view class="wux-class {{ classes.wrap }}" scroll-x="{{ direction === 'horizontal' }}"
+             scroll-y="{{ direction === 'vertical' }}" wx:if="{{ scroll }}">
+    <slot></slot>
+</scroll-view>
+<view class="wux-class {{ classes.wrap }}" wx:else>
+    <slot></slot>
+</view>

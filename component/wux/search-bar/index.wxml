@@ -1,0 +1,38 @@
+<view class="wux-class {{ classes.wrap }}">
+    <view class="{{ classes.form }}">
+        <view class="{{ classes.box }}">
+            <icon class="{{ classes.search }}" color="#B2B2B2" size="14" type="search"/>
+            <input
+                    adjust-position="{{ adjustPosition }}"
+                    bindblur="onBlur"
+                    bindconfirm="onConfirm"
+                    bindfocus="onFocus"
+                    bindinput="onChange"
+                    class="{{ classes.input }}"
+                    confirm-hold="{{ confirmHold }}"
+                    confirm-type="{{ confirmType }}"
+                    cursor="{{ cursor }}"
+                    cursor-spacing="{{ cursorSpacing }}"
+                    disabled="{{ disabled }}"
+                    focus="{{ inputFocus }}"
+                    maxlength="{{ maxlength }}"
+                    placeholder="{{ placeholder }}"
+                    placeholder-class="{{ placeholderClass }}"
+                    placeholder-style="{{ extStyle }}"
+                    selection-end="{{ selectionEnd }}"
+                    selection-start="{{ selectionStart }}"
+                    type="text"
+                    value="{{ inputValue }}"
+            />
+            <icon bindtap="onClear" class="{{ classes.clear }}" color="#B2B2B2" size="14" type="clear"
+                  wx:if="{{ clear && !disabled && inputValue && inputValue.length > 0 }}"/>
+        </view>
+        <label bindtap="onClick" class="{{ classes.label }}" wx:if="{{ !inputFocus && !inputValue }}">
+            <icon class="{{ classes.icon }}" color="#B2B2B2" size="14" type="search"/>
+            <text class="{{ classes.text }}">{{ placeholder }}</text>
+        </label>
+    </view>
+    <view bindtap="onCancel" class="{{ classes.cancel }}"
+          wx:if="{{ showCancel || inputFocus || (inputValue && inputValue.length > 0) }}">{{ cancelText }}
+    </view>
+</view>

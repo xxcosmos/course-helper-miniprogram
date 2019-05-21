@@ -1,0 +1,82 @@
+<wxs module="utils" src="../wxs/utils.wxs"/>
+
+<van-cell
+        border="{{ border }}"
+        center="{{ center }}"
+        custom-class="van-field"
+        custom-style="{{ customStyle }}"
+        icon="{{ leftIcon }}"
+        is-link="{{ isLink }}"
+        required="{{ required }}"
+        size="{{ size }}"
+        title="{{ label }}"
+        title-width="{{ titleWidth }}"
+>
+    <slot name="left-icon" slot="icon"/>
+    <slot name="label" slot="title"/>
+    <view class="van-field__body {{ type === 'textarea' ? 'van-field__body--textarea' : '' }}">
+    <textarea
+            adjust-position="{{ adjustPosition }}"
+            auto-height="{{ autosize }}"
+            bind:blur="onBlur"
+            bind:confirm="onConfirm"
+            bind:focus="onFocus"
+            bindinput="onInput"
+            class="input-class {{ utils.bem('field__input', [inputAlign, { disabled, error }]) }}"
+            cursor-spacing="{{ cursorSpacing }}"
+            disabled="{{ disabled || readonly }}"
+            fixed="{{ fixed }}"
+            focus="{{ focus }}"
+            maxlength="{{ maxlength }}"
+            placeholder="{{ placeholder }}"
+            placeholder-class="{{ error ? 'van-field__input--error' : 'van-field__placeholder' }}"
+            placeholder-style="{{ placeholderStyle }}"
+            show-confirm-bar="{{ showConfirmBar }}"
+            value="{{ value }}"
+            wx:if="{{ type === 'textarea' }}"
+    />
+        <input
+                adjust-position="{{ adjustPosition }}"
+                bind:blur="onBlur"
+                bind:confirm="onConfirm"
+                bind:focus="onFocus"
+                bindinput="onInput"
+                class="input-class {{ utils.bem('field__input', [inputAlign, { disabled, error }]) }}"
+                confirm-hold="{{ confirmHold }}"
+                confirm-type="{{ confirmType }}"
+                cursor-spacing="{{ cursorSpacing }}"
+                disabled="{{ disabled || readonly }}"
+                focus="{{ focus }}"
+                maxlength="{{ maxlength }}"
+                placeholder="{{ placeholder }}"
+                placeholder-class="{{ error ? 'van-field__input--error' : 'van-field__placeholder' }}"
+                placeholder-style="{{ placeholderStyle }}"
+                type="{{ type }}"
+                value="{{ value }}"
+                wx:else
+        />
+        <van-icon
+                bind:touchstart="onClear"
+                class="van-field__clear-root"
+                custom-class="van-field__clear"
+                name="clear"
+                size="16px"
+                wx:if="{{ showClear }}"
+        />
+        <view bind:tap="onClickIcon" class="van-field__icon-container" wx:if="{{ icon || useIconSlot }}">
+            <van-icon
+                    custom-class="van-field__icon {{ iconClass }}"
+                    name="{{ icon }}"
+                    size="16px"
+                    wx:if="{{ icon }}"
+            />
+            <slot name="icon" wx:else/>
+        </view>
+        <view class="van-field__button" wx:if="{{ useButtonSlot }}">
+            <slot name="button"/>
+        </view>
+    </view>
+    <view class="van-field__error-message" wx:if="{{ errorMessage }}">
+        {{ errorMessage }}
+    </view>
+</van-cell>

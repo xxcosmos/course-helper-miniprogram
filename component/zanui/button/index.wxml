@@ -1,0 +1,39 @@
+<wxs module="utils" src="../wxs/utils.wxs"/>
+
+<button
+        app-parameter="{{ appParameter }}"
+        aria-label="{{ ariaLabel }}"
+        bindcontact="bindContact"
+        binderror="bindError"
+        bindgetphonenumber="bindGetPhoneNumber"
+        bindgetuserinfo="bindGetUserInfo"
+        bindlaunchapp="bindLaunchApp"
+        bindopensetting="bindOpenSetting"
+        bindtap="onClick"
+        business-id="{{ businessId }}"
+        class="custom-class {{ utils.bem('button', [type, size, { block, round, plain, square, loading, disabled, hairline, unclickable: disabled || loading }]) }} {{ hairline ? 'van-hairline--surround' : '' }}"
+        hover-class="van-button--active hover-class"
+        id="{{ id }}"
+        lang="{{ lang }}"
+        open-type="{{ openType }}"
+        send-message-img="{{ sendMessageImg }}"
+        send-message-path="{{ sendMessagePath }}"
+        send-message-title="{{ sendMessageTitle }}"
+        session-from="{{ sessionFrom }}"
+        show-message-card="{{ showMessageCard }}"
+>
+    <block wx:if="{{ loading }}">
+        <van-loading
+                color="{{ type === 'default' ? '#c9c9c9' : '' }}"
+                custom-class="loading-class"
+                size="{{ loadingSize }}"
+        />
+        <view
+                class="van-button__loading-text"
+                wx:if="{{ loadingText }}"
+        >
+            {{ loadingText }}
+        </view>
+    </block>
+    <slot wx:else/>
+</button>

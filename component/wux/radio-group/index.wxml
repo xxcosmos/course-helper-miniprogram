@@ -1,0 +1,4 @@
+<wux-cell-group label="{{ label }}" prefixCls="{{ cellGroupPrefixCls }}" title="{{ title }}"
+                wux-class="{{ prefixCls }}">
+    <slot></slot>
+</wux-cell-group>

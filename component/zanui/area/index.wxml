@@ -1,0 +1,18 @@
+<van-picker
+        active-class="active-class"
+        bind:cancel="onCancel"
+        bind:change="onChange"
+        bind:confirm="onConfirm"
+        cancel-button-text="{{ cancelButtonText }}"
+        class="van-area__picker"
+        column-class="column-class"
+        columns="{{ displayColumns }}"
+        confirm-button-text="{{ confirmButtonText }}"
+        item-height="{{ itemHeight }}"
+        loading="{{ loading }}"
+        show-toolbar
+        title="{{ title }}"
+        toolbar-class="toolbar-class"
+        value-key="name"
+        visible-item-count="{{ visibleItemCount }}"
+/>

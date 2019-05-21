@@ -1,0 +1,25 @@
+<template name="actions">
+    <block wx:for="{{ actions }}" wx:for-item="action" wx:key="">
+        <view catchtap="onTap" class="{{ classes.action }} {{ action.className }}" data-index="{{ index }}"
+              data-type="{{ type }}" data-value="{{ action }}" style="{{ action.style }}">
+            <view class="{{ classes.text }}">{{ action.text }}</view>
+        </view>
+    </block>
+</template>
+
+<view class="wux-class {{ classes.wrap }}">
+    <view catchtouchstart="onClose" class="{{ classes.cover }}" hidden="{{ !showCover }}"
+          style="{{ offsetStyle }}"></view>
+    <view catchtap="onAcitons" class="{{ classes.left }}" wx:if="{{ useSlots || left.length > 0 }}">
+        <template data="{{ classes, actions: left, type: 'left' }}" is="actions" wx:if="{{ !useSlots }}"/>
+        <slot name="left" wx:else></slot>
+    </view>
+    <view catchtap="onAcitons" class="{{ classes.right }}" wx:if="{{ useSlots || right.length > 0 }}">
+        <template data="{{ classes, actions: right, type: 'right' }}" is="actions" wx:if="{{ !useSlots }}"/>
+        <slot name="right" wx:else></slot>
+    </view>
+    <view catchtouchend="onTouchEnd" catchtouchmove="onTouchMove" catchtouchstart="onTouchStart"
+          class="{{ classes.content }}" style="{{ offsetStyle }}">
+        <slot></slot>
+    </view>
+</view>

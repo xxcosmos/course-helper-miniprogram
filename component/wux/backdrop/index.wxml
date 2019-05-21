@@ -1,0 +1,2 @@
+<wux-animation-group bind:click="onClick" classNames="{{ classNames }}" in="{{ in }}" wrapStyle="{{ { zIndex } }}"
+                     wux-class="{{ classes.wrap }}"/>

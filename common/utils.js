@@ -11,6 +11,10 @@ function isSignExpired(message) {
   return message == "签名认证失败"
 }
 
+function isNull(str) {
+    return str == null || str == "" || str == " "
+}
+
 function goToLogin() {
   let userInfo = wx.getStorageSync("userInfo")
   //缓存中无用户信息
@@ -48,12 +52,11 @@ function goToLogin() {
       }
     })
   }
-
-
 }
 
 module.exports = {
   ErrorToast: errorToast,
   IsSignExpired: isSignExpired,
   Login: goToLogin,
+    IsNull: isNull,
 }
