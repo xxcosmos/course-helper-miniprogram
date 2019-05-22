@@ -1,0 +1,28 @@
+var filters = {
+  toFix: function(value) {
+    return value.toFixed(2) //此处2为保留两位小数
+  },
+  sub: function(val) {
+    if (val.length == 0 || val == undefined) {
+      return;
+    }
+    if (val.length > 17) {
+      return val.substring(0, 17) + "...";
+    } else {
+      return val;
+    }
+  },
+  subStr: function(val, begin, end) {
+    if (val.length == 0 || val == undefined) {
+      return;
+    }
+    return val.substring(begin, end);
+
+  }
+}
+module.exports = {
+  toFix: filters.toFix,
+  sub: filters.sub,
+  subStr: filters.subStr
+
+}

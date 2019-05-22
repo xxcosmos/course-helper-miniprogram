@@ -1,36 +1,25 @@
+<wxs src="../../wxs/utils.wxs" module="filters" />
 <van-search show-action focus="{{focus}}" bind:search="onSearch" bind:cancel="onCancel" />
 
 <block wx:if="{{courseList!=null}}">
-  <block wx:for="{{courseList}}">
+  <!-- 搜索筛选 -->
+  <block wx:for="{{courseList}}" wx:key="courseCode">
     <view bindtap="goToCourse" data-code="{{item.courseCode}}">
       <van-card title="{{item.courseName}}" desc="{{item.courseTypeName}}">
 
         <!--课程属性标签 -->
         <view slot="tags">
-          <block wx:if="{{item.courseType==1}}">
-            <van-tag mark plain>必修</van-tag>
-          </block>
-          <block wx:if="{{item.courseType==2}}">
-            <van-tag mark plain>选修</van-tag>
-          </block>
+          <van-tag mark type="danger">{{item.courseType==1?"必修":"选修"}}</van-tag>
         </view>
-
+        <view slot="thumb">
+          <avatar scale size="large" body-style="background-color: #11c1f3">{{filters.subStr(item.courseName,0,1)}}</avatar>
+        </view>
       </van-card>
     </view>
   </block>
 </block>
 <block wx:else>
-  <van-tag plain size="large">假</van-tag>
-  <van-tag plain type="danger" size="large">装</van-tag>
-  <van-tag plain type="primary" size="large">有</van-tag>
-  <van-tag plain type="success" size="large">搜</van-tag>
-  <van-tag plain size="large">索</van-tag>
-  <van-tag plain type="danger" size="large">历</van-tag>
-  <van-tag plain type="primary" size="large">史</van-tag>
-  <br/>
-  <van-tag color="#f2826a" size="large">和</van-tag>
-  <van-tag color="#f2826a" plain size="large">热</van-tag>
-  <van-tag color="#7232dd" size="large">门</van-tag>
-  <van-tag color="#7232dd" plain size="large">搜</van-tag>
-  <van-tag color="#ffe1e1" size="large" text-color="#ad0000">索</van-tag>
+  <block wx:for="{{searchHistory}}" wx:key="*this">
+    <van-tag plain type="danger" size="large">{{item}}</van-tag>
+  </block>
 </block>

@@ -6,7 +6,8 @@
     "pages/course/course",
     "pages/circle/circle",
     "pages/message/message",
-    "pages/mine/mine"
+    "pages/mine/mine",
+    "pages/auth/auth"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -34,6 +35,9 @@
         "text": "我的"
       }
     ]
+  },
+  "usingComponents": {
+    "van-toast": "/component/zanui/toast/index"
   },
   "sitemapLocation": "sitemap.json"
 }

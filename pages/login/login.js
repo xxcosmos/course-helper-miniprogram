@@ -13,9 +13,6 @@ Page({
     let userInfo = e.detail.userInfo
     wx.setStorageSync("userInfo", userInfo)
     utils.Login()
-    wx.redirectTo({
-      url: '../index/index',
-    })
   },
 
 

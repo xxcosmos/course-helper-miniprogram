@@ -1,7 +1,7 @@
 import baseComponent from '../helpers/baseComponent'
 import classNames from '../helpers/classNames'
-import {parse, diff, format} from './core'
-import locales from './locales'
+import {parse, diff, format} from './core/index.js'
+import locales from './locales/index.js'
 
 baseComponent({
     properties: {

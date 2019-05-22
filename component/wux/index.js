@@ -1,5 +1,5 @@
-import $wuxCountDown from './countdown'
-import $wuxCountUp from './countup'
+import $wuxCountDown from './countdown/index.js'
+import $wuxCountUp from './countup/index.js'
 
 /**
  * 使用选择器选择组件实例节点，返回匹配到的第一个组件实例对象

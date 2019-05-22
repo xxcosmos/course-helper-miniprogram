@@ -1,4 +1,4 @@
-import qrjs from './qr.js'
+import qrjs from './qr.js/index.js'
 
 /**
  * 字符串转换成 UTF-8

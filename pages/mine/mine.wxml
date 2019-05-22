@@ -1,2 +1,21 @@
-<!--pages/mine/mine.wxml-->
-<text>pages/mine/mine.wxml</text>
+<van-card title="{{userInfo.nickname}}" desc="{{item.gender}}">
+
+  <!--课程属性标签 -->
+  <view slot="tags">
+    <block wx:if="{{userInfo.gender==1}}">
+      <van-tag mark plain type="danger">男</van-tag>
+    </block>
+    <block wx:elif="{{userInfo.gender==2}}">
+      <van-tag mark plain type="danger">女</van-tag>
+    </block>
+    <block wx:else>
+    <van-tag mark plain type="danger">未知</van-tag>
+    </block>
+  </view>
+  <view slot="thumb">
+  <avatar scale size="large" src="{{userInfo.avatarUrl}}" />
+  </view>
+<view slot="footer">
+    <van-button size="normal" type="primary" bind:click="goToAuth">{{userInfo.state==1?"已认证":"未认证"}}</van-button>
+  </view>
+</van-card>

@@ -1,3 +1,7 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "van-card": "/component/zanui/card/index",
+    "van-button": "/component/zanui/button/index",
+    "avatar": "/component/wux/avatar/index"
+  }
 }

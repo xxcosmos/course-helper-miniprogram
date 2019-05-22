@@ -1,7 +1,7 @@
 {
   "component": true,
   "usingComponents": {
-    "van-tabbar": "/zanui/tabbar/index",
-    "van-tabbar-item": "/zanui/tabbar-item/index"
+    "van-tabbar": "/component/zanui/tabbar/index",
+    "van-tabbar-item": "/component/zanui/tabbar-item/index"
   }
 }

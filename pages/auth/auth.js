@@ -1,49 +1,23 @@
+// pages/index/index.js
 const api = require('../../common/api.js')
 const utils = require('../../common/utils.js')
-
 Page({
 
+  /**
+   * 页面的初始数据
+   */
   data: {
-    courseList: null,
-    focus: true,
-    searchHistory: null
+
   },
-
-  onCancel: function(e) {
-    wx.navigateBack({
-      url: "../index/index"
-    })
+  onClickIcon: function(e) {
+    utils.ErrorToast("就是输入你的姓名啦")
   },
+  auth(e) {
+    let name = e.detail.value.name
+    let studentId = e.detail.value.studentId
 
-  goToCourse: function(e) {
-    let courseCode = e.currentTarget.dataset.code
-    wx.navigateTo({
-      url: "../course/course" + "?courseCode=" + courseCode,
-    })
-  },
-  
-  onSearch: function(e) {
-    let that = this
-    let keyword = e.detail
-
-    //处理为空的情况
-    if (utils.IsNull(keyword)) {
-      utils.ErrorToast("请输入搜索内容")
-      return
-    }
-    //设置搜索历史
-    var searchHistory = wx.getStorageSync("searchHistory")
-    if(searchHistory==undefined||searchHistory==null){
-      searchHistory = {}
-    }
-    searchHistory.concat(keyword)
-    wx.setStorageSync("searchHistory", searchHistory)
-    this.setData({
-      searchHistory: searchHistory
-    })
-
+    let that = this;
     let token = wx.getStorageSync('token')
-
     //处理token为空的情况
     if (utils.IsNull(token)) {
       utils.Login()
@@ -51,21 +25,22 @@ Page({
     }
 
     wx.request({
-      url: api.CourseSearch,
-      method: "GET",
+      url: api.Bind,
+      method: 'POST',
       header: {
         "authorization": token,
-        'content-type': 'application/x-www-form-urlencoded'
       },
       data: {
-        keyword: keyword
+        studentName: name,
+        studentId: studentId
       },
       success: res => {
-
         if (res.statusCode != 200) {
           utils.ErrorToast("服务器出现问题")
+          //Todo 网络故障处理
           return
         }
+
         if (res.data.code != 200) {
           //返回不正常
           if (utils.IsSignExpired(res.data.message)) {
@@ -78,15 +53,16 @@ Page({
           return
         }
         //返回正常
-        that.setData({
-          courseList: res.data.data
+        wx.showToast({
+          title: '认证成功',
         })
+        setTimeout(function() {
+          wx.navigateBack({
+            delta: 1
+          })
+        }, 1000)
       }
     })
-
-
-
-
   },
 
   /**
@@ -107,10 +83,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    var searchHistory = wx.getStorageSync("searchHistory")
-    this.setData({
-      searchHistory: searchHistory
-    })
+
   },
 
   /**

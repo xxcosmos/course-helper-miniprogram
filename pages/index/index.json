@@ -1,5 +1,11 @@
 {
   "usingComponents": {
-    "van-search": "/zanui/search/index"
+    "van-search": "/component/zanui/search/index",
+    "filter-bar": "/component/wux/filterbar/index",
+    "van-tab": "/component/zanui/tab/index",
+    "van-tabs": "/component/zanui/tabs/index",
+    "van-card": "/component/zanui/card/index",
+    "avatar": "/component/wux/avatar/index"
+    
   }
 }
