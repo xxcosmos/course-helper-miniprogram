@@ -1,11 +1,12 @@
 <wxs src="../../wxs/utils.wxs" module="filters" />
-<van-search show-action focus="{{focus}}" bind:search="onSearch" bind:cancel="onCancel" />
+<van-search bind:cancel="onCancel" bind:clear="onClear" bind:search="onSearch" focus show-action
+            value="{{searchValue}}"/>
 
 <block wx:if="{{courseList!=null}}">
   <!-- 搜索筛选 -->
   <block wx:for="{{courseList}}" wx:key="courseCode">
     <view bindtap="goToCourse" data-code="{{item.courseCode}}">
-      <van-card title="{{item.courseName}}" desc="{{item.courseTypeName}}">
+        <van-card desc="{{item.unitName}}" title="{{item.courseName}}">
 
         <!--课程属性标签 -->
         <view slot="tags">
@@ -19,7 +20,18 @@
   </block>
 </block>
 <block wx:else>
-  <block wx:for="{{searchHistory}}" wx:key="*this">
-    <van-tag plain type="danger" size="large">{{item}}</van-tag>
-  </block>
+    <block wx:if="{{searchHistory!=null}}">
+        <van-panel>
+            <van-row gutter="5">
+                <block wx:for="{{searchHistory}}" wx:key="item">
+                    <view data-history='{{item}}' ontap="getHistory">
+                        <van-col>
+                            <van-tag plain size="large" type="danger">{{item}}</van-tag>
+                        </van-col>
+                    </view>
+                </block>
+            </van-row>
+            <van-button bind:click="clearHistory" size="large">清除搜索历史</van-button>
+        </van-panel>
+    </block>
 </block>

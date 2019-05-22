@@ -1,10 +1,6 @@
 {
   "usingComponents": {
-    "van-panel": "/component/zanui/panel/index",
-    "van-cell": "/component/zanui/cell/index",
-    "van-cell-group": "/component/zanui/cell-group/index",
     "van-icon": "/component/zanui/icon/index",
-    "van-collapse": "/component/zanui/collapse/index",
-    "van-collapse-item": "/component/zanui/collapse-item/index"
+    "van-button": "/component/zanui/button/index"
   }
 }

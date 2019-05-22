@@ -1,23 +1,53 @@
 <wxs src="../../wxs/utils.wxs" module="filters" />
 
+
+<wux-fab-button bind:change="goToComment" bind:click="onClick" buttons="{{ buttons }}" theme="assertive"/>
+
 <van-panel title="{{course.courseName}}" desc="课程代码：{{course.courseCode}}" status="{{course.courseType==1?'必修':'选修'}}">
 
-  <van-cell-group title="课程信息">
-    <van-cell icon="smile-o" title="学分：" value="{{course.courseCredit}}" />
-    <van-cell icon="smile-o" title="总学时：" value="{{course.courseHour}}" />
-    <van-cell icon="smile-o" title="课程类别：" value="{{course.courseTypeName}}" />
-    <van-cell icon="smile-o" title="开课单位： " value="{{course.unitName}}" />
-  </van-cell-group>
-<block wx:if="{{teacherList!=null}}">
-  <van-collapse value="{{activeNames}}" bind:change="onChange">
-    <van-collapse-item title="授课教师信息" name="1">
-      <van-cell-group >
-        <block wx:for="{{teacherList}}" wx:key="teacherName">
-          <van-cell icon="smile-o" title="姓名：" value="平均分：{{filters.toFix(item.average)}}" label="{{item.teacherName}}" />
+    <van-collapse bind:change="onChangeCollapse" value="{{activeNames}}">
+
+        <van-collapse-item name="1" title="课程信息">
+            <van-cell-group>
+                <van-cell icon="smile-o" title="学分：" value="{{course.courseCredit}}"/>
+                <van-cell icon="smile-o" title="总学时：" value="{{course.courseHour}}"/>
+                <van-cell icon="smile-o" title="课程类别：" value="{{course.courseTypeName}}"/>
+                <van-cell icon="smile-o" title="开课单位： " value="{{course.unitName}}"/>
+            </van-cell-group>
+        </van-collapse-item>
+
+        <block wx:if="{{teacherList!=null}}">
+            <van-collapse-item name="2" title="授课教师列表">
+                <van-cell-group>
+                    <block wx:for="{{teacherList}}" wx:key="teacherName">
+                        <van-cell icon="smile-o" label="{{item.teacherName}}" title="姓名："
+                                  value="平均分：{{filters.toFix(item.average)}}"/>
+                    </block>
+                </van-cell-group>
+            </van-collapse-item>
         </block>
-      </van-cell-group>
-    </van-collapse-item>
-  </van-collapse>
-  </block>
-  
+
+    </van-collapse>
+    <van-panel title="课程评分">
+        <van-row>
+            <van-col offset="8" span="8">
+                <van-rate readonly value="{{ courseGrade }}"/>
+            </van-col>
+        </van-row>
+    </van-panel>
+
+    <van-panel title="课程评价">
+
+        <wux-card wx:for="{{commentList}}" wx:key="nickname">
+            <view slot="body">
+                <avatar scale size="large" src="{{item.avatarUrl}}"/>
+                {{item.nickname}}{{item.time}}{{item.content}}
+            </view>
+            <view slot="footer">
+                <van-icon info="9" name="thumb-circle-o "/>
+                <van-button size="mini ">按钮</van-button>
+
+            </view>
+        </wux-card>
+    </van-panel>
 </van-panel>

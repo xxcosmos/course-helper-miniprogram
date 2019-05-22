@@ -8,10 +8,26 @@ Page({
   data: {
     course: null,
     teacherList: null,
-    activeNames: ['1']
+      activeNames: ['1'],
+      courseGrade: 4,
+      commentList: [
+          {
+              avatarUrl: "https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640",
+              nickname: "周杰伦",
+              content: "我觉得这节课不ok",
+              time: "2019-5-20"
+          }
+      ]
   },
 
-  onChange:function(e){
+    goToComment: function () {
+        wx.setStorageSync("course", this.data.course)
+        wx.navigateTo({
+            url: '../comment/comment',
+        })
+  },
+
+    onChangeCollapse: function (e) {
     this.setData({
       activeNames: e.detail
     });

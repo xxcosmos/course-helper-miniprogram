@@ -9,13 +9,13 @@
       <van-tag mark plain type="danger">女</van-tag>
     </block>
     <block wx:else>
-    <van-tag mark plain type="danger">未知</van-tag>
+        <van-tag mark plain type="danger">未知</van-tag>
     </block>
   </view>
   <view slot="thumb">
-  <avatar scale size="large" src="{{userInfo.avatarUrl}}" />
+      <avatar scale size="large" src="{{userInfo.avatarUrl}}"/>
   </view>
-<view slot="footer">
+    <view slot="footer">
     <van-button size="normal" type="primary" bind:click="goToAuth">{{userInfo.state==1?"已认证":"未认证"}}</van-button>
   </view>
 </van-card>

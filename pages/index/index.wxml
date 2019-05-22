@@ -24,7 +24,7 @@
 <block wx:if="{{courseList!=null}}">
   <block wx:for="{{courseList}}" wx:key="courseCode">
     <view bindtap="goToCourse" data-code="{{item.courseCode}}">
-      <van-card title="{{item.courseName}}" desc="{{item.courseTypeName}}">
+        <van-card desc="{{item.unitName}}" title="{{item.courseName}}">
 
         <!--课程属性标签 -->
         <view slot="tags">

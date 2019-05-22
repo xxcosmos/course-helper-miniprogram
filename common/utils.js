@@ -12,7 +12,7 @@ function isSignExpired(message) {
 }
 
 function isNull(str) {
-  return str == null || str == "" || str == " "
+    return str == null || str == "" || str == " " || str == undefined
 }
 
 function getCourseList(url) {
@@ -79,6 +79,7 @@ function goToLogin() {
               let token = res.data.data
               console.log(token)
               wx.setStorageSync('token', token)
+                getUserInfo()
               wx.navigateBack({
                 delta: 1
               })
@@ -92,6 +93,42 @@ function goToLogin() {
   }
 }
 
+function getUserInfo() {
+    let token = wx.getStorageSync('token')
+    //处理token为空的情况
+    if (isNull(token)) {
+        this.goToLogin()
+        return
+    }
+    wx.request({
+        url: api.User,
+        method: "GET",
+        header: {
+            "authorization": token,
+        },
+        success: res => {
+
+            if (res.statusCode != 200) {
+                errorToast("服务器出现问题")
+                return
+            }
+            if (res.data.code != 200) {
+                //返回不正常
+                if (isSignExpired(res.data.message)) {
+                    //token失效
+                    goToLogin()
+                    return
+                }
+                //其他错误
+                errorToast(res.data.message)
+                return
+            }
+            //返回正常
+            console.log(res.data.data)
+            wx.setStorageSync("userInfo", res.data.data);
+        }
+    })
+}
 module.exports = {
   ErrorToast: errorToast,
   IsSignExpired: isSignExpired,

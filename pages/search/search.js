@@ -1,48 +1,53 @@
 const api = require('../../common/api.js')
 const utils = require('../../common/utils.js')
-
+import Toast from '../../component/zanui/toast/toast';
 Page({
 
   data: {
     courseList: null,
     focus: true,
-    searchHistory: null
+      searchHistory: null,
+      searchValue: null
   },
 
+    //点击搜索框取消按钮事件
   onCancel: function(e) {
     wx.navigateBack({
-      url: "../index/index"
+        delta: 1
     })
   },
-
+    //点击课程事件
   goToCourse: function(e) {
     let courseCode = e.currentTarget.dataset.code
     wx.navigateTo({
       url: "../course/course" + "?courseCode=" + courseCode,
     })
   },
-  
+    onClear() {
+        this.setData({
+            courseList: null
+        })
+    },
+    getHistory(e) {
+        this.setData({
+            searchValue: e.currentTarget.dataset.history
+        })
+        let event = {
+            detail: e.currentTarget.dataset.history
+        };
+        this.onSearch(event)
+    },
   onSearch: function(e) {
     let that = this
     let keyword = e.detail
 
     //处理为空的情况
     if (utils.IsNull(keyword)) {
-      utils.ErrorToast("请输入搜索内容")
+        Toast.fail("请输入搜索内容")
       return
     }
-    //设置搜索历史
-    var searchHistory = wx.getStorageSync("searchHistory")
-    if(searchHistory==undefined||searchHistory==null){
-      searchHistory = {}
-    }
-    searchHistory.concat(keyword)
-    wx.setStorageSync("searchHistory", searchHistory)
-    this.setData({
-      searchHistory: searchHistory
-    })
 
-    let token = wx.getStorageSync('token')
+      let token = wx.getStorageSync('token') || null
 
     //处理token为空的情况
     if (utils.IsNull(token)) {
@@ -63,7 +68,7 @@ Page({
       success: res => {
 
         if (res.statusCode != 200) {
-          utils.ErrorToast("服务器出现问题")
+            Toast.fail("服务器出现问题")
           return
         }
         if (res.data.code != 200) {
@@ -74,26 +79,41 @@ Page({
             return
           }
           //其他错误
-          utils.ErrorToast(res.data.message)
+            Toast.fail(res.data.message)
           return
         }
         //返回正常
         that.setData({
           courseList: res.data.data
         })
+          //设置搜索历史
+          var searchHistory = wx.getStorageSync("searchHistory") || []
+          //数组去重
+          if (searchHistory.indexOf(keyword) == -1) { //判断在arr数组中是否存在，不存在则unshift到arr数组中
+              searchHistory.push(keyword)
+              wx.setStorageSync("searchHistory", searchHistory)
+              this.setData({
+                  searchHistory: searchHistory
+              })
+
+          }
       }
     })
-
-
-
-
   },
-
+    clearHistory(e) {
+        this.setData({
+            searchHistory: null
+        }),
+            wx.removeStorageSync("searchHistory")
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+      var searchHistory = wx.getStorageSync("searchHistory") || null
+      this.setData({
+          searchHistory: searchHistory
+      })
   },
 
   /**
@@ -107,10 +127,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    var searchHistory = wx.getStorageSync("searchHistory")
-    this.setData({
-      searchHistory: searchHistory
-    })
+
   },
 
   /**

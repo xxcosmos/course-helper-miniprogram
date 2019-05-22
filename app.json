@@ -7,7 +7,9 @@
     "pages/circle/circle",
     "pages/message/message",
     "pages/mine/mine",
-    "pages/auth/auth"
+    "pages/auth/auth",
+    "pages/egg/egg",
+    "pages/comment/comment"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -37,7 +39,31 @@
     ]
   },
   "usingComponents": {
-    "van-toast": "/component/zanui/toast/index"
+    "van-toast": "/component/zanui/toast/index",
+    "van-row": "/component/zanui/row/index",
+    "van-col": "/component/zanui/col/index",
+    "van-card": "/component/zanui/card/index",
+    "van-button": "/component/zanui/button/index",
+    "van-search": "/component/zanui/search/index",
+    "van-tag": "/component/zanui/tag/index",
+    "avatar": "/component/wux/avatar/index",
+    "van-panel": "/component/zanui/panel/index",
+    "van-cell": "/component/zanui/cell/index",
+    "van-cell-group": "/component/zanui/cell-group/index",
+    "van-icon": "/component/zanui/icon/index",
+    "van-collapse": "/component/zanui/collapse/index",
+    "van-collapse-item": "/component/zanui/collapse-item/index",
+    "filter-bar": "/component/wux/filterbar/index",
+    "wux-card": "/component/wux/card/index",
+    "wux-wing-blank": "/component/wux/wing-blank/index",
+    "wux-fab-button": "/component/wux/fab-button/index",
+    "van-tab": "/component/zanui/tab/index",
+    "van-tabs": "/component/zanui/tabs/index",
+    "van-notice-bar": "/component/zanui/notice-bar/index",
+    "van-field": "/component/zanui/field/index",
+    "van-rate": "/component/zanui/rate/index",
+    "van-radio": "/component/zanui/radio/index",
+    "van-radio-group": "/component/zanui/radio-group/index"
   },
   "sitemapLocation": "sitemap.json"
 }

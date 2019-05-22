@@ -47,43 +47,6 @@ Page({
             })
         }
 
-      let that = this
-      let token = wx.getStorageSync('token')
-      //处理token为空的情况
-      if (utils.IsNull(token)) {
-        utils.Login()
-        return
-      }
-      wx.request({
-        url: api.User,
-        method: "GET",
-        header: {
-          "authorization": token,
-        },
-        success: res => {
-
-          if (res.statusCode != 200) {
-            utils.ErrorToast("服务器出现问题")
-            return
-          }
-          if (res.data.code != 200) {
-            //返回不正常
-            if (utils.IsSignExpired(res.data.message)) {
-              //token失效
-              utils.Login()
-              return
-            }
-            //其他错误
-            utils.ErrorToast(res.data.message)
-            return
-          }
-          //返回正常
-          console.log(res.data.data)
-          that.setData({
-            userInfo: res.data.data
-          })
-        }
-      })
     },
 
     /**
