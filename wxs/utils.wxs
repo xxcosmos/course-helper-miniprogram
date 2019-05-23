@@ -18,11 +18,15 @@ var filters = {
     }
     return val.substring(begin, end);
 
-  }
+  },
+
+  
 }
+
 module.exports = {
   toFix: filters.toFix,
   sub: filters.sub,
-  subStr: filters.subStr
+  subStr: filters.subStr,
+
 
 }

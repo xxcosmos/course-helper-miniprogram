@@ -74,6 +74,11 @@ Page({
                 }
                 //返回正常
                 utils.ErrorToast(res.data.message)
+                setTimeout(function () {
+                    wx.navigateBack({
+                        delta: 1
+                    })
+                }, 1000)
             }
         })
 

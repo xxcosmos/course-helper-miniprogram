@@ -55,6 +55,7 @@
     "van-collapse-item": "/component/zanui/collapse-item/index",
     "filter-bar": "/component/wux/filterbar/index",
     "wux-card": "/component/wux/card/index",
+    "wux-timeago": "/component/wux/timeago/index",
     "wux-wing-blank": "/component/wux/wing-blank/index",
     "wux-fab-button": "/component/wux/fab-button/index",
     "van-tab": "/component/zanui/tab/index",
