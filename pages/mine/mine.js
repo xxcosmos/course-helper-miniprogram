@@ -47,6 +47,11 @@ Page({
             })
         }
 
+        let userInfo = wx.getStorageSync("userInfo")
+        this.setData({
+            userInfo: userInfo
+        })
+
     },
 
     /**

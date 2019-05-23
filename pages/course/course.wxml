@@ -1,7 +1,8 @@
 <wxs src="../../wxs/utils.wxs" module="filters" />
 
 
-<wux-fab-button bind:change="goToComment" bind:click="onClick" buttons="{{ buttons }}" theme="assertive"/>
+<wux-fab-button actionRotate="{{ false }}" bind:change="goToComment" bind:click="onClick" buttons="{{ buttons }}"
+                theme="assertive"/>
 
 <van-panel title="{{course.courseName}}" desc="课程代码：{{course.courseCode}}" status="{{course.courseType==1?'必修':'选修'}}">
 
@@ -38,14 +39,21 @@
 
     <van-panel title="课程评价">
 
-        <wux-card wx:for="{{commentList}}" wx:key="nickname">
+        <wux-card wx:for="{{commentList}}" wx:key="comment.id">
             <view slot="body">
-                <avatar scale size="large" src="{{item.avatarUrl}}"/>
-                {{item.nickname}}{{item.time}}{{item.content}}
+                <avatar scale size="large" src="{{item.userVO.avatarUrl}}"/>
+                {{item.userVO.nickname}}
+                <wux-timeago to="{{item.comment.createTime}}"/>
+                {{item.comment.content}}{{item.comment.star}}{{item.userVO.state==1?"已认证":"未认证"}}
             </view>
             <view slot="footer">
-                <van-icon info="9" name="thumb-circle-o "/>
-                <van-button size="mini ">按钮</van-button>
+                <view wx:if="{{item.like==true}}">
+                    已点赞
+                </view>
+                <view wx:else>
+                    未点赞
+                </view>
+                <van-icon info="{{item.comment.likeNum}}" name="thumb-circle-o "/>
 
             </view>
         </wux-card>
