@@ -6,6 +6,21 @@
 
 <van-panel title="{{course.courseName}}" desc="课程代码：{{course.courseCode}}" status="{{course.courseType==1?'必修':'选修'}}">
 
+    <van-panel>
+        <view slot="header">
+            <van-row>
+                <van-col>
+                    课程评分
+                </van-col>
+                <van-col>
+                    <van-rate readonly value="{{ courseGrade }}"/>
+                </van-col>
+                <van-col>123人已评价</van-col>
+
+            </van-row>
+        </view>
+    </van-panel>
+
     <van-collapse bind:change="onChangeCollapse" value="{{activeNames}}">
 
         <van-collapse-item name="1" title="课程信息">
@@ -29,33 +44,56 @@
         </block>
 
     </van-collapse>
-    <van-panel title="课程评分">
+
+
+    <van-panel>
         <van-row>
             <van-col offset="8" span="8">
-                <van-rate readonly value="{{ courseGrade }}"/>
+                <van-icon bind:click="goToFile" name="description" size="40px"/>
+            </van-col>
+            <van-col span="8">
+                <van-icon bind:click="goToPhoto" name="photo-o" size="40px"/>
             </van-col>
         </van-row>
     </van-panel>
 
+
     <van-panel title="课程评价">
 
-        <wux-card wx:for="{{commentList}}" wx:key="comment.id">
-            <view slot="body">
+        <van-card wx:for="{{commentList}}" wx:key="comment.id">
+            <view slot="thumb">
                 <avatar scale size="large" src="{{item.userVO.avatarUrl}}"/>
-                {{item.userVO.nickname}}
-                <wux-timeago to="{{item.comment.createTime}}"/>
-                {{item.comment.content}}{{item.comment.star}}{{item.userVO.state==1?"已认证":"未认证"}}
             </view>
-            <view slot="footer">
-                <view wx:if="{{item.like==true}}">
-                    已点赞
-                </view>
-                <view wx:else>
-                    未点赞
-                </view>
-                <van-icon info="{{item.comment.likeNum}}" name="thumb-circle-o "/>
+            <view slot="title">
+                <van-row>
+                    <van-col> {{item.userVO.nickname}}</van-col>
+                    <van-col offset="2">
+                        <van-tag plain type="danger" wx:if="{{item.userVO.state==1}}">认证用户</van-tag>
+                    </van-col>
+                    <van-col offset="11">
+                        <wux-timeago to="{{item.comment.createTime}}"/>
+                    </van-col>
+                </van-row>
+            </view>
+            <view slot="desc">
+                {{item.comment.content}} {{item.comment.star}}
 
             </view>
-        </wux-card>
+
+
+            <view slot="footer">
+                <view wx:if="{{item.like==true}}">
+                    <van-icon bind:click="onLike" data-id='{{item.comment.id}}' data-index='{{index}}'
+                              info="{{item.comment.likeNum}}"
+                              name="https://inwust-1251756217.cos.ap-chengdu.myqcloud.com/like_highlight.png"/>
+                </view>
+                <view wx:else>
+                    <van-icon bind:click="onLike" data-id='{{item.comment.id}}' data-index='{{index}}'
+                              info="{{item.comment.likeNum}}"
+                              name="https://inwust-1251756217.cos.ap-chengdu.myqcloud.com/like_plain.png"/>
+                </view>
+
+            </view>
+        </van-card>
     </van-panel>
 </van-panel>

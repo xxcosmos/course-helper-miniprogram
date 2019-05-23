@@ -9,7 +9,9 @@
     "pages/mine/mine",
     "pages/auth/auth",
     "pages/egg/egg",
-    "pages/comment/comment"
+    "pages/comment/comment",
+    "pages/file/file",
+    "pages/photo/photo"
   ],
   "window": {
     "backgroundTextStyle": "light",

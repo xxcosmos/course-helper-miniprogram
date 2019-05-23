@@ -11,4 +11,8 @@ module.exports = {
   RecommendCourse: baseURL+'/course/recommend',
   Comment: baseURL + '/comment',
   CommentForCourse: baseURL + '/comment/course',
+    Like: baseURL + '/like',
+    Auth: baseURL + '/auth',
+    CosAuth: baseURL + '/auth/cos',
+    FileInfo: baseURL + '/file/info'
 };

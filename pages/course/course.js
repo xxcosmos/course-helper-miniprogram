@@ -12,25 +12,75 @@ Page({
       courseGrade: 4,
       commentList: null
   },
+    onLike(e) {
+        console.log(e)
+        let that = this
+        let index = e.target.dataset.index
+        let token = wx.getStorageSync('token')
+        let userInfo = wx.getStorageSync("userInfo")
+        console.log(userInfo)
+        //处理token为空的情况
+        if (utils.IsNull(token) || utils.IsNull(userInfo)) {
+            utils.Login()
+            return
+        }
+
+        wx.request({
+            url: api.Like,
+            method: 'POST',
+            header: {
+                "authorization": token,
+            },
+            data: {
+                ownerId: e.target.dataset.id,
+            },
+            success: res => {
+                if (res.statusCode != 200) {
+                    utils.ErrorToast("服务器出现问题")
+                    //Todo 网络故障处理
+                    return
+                }
+
+                if (res.data.code != 200) {
+                    //返回不正常
+                    if (utils.IsSignExpired(res.data.message)) {
+                        //token失效
+                        utils.Login()
+                        return
+                    }
+                    //其他错误
+                    utils.ErrorToast(res.data.message)
+                    return
+                }
+                //返回正常 修改本地数据
+                let commentList = that.data.commentList
+                if (commentList[index].like == true) {
+                    commentList[index].like = false;
+                    commentList[index].comment.likeNum -= 1
+                } else {
+                    commentList[index].like = true
+                    commentList[index].comment.likeNum += 1
+                }
+                that.setData({
+                    commentList: commentList
+                })
+            }
+        })
+    },
     toDate: function (date) {
         console.log(date)
         var arr = date.split('T');
         var d = arr[0];
         var darr = d.split('-');
-
         var t = arr[1];
         var tarr = t.split('.000');
         var marr = tarr[0].split(':');
-
         var dd = parseInt(darr[0]) + "/" + parseInt(darr[1]) + "/" + parseInt(darr[2]) + " " + parseInt(marr[0]) + ":" + parseInt(marr[1]) + ":" + parseInt(marr[2]);
         return this.formatDateTime(dd);
-
     },
     formatDateTime(date) {
         var time = new Date(Date.parse(date));
         time.setTime(time.setHours(time.getHours()));
-
-
         let Y = time.getFullYear() + '-';
         let M = this.addZero(time.getMonth() + 1) + '-';
         let D = this.addZero(time.getDate()) + ' ';
@@ -51,7 +101,16 @@ Page({
             url: '../comment/comment',
         })
   },
-
+    goToFile() {
+        wx.navigateTo({
+            url: '../file/file?courseCode=' + this.data.course.courseCode,
+        })
+    },
+    goToPhoto() {
+        wx.navigateTo({
+            url: '../photo/photo?courseCode=' + this.data.course.courseCode,
+        })
+    },
     onChangeCollapse: function (e) {
     this.setData({
       activeNames: e.detail
@@ -104,8 +163,8 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
-
+  onShow: function (options) {
+    
   },
 
   /**
