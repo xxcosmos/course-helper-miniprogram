@@ -1,27 +1,52 @@
-// pages/photo/photo.js
+const api = require('../../common/api.js');
+const utils = require('../../common/utils.js');
+import Toast from '../../component/zanui/toast/toast';
+
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
+        tempFile: null,
         courseCode: null,
     },
-    goToUpload(e) {
-        wx.navigateTo({
-            url: '/pages/upload/image',
-        })
+
+    onUploadFile(e) {
+        let that = this;
+        let fileDescription = e.detail.value.fileDescription;
+        if (utils.IsNull(fileDescription)) {
+            Toast.fail("请输入文件描述哦");
+            return
+        }
+
+        let data = {
+            ownerId: that.data.courseCode,
+            type: that.data.tempFile.type,
+            fileDescription: fileDescription,
+            fileName: that.data.tempFile.name,
+            size: that.data.tempFile.size
+        };
+        let response = utils.RequestWithDataByAuth('POST', api.File, data);
+        utils.CosDao.postObject(that.data.tempFile, response);
+        utils.GoBackWithTimeout();
     },
+
+
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        let tempFile = wx.getStorageSync("tempFile");
         let courseCode = wx.getStorageSync("courseCode");
         this.setData({
-            courseCode: courseCode
+            courseCode: courseCode,
+            tempFile: tempFile
         })
     },
 
+
+//---------以上为代码-----------
     /**
      * 生命周期函数--监听页面初次渲染完成
      */

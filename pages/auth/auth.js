@@ -1,6 +1,8 @@
-// pages/index/index.js
-const api = require('../../common/api.js')
-const utils = require('../../common/utils.js')
+let api = require('../../common/api');
+let util = require('../../common/util');
+let utils = require('../../common/utils');
+import Toast from 'component/zanui/toast/toast';
+
 Page({
 
   /**
@@ -9,63 +11,30 @@ Page({
   data: {
 
   },
+
   onClickIcon: function(e) {
-    utils.ErrorToast("就是输入你的姓名啦")
+      Toast("就是输入你的姓名啦")
   },
+
   auth(e) {
-    let name = e.detail.value.name
-    let studentId = e.detail.value.studentId
+      let name = e.detail.value.name;
+      let studentId = e.detail.value.studentId;
 
     let that = this;
-    let token = wx.getStorageSync('token')
-    //处理token为空的情况
-    if (utils.IsNull(token)) {
-      utils.Login()
-      return
-    }
-
-    wx.request({
-      url: api.Bind,
-      method: 'POST',
-      header: {
-        "authorization": token,
-      },
-      data: {
-        studentName: name,
-        studentId: studentId
-      },
-      success: res => {
-        if (res.statusCode != 200) {
-          utils.ErrorToast("服务器出现问题")
-          //Todo 网络故障处理
-          return
-        }
-
-        if (res.data.code != 200) {
-          //返回不正常
-          if (utils.IsSignExpired(res.data.message)) {
-            //token失效
-            utils.Login()
-            return
-          }
-          //其他错误
-          utils.ErrorToast(res.data.message)
-          return
-        }
+      let data = {
+          studentName: name,
+          studentId: studentId
+      };
+      let response = utils.RequestWithDataByAuth('POST', api.Bind, data);
         //返回正常
-        wx.showToast({
-          title: '认证成功',
-        })
-        setTimeout(function() {
-          wx.navigateBack({
-            delta: 1
-          })
-        }, 1000)
+      if (response === "success") {
+          Toast.success();
+          utils.GoBackWithTimeout();
       }
-    })
   },
 
-  /**
+
+    /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
@@ -120,4 +89,4 @@ Page({
   onShareAppMessage: function() {
 
   }
-})
+});

@@ -1,0 +1,4 @@
+<wux-upload bind:change="onChange" bind:preview="onPreview" bind:remove="onRemove" listType="picture-card"
+            sizetype="['original']">
+    <button type="default">上传图片</button>
+</wux-upload>

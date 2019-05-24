@@ -1,44 +1,45 @@
+<van-toast id="van-toast"/>
 <wxs src="../../wxs/utils.wxs" module="filters" />
 <van-toast id="van-toast" />
 武汉科技大学
 <view bindtap='toSearch'>
-  <van-search placeholder="请输入搜索关键词" />
+    <van-search placeholder="请输入搜索关键词" />
 </view>
 <swiper indicator-dots='{{indicatorDots}}' autoplay='{{autoplay}}'>
-  <block wx:for="{{imgUrls}}" wx:key="*this">
-    <swiper-item>
-      <image src="{{item}}" />
-    </swiper-item>
-  </block>
+    <block wx:for="{{imgUrls}}" wx:key="*this">
+        <swiper-item>
+            <image src="{{item}}" />
+        </swiper-item>
+    </block>
 </swiper>
 <van-tabs sticky animated swipeable bind:click="onClick">
-  <van-tab title="热门课程"> </van-tab>
-  <van-tab title="推荐评价"></van-tab>
+    <van-tab title="热门课程"> </van-tab>
+    <van-tab title="推荐评价"></van-tab>
 
-  <van-tab title="全部课程">
-    <filter-bar items="{{ items }}" bind:change="onChange" />
-  </van-tab>
+    <van-tab title="全部课程">
+        <filter-bar items="{{ items }}" bind:change="onChange" />
+    </van-tab>
 
 </van-tabs>
 
 <block wx:if="{{courseList!=null}}">
-  <block wx:for="{{courseList}}" wx:key="courseCode">
-    <view bindtap="goToCourse" data-code="{{item.courseCode}}">
-        <van-card desc="{{item.unitName}}" title="{{item.courseName}}">
+    <block wx:for="{{courseList}}" wx:key="courseCode">
+        <view bindtap="goToCourse" data-code="{{item.courseCode}}">
+            <van-card desc="{{item.unitName}}" title="{{item.courseName}}">
 
-        <!--课程属性标签 -->
-        <view slot="tags">
-          <block wx:if="{{item.courseType==1}}">
-            <van-tag plain type="danger">必修</van-tag>
-          </block>
-          <block wx:elif="{{item.courseType==2}}">
-            <van-tag plain type="danger">选修</van-tag>
-          </block>
+                <!--课程属性标签 -->
+                <view slot="tags">
+                    <block wx:if="{{item.courseType==1}}">
+                        <van-tag plain type="danger">必修</van-tag>
+                    </block>
+                    <block wx:elif="{{item.courseType==2}}">
+                        <van-tag plain type="danger">选修</van-tag>
+                    </block>
+                </view>
+                <view slot="thumb">
+                    <avatar scale size="large" body-style="background-color: #11c1f3" >{{filters.subStr(item.courseName,0,1)}}</avatar>
+                </view>
+            </van-card>
         </view>
-        <view slot="thumb">
-          <avatar scale size="large" body-style="background-color: #11c1f3" >{{filters.subStr(item.courseName,0,1)}}</avatar>
-        </view>
-      </van-card>
-    </view>
-  </block>
+    </block>
 </block>

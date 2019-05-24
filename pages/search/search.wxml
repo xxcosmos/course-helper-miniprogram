@@ -1,5 +1,5 @@
 <wxs src="../../wxs/utils.wxs" module="filters" />
-<van-search bind:cancel="onCancel" bind:clear="onClear" bind:search="onSearch" focus show-action
+<van-search bind:cancel="onCancel" bind:change="onChange" bind:clear="onClear" bind:search="onSearch" focus show-action
             value="{{searchValue}}"/>
 
 <block wx:if="{{courseList!=null}}">

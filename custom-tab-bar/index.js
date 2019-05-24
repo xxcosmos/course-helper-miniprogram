@@ -12,37 +12,37 @@ Component({
         active: 0,
         activeColor: "#07c160",
         tab: [{
-            info: 1,
+            info: 0,
             dot: true,
             icon: {
-                normal: 'https://www.easyicon.net/download/png/1199082/1553/',
-                active: 'https://www.easyicon.net/download/png/1199082/1553/'
+                normal: '/img.yzcdn.cn/icon-normal.png',
+                active: '//img.yzcdn.cn/icon-active.png'
             },
             pagePath: "/pages/index/index",
             text: "首页"
         },
-            {
-                info: 2,
-                dot: true,
-                icon: {
-                    normal: '//img.yzcdn.cn/icon-normal.png',
-                    active: '//img.yzcdn.cn/icon-active.png'
-                },
-                pagePath: "/pages/circle/circle",
-                text: "圈子"
-            },
+            // {
+            //     info: 1,
+            //     dot: true,
+            //     icon: {
+            //         normal: '//img.yzcdn.cn/icon-normal.png',
+            //         active: '//img.yzcdn.cn/icon-active.png'
+            //     },
+            //     pagePath: "/pages/circle/circle",
+            //     text: "圈子"
+            // },
+            // {
+            //     info: 2,
+            //     dot: true,
+            //     icon: {
+            //         normal: '//img.yzcdn.cn/icon-normal.png',
+            //         active: '//img.yzcdn.cn/icon-active.png'
+            //     },
+            //     pagePath: "/pages/message/message",
+            //     text: "消息"
+            // },
             {
                 info: 3,
-                dot: true,
-                icon: {
-                    normal: '//img.yzcdn.cn/icon-normal.png',
-                    active: '//img.yzcdn.cn/icon-active.png'
-                },
-                pagePath: "/pages/message/message",
-                text: "消息"
-            },
-            {
-                info: 4,
                 dot: true,
                 icon: {
                     normal: '//img.yzcdn.cn/icon-normal.png',
@@ -62,14 +62,15 @@ Component({
     methods: {
 
         onChange(event) {
-            let index = event.detail
+            let index = event.detail;
+            this.setData({
+                active: index
+            });
             wx.switchTab({
                 url: this.data.tab[index].pagePath,
             })
-            this.setData({
-                active: index
-            })
+
         }
 
     }
-})
+});

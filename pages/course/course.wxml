@@ -1,8 +1,7 @@
 <wxs src="../../wxs/utils.wxs" module="filters" />
 
 
-<wux-fab-button actionRotate="{{ false }}" bind:change="goToComment" bind:click="onClick" buttons="{{ buttons }}"
-                theme="assertive"/>
+<wux-fab-button actionRotate="{{false}}" bind:change="goToComment" theme="energized"/>
 
 <van-panel title="{{course.courseName}}" desc="课程代码：{{course.courseCode}}" status="{{course.courseType==1?'必修':'选修'}}">
 
@@ -13,9 +12,9 @@
                     课程评分
                 </van-col>
                 <van-col>
-                    <van-rate readonly value="{{ courseGrade }}"/>
+                    <van-rate readonly value="{{ averageStar }}"/>
                 </van-col>
-                <van-col>123人已评价</van-col>
+                <van-col>{{commentList.length}}条评价</van-col>
 
             </van-row>
         </view>
@@ -48,7 +47,7 @@
 
     <van-panel>
         <van-row>
-            <van-col offset="8" span="8">
+            <van-col offset="4" span="8">
                 <van-icon bind:click="goToFile" name="description" size="40px"/>
             </van-col>
             <van-col span="8">
@@ -83,11 +82,13 @@
 
             <view slot="footer">
                 <view wx:if="{{item.like==true}}">
+                    有用
                     <van-icon bind:click="onLike" data-id='{{item.comment.id}}' data-index='{{index}}'
                               info="{{item.comment.likeNum}}"
                               name="https://inwust-1251756217.cos.ap-chengdu.myqcloud.com/like_highlight.png"/>
                 </view>
                 <view wx:else>
+                    有用
                     <van-icon bind:click="onLike" data-id='{{item.comment.id}}' data-index='{{index}}'
                               info="{{item.comment.likeNum}}"
                               name="https://inwust-1251756217.cos.ap-chengdu.myqcloud.com/like_plain.png"/>

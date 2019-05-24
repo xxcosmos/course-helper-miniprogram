@@ -11,7 +11,9 @@
     "pages/egg/egg",
     "pages/comment/comment",
     "pages/file/file",
-    "pages/photo/photo"
+    "pages/photo/photo",
+    "pages/upload/file",
+    "pages/upload/image"
   ],
   "window": {
     "backgroundTextStyle": "light",
