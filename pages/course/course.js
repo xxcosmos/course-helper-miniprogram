@@ -18,12 +18,20 @@ Page({
     onLike(e) {
         let that = this;
         let index = e.target.dataset.index;
+        that.setData({
+            index: index
+        });
         let userInfo = wx.getStorageSync("userInfo");
         if (utils.IsNull(userInfo)) {
             utils.Login();
             return
         }
-        let response = utils.RequestWithDataByAuth('POST', api.Like, {ownerId: e.target.dataset.id});
+        utils.RequestWithDataByAuth('POST', api.Like, {ownerId: e.target.dataset.id}, that.likeCallback);
+
+    },
+    likeCallback(res) {
+        let that = this;
+        let index = that.data.index;
         let commentList = that.data.commentList;
         if (commentList[index].like === true) {
             commentList[index].like = false;
@@ -66,8 +74,19 @@ Page({
     getCourseData() {
         let that = this;
         let courseCode = wx.getStorageSync('courseCode');
-        let response = utils.RequestWithoutDataNoAuth('GET', api.Course + '/' + courseCode);
+        let token = wx.getStorageSync('token')
+        if (utils.IsNull(token)) {
+            utils.RequestWithoutDataNoAuth('GET', api.Course + '/' + courseCode, that.getCourseDataCallback);
 
+        } else {
+            utils.RequestWithoutDataAuth('GET', api.Course + '/' + courseCode, that.getCourseDataCallback);
+
+        }
+
+
+    },
+    getCourseDataCallback(response) {
+        let that = this;
         //将GMT 转换成标准格式
         for (let i = 0; i < response.commentVOList.length; i++) {
             response.commentVOList[i].comment.createTime = utils.ToDate(response.commentVOList[i].comment.createTime)

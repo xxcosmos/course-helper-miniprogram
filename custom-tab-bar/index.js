@@ -15,8 +15,8 @@ Component({
             info: 0,
             dot: true,
             icon: {
-                normal: '/img.yzcdn.cn/icon-normal.png',
-                active: '//img.yzcdn.cn/icon-active.png'
+                normal: 'https://inwust-1251756217.cos.ap-chengdu.myqcloud.com/like_plain.png',
+                active: 'https://inwust-1251756217.cos.ap-chengdu.myqcloud.com/like_plain.png'
             },
             pagePath: "/pages/index/index",
             text: "首页"
@@ -42,7 +42,7 @@ Component({
             //     text: "消息"
             // },
             {
-                info: 3,
+                info: 1,
                 dot: true,
                 icon: {
                     normal: '//img.yzcdn.cn/icon-normal.png',

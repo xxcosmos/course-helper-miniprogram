@@ -27,7 +27,11 @@ Page({
             fileName: that.data.tempFile.name,
             size: that.data.tempFile.size
         };
-        let response = utils.RequestWithDataByAuth('POST', api.File, data);
+        let response = utils.RequestWithDataByAuth('POST', api.File, data, that.uploadCallback);
+
+    },
+    uploadCallback(response) {
+        let that = this;
         utils.CosDao.postObject(that.data.tempFile, response);
         utils.GoBackWithTimeout();
     },

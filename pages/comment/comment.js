@@ -44,7 +44,10 @@ Page({
             content: content,
             star: star
         };
-        let response = utils.RequestWithDataByAuth('POST', api.Comment, data);
+        utils.RequestWithDataByAuth('POST', api.Comment, data, that.commentCallback);
+
+    },
+    commentCallback(response) {
         if (response === "success") {
             Toast.success();
             utils.GoBackWithTimeout()

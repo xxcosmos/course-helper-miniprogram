@@ -60,13 +60,19 @@ Page({
 
     addDownloadCount(id, index) {
         let that = this;
-        utils.RequestWithoutDataAuth('GET', api.AddDownloadCount + '/' + id);
+        utils.RequestWithoutDataAuth('GET', api.AddDownloadCount + '/' + id, that.defaultCallback);
+    },
+    defaultCallback(res) {
     },
 
     getFileList() {
         let that = this;
         let courseCode = wx.getStorageSync("courseCode");
-        let response = utils.RequestWithoutDataNoAuth('GET', api.GetCourseFile + '/' + courseCode);
+        utils.RequestWithoutDataNoAuth('GET', api.GetCourseFile + '/' + courseCode, that.getFileListCallback);
+
+    },
+    getFileListCallback(response) {
+        let that = this;
         //返回正常
         for (let i = 0; i < response.length; i++) {
             response[i].createTime = utils.ToDate(response[i].createTime)

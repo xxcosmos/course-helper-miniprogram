@@ -53,6 +53,9 @@ Page({
     onSearch: function (e) {
         let that = this;
         let keyword = e.detail;
+        that.setData({
+            keyword: keyword
+        });
 
         //处理为空的情况
         if (utils.IsNull(keyword)) {
@@ -60,8 +63,12 @@ Page({
             return
         }
 
-        let response = utils.RequestWithDataNoAuth('GET', api.CourseSearch, {keyword: keyword});
+        utils.RequestWithDataNoAuth('GET', api.CourseSearch, {keyword: keyword}, that.searchCallback);
 
+    },
+    searchCallback(response) {
+        let that = this;
+        let keyword = that.data.keyword;
         //设置搜索历史
         let searchHistory = wx.getStorageSync("searchHistory") || [];
         //数组去重

@@ -1,7 +1,6 @@
 let api = require('api');
 let COS = require('cos-wx-sdk-v5');
-let util = require('util');
-import Toast from 'component/zanui/toast/toast';
+import Toast from '../component/zanui/toast/toast';
 
 let TaskId;
 
@@ -43,7 +42,7 @@ function resultHandle(res) {
         errorHandle(res.data);
         return null;
     }
-    if (util.isNullOrUndefined(res.data.data)) {
+    if (isNull(res.data.data)) {
         return "success";
     }
     return res.data.data
@@ -51,10 +50,10 @@ function resultHandle(res) {
 
 }
 
-function requestWithDataByAuth(method, url, data) {
+function requestWithDataByAuth(method, url, data, callback) {
     //判断token是否存在
     let token = wx.getStorageSync('token');
-    if (util.isNullOrUndefined(token)) {
+    if (isNull(token)) {
         goToLogin();
         return
     }
@@ -67,30 +66,30 @@ function requestWithDataByAuth(method, url, data) {
         },
         data,
         success(res) {
-            return resultHandle(res)
+            callback(resultHandle(res));
         }
     })
 
 }
 
-function requestWithDataNoAuth(method, url, data) {
+function requestWithDataNoAuth(method, url, data, callback) {
     wx.request(
         {
             url: url,
             method: method,
             data,
             success(res) {
-                return resultHandle(res);
+                callback(resultHandle(res));
             }
         }
     )
 
 }
 
-function requestWithoutDataAuth(method, url) {
+function requestWithoutDataAuth(method, url, callback) {
     //判断token是否存在
     let token = wx.getStorageSync('token');
-    if (util.isNullOrUndefined(token)) {
+    if (isNull(token)) {
         goToLogin();
         return
     }
@@ -103,20 +102,20 @@ function requestWithoutDataAuth(method, url) {
                 "authorization": token,
             },
             success(res) {
-                return resultHandle(res)
+                callback(resultHandle(res));
             }
         }
     )
 
 }
 
-function requestWithoutDataNoAuth(method, url) {
+function requestWithoutDataNoAuth(method, url, funcCallback) {
     wx.request(
         {
             url: url,
             method: method,
             success(res) {
-                return resultHandle(res);
+                funcCallback(resultHandle(res));
             }
         }
     )
@@ -126,16 +125,16 @@ function requestWithoutDataNoAuth(method, url) {
  * 得到课程列表
  * @param url
  */
-function getCourseList(url) {
-    return requestWithoutDataNoAuth("GET", url);
+function getCourseList(url, callback) {
+    requestWithoutDataNoAuth("GET", url, callback);
 }
 
 /**
  * 得到推荐课程 已认证
  * @returns {*}
  */
-function getRecommendCourseListByAuth() {
-    return requestWithoutDataAuth("GET", url);
+function getRecommendCourseListByAuth(callback) {
+    requestWithoutDataAuth("GET", api.RecommendCourse, callback);
 
 }
 
@@ -145,7 +144,7 @@ function getRecommendCourseListByAuth() {
 function goToLogin() {
     let userInfo = wx.getStorageSync("userInfo");
     //缓存中无用户信息
-    if (util.isNullOrUndefined(userInfo)) {
+    if (isNull(userInfo)) {
         wx.navigateTo({
             url: '/pages/login/login',
         });
@@ -160,33 +159,43 @@ function goToLogin() {
                 code: res.code,
                 userInfo: userInfo
             };
-            let response = requestWithDataNoAuth('POST', api.Login, data);
-            wx.setStorageSync("token", response);
-            getWxUserInfo();
+            requestWithDataNoAuth('POST', api.Login, data, loginCallback);
+
         }
     })
+}
+
+function loginCallback(res) {
+    wx.setStorageSync("token", res);
+    getWxUserInfo();
 }
 
 /**
  * 请求用户信息
  */
 function getWxUserInfo() {
-    let response = requestWithoutDataAuth("GET", api.User);
-    wx.setStorageSync("userInfo", response);
+    requestWithoutDataAuth("GET", api.User, userInfoCallback);
+}
+
+function userInfoCallback(res) {
+    wx.setStorageSync("userInfo", res);
 }
 
 let getAuthorization = function (options, callback) {
-    let response = requestWithoutDataAuth("GET", api.CosAuth);
-    let credentials = response.credentials;
+    requestWithoutDataAuth("GET", api.CosAuth, getAuthCallback(callback));
+
+
+};
+
+function getAuthCallback(res, callback) {
+    let credentials = res.credentials;
     callback({
         TmpSecretId: credentials.tmpSecretId,
         TmpSecretKey: credentials.tmpSecretKey,
         XCosSecurityToken: credentials.sessionToken,
         ExpiredTime: data.expiredTime, // SDK 在 ExpiredTime 时间前，不会再次调用 getAuthorization
     })
-
-
-};
+}
 let cos = new COS({
     getAuthorization: getAuthorization
 });

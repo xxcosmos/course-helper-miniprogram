@@ -153,19 +153,20 @@ Page({
         let token = wx.getStorageSync('token');
         let response = null;
         if (utils.IsNull(token)) {
-            response = utils.GetCourseList(api.RecommendCourse);
+            utils.GetCourseList(api.RecommendCourse, that.getCourseListCallback);
         } else {
-            response = utils.GetRecommendCourseListByAuth();
+            utils.GetRecommendCourseListByAuth(that.getCourseListCallback);
         }
-        //返回正常
-        that.setData({
-            courseList: response
-        })
+
     },
 
     getHottestCourse: function (e) {
         let that = this;
-        let response = utils.GetCourseList(api.HottestCourse);
+        utils.GetCourseList(api.HottestCourse, that.getCourseListCallback);
+
+    },
+    getCourseListCallback(response) {
+        let that = this;
         that.setData({
             courseList: response
         })
@@ -176,7 +177,12 @@ Page({
             page: that.data.pageInfo.nextPage,
             size: that.data.pageInfo.pageSize
         };
-        let response = utils.RequestWithDataNoAuth('GET', api.Course, data);
+        utils.RequestWithDataNoAuth('GET', api.Course, data, that.getAllCourseCallback);
+
+
+    },
+    getAllCourseCallback(response) {
+        let that = this;
         if (that.data.courseList == null) {
             that.setData({
                 courseList: response.list,
@@ -188,7 +194,6 @@ Page({
                 pageInfo: response
             })
         }
-
     },
 
     onClick: function (e) {
