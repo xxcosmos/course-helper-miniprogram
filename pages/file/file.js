@@ -8,17 +8,16 @@ Page({
      */
     data: {
         courseCode: null,
-        fileList: null
+        fileList: null,
     },
 
-    onChooseFile() {
+    onTapButton(e) {
         wx.chooseMessageFile({
             count: 1,
-            type: 'file',
             success(res) {
                 wx.setStorageSync('tempFile', res.tempFiles[0]);
                 wx.navigateTo({
-                    url: '/pages/upload/file',
+                    url: '/pages/upload/upload',
                 })
             }
         })
@@ -31,9 +30,9 @@ Page({
     },
 
     onDownload(e) {
-        let token = wx.getStorageSync('token')
+        let token = wx.getStorageSync('token');
         if (utils.IsNull(token)) {
-            utils.Login()
+            utils.Login();
             console.log("hey i am")
         } else {
             let url = this.getUrl(e);

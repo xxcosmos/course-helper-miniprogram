@@ -48,6 +48,10 @@ var filters = {
     isValidExtension: function (fileName) {
         var fileExtension = fileName.split('.').pop().toLowerCase();
         return ['doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'pdf'].indexOf(fileExtension) !== -1
+    },
+
+    isNull:function(o){
+      return o==null ||o==[]||o==''||o==undefined
     }
 
 
@@ -58,7 +62,7 @@ module.exports = {
     sub: filters.sub,
     subStr: filters.subStr,
     isValidExtension: filters.isValidExtension,
-    convertByte: filters.convertByte
-
+    convertByte: filters.convertByte,
+    isNull: filters.isNull
 
 };

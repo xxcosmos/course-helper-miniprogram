@@ -1,1 +1,62 @@
 /* pages/mine/mine.wxss */
+
+
+.my-card {
+    position: relative;
+    top: 20 rpx;
+    left: 30 rpx;
+    height: 250 rpx;
+    width: 85%;
+    padding: 20 rpx;
+    background: #f5f5f5;
+    box-shadow: 0px 0px 14px #D4D4D4;
+    border-radius: 20 rpx;
+    margin-bottom: 70 rpx;
+    margin-top: 10 rpx;
+}
+
+.avatar-box {
+    position: relative;
+    top: 15 rpx;
+    left: 25 rpx;
+}
+
+.major-box {
+    font-size: 26 rpx;
+}
+
+.gender-box {
+    display: inline-block;
+    position: relative;
+    top: 10 rpx;
+    width: 50 rpx;
+    height: 50 rpx;
+}
+
+
+.identity-box {
+    position: relative;
+    top: 10 rpx;
+    color: gray;
+    font-size: 28 rpx;
+}
+
+.to-auth {
+    position: absolute;
+    top: 75 rpx;
+    right: 50 rpx;
+    width: 130 rpx;
+    height: 130 rpx;
+    border-radius: 130 rpx;
+    box-shadow: 0px 0px 14px rgb(189, 176, 176);
+    color: white;
+    font-size: 28 rpx;
+    text-align: center;
+    line-height: 130 rpx;
+    background: #ef473a;
+}
+
+.my-star, .my-comment {
+    width: 100%;
+    height: 100 rpx;
+}

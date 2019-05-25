@@ -1,1 +1,25 @@
 /* pages/index/index.wxss */
+.title-uni {
+    padding: 20 rpx;
+
+}
+
+
+.hot-box {
+    padding: 10 rpx;
+    padding-left: 42 rpx;
+}
+
+.avatar-box {
+    position: relative;
+    top: 15 rpx;
+    left: 25 rpx;
+}
+
+
+.swiper-box {
+    width: 95%;
+    height: 95%;
+    overflow: hidden;
+    border-radius: 20 rpx;
+}

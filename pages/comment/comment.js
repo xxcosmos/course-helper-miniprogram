@@ -1,5 +1,4 @@
 let api = require('../../common/api');
-let util = require('../../common/util');
 let utils = require('../../common/utils');
 import Toast from '../../component/zanui/toast/toast';
 
@@ -10,26 +9,24 @@ Page({
      */
     data: {
         course: {},
-        star: "five"
+        rate: 0
     },
-    onChange1: function (e) {
+    onRateChange(e) {
         this.setData({
-            star: e.detail
+            rate: e.detail
         })
     },
     submit: function (e) {
         let that = this;
-        let star = e.detail.value.one;
+        let rate = e.detail.value.rate;
         let content = e.detail.value.content;
-        if (star === "one") {
-            star = 1;
-        } else if (star === "three") {
-            star = 3;
-        } else if (star === "five") {
-            star = 5;
-        }
+
         if (utils.IsNull(content)) {
             Toast.fail("请输入评价内容")
+            return
+        }
+        if (rate == 0) {
+            Toast.fail("还未评分哦～")
             return
         }
 
@@ -42,14 +39,14 @@ Page({
             ownerId: that.data.course.courseCode,
             fromId: userInfo.id,
             content: content,
-            star: star
+            rate: rate
         };
         utils.RequestWithDataByAuth('POST', api.Comment, data, that.commentCallback);
 
     },
     commentCallback(response) {
         if (response === "success") {
-            Toast.success();
+            Toast.success("评价成功");
             utils.GoBackWithTimeout()
         }
     },

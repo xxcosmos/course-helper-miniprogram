@@ -3,18 +3,17 @@
 const baseURL = 'http://xiaoyuu.nat300.top';
 
 
-
 module.exports = {
-  User: baseURL + '/user',
-  Login: baseURL + '/user/login',
-  Bind: baseURL + '/user/bind',
+    User: baseURL + '/user',
+    Login: baseURL + '/user/login',
+    Bind: baseURL + '/user/bind',
 
-  Course: baseURL + '/course',
-  CourseSearch: baseURL + '/course/search',
+    Course: baseURL + '/course',
+    CourseSearch: baseURL + '/course/search',
     HottestCourse: baseURL + '/course/hot',
     RecommendCourse: baseURL + '/course/recommend',
     CourseByCollegeCode: baseURL + '/course/college',
-  Comment: baseURL + '/comment',
+    Comment: baseURL + '/comment',
 
     Like: baseURL + '/like',
     Auth: baseURL + '/auth',

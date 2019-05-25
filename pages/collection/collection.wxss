@@ -1,0 +1,5 @@
+.avatar-box {
+    position: relative;
+    top: 15 rpx;
+    left: 25 rpx;
+}

@@ -1,5 +1,4 @@
 let api = require('../../common/api');
-let util = require('../../common/util');
 let utils = require('../../common/utils');
 import Toast from '../../component/zanui/toast/toast';
 
@@ -134,6 +133,7 @@ Page({
 
     goToCourse: function (e) {
         wx.setStorageSync('courseCode', e.currentTarget.dataset.code);
+
         wx.navigateTo({
             url: "../course/course",
         })
@@ -172,12 +172,13 @@ Page({
         })
     },
     getAllCourse: function () {
+        Toast.loading("正在加载");
+
         let that = this;
         let data = {
             page: that.data.pageInfo.nextPage,
             size: that.data.pageInfo.pageSize
         };
-        Toast.loading("正在加载");
         utils.RequestWithDataNoAuth('GET', api.Course, data, that.getAllCourseCallback);
 
 
@@ -235,12 +236,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-        if (typeof this.getTabBar === 'function' &&
-            this.getTabBar()) {
-            this.getTabBar().setData({
-                active: 0
-            })
-        }
+
     }
     ,
 
@@ -272,6 +268,7 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function () {
+        console.log(this.data.pageInfo.hasNextPage, this.data.index)
         if (this.data.pageInfo.hasNextPage && this.data.index === 2) {
             this.getAllCourse()
         }

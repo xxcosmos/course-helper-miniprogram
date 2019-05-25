@@ -1,5 +1,5 @@
-<wux-fab-button actionRotate="{{false}}" bind:change="onChooseFile" theme="energized" xmlns:wx=""
-                xmlns:wx=""></wux-fab-button>
+<wux-fab-button actionRotate="{{false}}" bind:change="onTapButton" theme="assertive"></wux-fab-button>
+
 <wxs module="filters" src="../../wxs/utils.wxs"></wxs>
 <van-toast id="van-toast"/>
 

@@ -290,7 +290,7 @@ function goBackWithTimeout() {
 }
 
 function isNull(o) {
-    return o === undefined || o == null || o === '';
+    return o === undefined || o == null || o === '' || o === [];
 }
 
 module.exports = {

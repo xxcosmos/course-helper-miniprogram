@@ -1,0 +1,12 @@
+<van-panel desc="随便说说" title="有啥意见啊？">
+
+    <form bindsubmit='submit'>
+        <van-cell-group>
+            <textarea auto-focus class="feedback-input" placeholder="150字以内"/>
+
+
+        </van-cell-group>
+
+        <button form-type="submit">提交</button>
+    </form>
+</van-panel>

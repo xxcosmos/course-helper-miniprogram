@@ -1,28 +1,40 @@
-<wxs src="../../wxs/utils.wxs" module="filters" />
+<wxs module="filters" src="../../wxs/utils.wxs"/>
 <van-toast id="van-toast"/>
 
 <van-search bind:cancel="onCancel" bind:change="onChange" bind:clear="onClear" bind:search="onSearch" focus show-action
-            value="{{searchValue}}"/>
+            value="{{keyword}}"/>
 
-<block wx:if="{{courseList!=null}}">
-  <!-- 搜索筛选 -->
-  <block wx:for="{{courseList}}" wx:key="courseCode">
-    <view bindtap="goToCourse" data-code="{{item.courseCode}}">
-        <van-card desc="{{item.unitName}}" title="{{item.courseName}}">
+<block wx:if="{{ !filters.isNull(courseList) }}">
+    <!-- 搜索筛选 -->
+    <block wx:for="{{courseList}}" wx:key="courseCode">
+        <view bindtap="goToCourse" data-code="{{item.course.courseCode}}">
+            <van-card desc="{{item.unitName}}" title="{{item.course.courseName}}">
 
-        <!--课程属性标签 -->
-        <view slot="tags">
-          <van-tag mark type="danger">{{item.courseType==1?"必修":"选修"}}</van-tag>
+                <!--课程属性标签 -->
+                <view slot="tags">
+                    <van-tag mark type="danger">{{item.course.courseType==1?"必修":"选修"}}</van-tag>
+                    <view>
+                        {{item.commentNum}}条评价
+                    </view>
+                </view>
+                <view slot="thumb">
+                    <avatar body-style="background-color: #ef473a; width: 100rpx; height: 100rpx; border-radius: 100rpx; line-height: 100rpx;"
+                            scale>{{filters.subStr(item.course.courseName,0,1)}}
+                    </avatar>
+                </view>
+            </van-card>
         </view>
-        <view slot="thumb">
-          <avatar scale size="large" body-style="background-color: #11c1f3">{{filters.subStr(item.courseName,0,1)}}</avatar>
-        </view>
-      </van-card>
-    </view>
-  </block>
+    </block>
 </block>
 <block wx:else>
-    <block wx:if="{{searchHistory!=null}}">
+    <block wx:if="{{!filters.isNull(keyword)}}">
+        <van-panel>
+            <image src="https://s2.ax1x.com/2019/05/25/VAVOcd.png"></image>
+            搜索不到结果，换一个关键词吧 呜呜呜
+        </van-panel>
+
+    </block>
+    <block wx:elif="{{!filters.isNull(searchHistory)}}">
         <van-panel>
             <van-row gutter="5">
                 <block wx:for="{{searchHistory}}" wx:key="item">
@@ -36,4 +48,5 @@
             <van-button bind:click="clearHistory" size="large">清除搜索历史</van-button>
         </van-panel>
     </block>
+
 </block>

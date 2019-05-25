@@ -1,1 +1,12 @@
-/* pages/comment/comment.wxss */
+.comment-input {
+    height: 500 rpx;
+    width: 95%;
+    font-size: 30 rpx;
+    padding: 20 rpx;
+    border-top: 1 rpx solid #f5f5f5;
+    border-bottom: 1 rpx solid #f5f5f5;
+}
+
+.van-cell__title {
+    width: 60%;
+}

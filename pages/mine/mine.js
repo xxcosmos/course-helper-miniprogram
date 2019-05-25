@@ -12,8 +12,10 @@ Page({
             nickname: '小红',
             gender: 1,
             state: 0,
-            studentId: "201713137042"
-        }
+            studentId: "201713137042",
+
+        },
+        major: '工业设计'
     },
     goToAuth(e) {
         if (this.data.userInfo.state === 0) {
@@ -21,6 +23,11 @@ Page({
                 url: '../auth/auth',
             })
         }
+    },
+    goToModify(e) {
+        wx.navigateTo({
+            url: '../modify/modify'
+        })
     },
     /**
      * 生命周期函数--监听页面加载

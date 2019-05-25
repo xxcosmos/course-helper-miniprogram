@@ -1,5 +1,6 @@
-const api = require('../../common/api.js')
-const utils = require('../../common/utils.js')
+const api = require('../../common/api.js');
+const utils = require('../../common/utils.js');
+import Toast from '../../component/zanui/toast/toast';
 
 Page({
 
@@ -9,9 +10,9 @@ Page({
     data: {
         course: null,
         teacherList: null,
-        activeNames: ['1'],
-        averageStar: 4,
+        averageRate: 5,
         commentList: null,
+        fileNum: 9
 
     },
 
@@ -75,6 +76,7 @@ Page({
         let that = this;
         let courseCode = wx.getStorageSync('courseCode');
         let token = wx.getStorageSync('token')
+        Toast.loading('加载课程ing')
         if (utils.IsNull(token)) {
             utils.RequestWithoutDataNoAuth('GET', api.Course + '/' + courseCode, that.getCourseDataCallback);
 
@@ -96,8 +98,9 @@ Page({
             course: response.course,
             teacherList: response.teacherList,
             commentList: response.commentVOList,
-            averageStar: response.averageStar
+            averageRate: response.averageRate
         })
+        Toast.clear()
     },
 
     /**

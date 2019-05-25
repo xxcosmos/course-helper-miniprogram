@@ -1,0 +1,29 @@
+<view class='comment-box' wx:for="{{commentList}}" wx:key="comment.id">
+    <view class="comment-info">
+        <van-row>
+            <van-col class="comment-time">
+                <wux-timeago to="{{item.comment.createTime}}"/>
+            </van-col>
+        </van-row>
+    </view>
+
+    <view class="comment-content">
+        <van-row class="comment-text">
+            <van-col>
+                <van-rate readonly size="{{ 12 }}" value="{{item.comment.star}}"/>
+            </van-col>
+            <van-col class="comment-text">
+                {{item.comment.content}}
+            </van-col>
+        </van-row>
+    </view>
+
+    <view class="like-icon">
+
+        <van-icon bind:click="onLike" color='#ef473a' data-id='{{item.comment.id}}' data-index='{{index}}' name="like"
+                  size='36rpx'/>
+        有用 {{item.comment.likeNum}}
+
+
+    </view>
+</view>

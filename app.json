@@ -4,16 +4,16 @@
     "pages/login/login",
     "pages/search/search",
     "pages/course/course",
-    "pages/circle/circle",
-    "pages/message/message",
     "pages/mine/mine",
     "pages/auth/auth",
-    "pages/egg/egg",
     "pages/comment/comment",
     "pages/file/file",
-    "pages/photo/photo",
-    "pages/upload/file",
-    "pages/upload/image"
+    "pages/upload/upload",
+    "pages/collection/collection",
+    "pages/myComment/myComment",
+    "pages/feedback/feedback",
+    "pages/about/about",
+    "pages/modify/modify"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -22,23 +22,18 @@
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
-    "custom": true,
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "首页"
-      },
-      {
-        "pagePath": "pages/circle/circle",
-        "text": "圈子"
-      },
-      {
-        "pagePath": "pages/message/message",
-        "text": "消息"
+        "text": "",
+        "iconPath": "statics/iconfont/1.png",
+        "selectedIconPath": "statics/iconfont/_1.png"
       },
       {
         "pagePath": "pages/mine/mine",
-        "text": "我的"
+        "text": "",
+        "iconPath": "statics/iconfont/4.png",
+        "selectedIconPath": "statics/iconfont/_4.png"
       }
     ]
   },

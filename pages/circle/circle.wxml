@@ -1,7 +1,0 @@
-<!-- link 模式，在右侧显示链接箭头 -->
-<van-notice-bar
-        bind:click="goToEasterEgg"
-        mode="closeable"
-        text="好消息！好消息！武科圈现已隆重上线啦 撒花🎉。"
-/>
-<van-icon info="9" name="thumb-circle-o "/>

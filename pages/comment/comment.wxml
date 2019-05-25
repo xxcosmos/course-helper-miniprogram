@@ -1,17 +1,20 @@
-<van-panel desc="课程代码：{{course.courseCode}}" status="{{course.courseType==1?'必修':'选修'}}" title="{{course.courseName}}">
+<wxs module="filters" src="../../wxs/utils.wxs"/>
+<van-toast id="van-toast"/>
+<!-- Todo 上面两个为js操作页面必备-->
+
+<van-panel
+        desc="课程代码：{{course.courseCode}}"
+        status="{{course.courseType==1?'必修':'选修'}}"
+        title="{{course.courseName}}"
+>
 
     <form bindsubmit='submit'>
         <van-cell-group>
-            <van-field autosize border="{{ false }}" clearable label="评价内容" name="content" placeholder="限 150 字以内"
-                       required type="textarea" value="{{ message }}"/>
+            <textarea auto-focus class="comment-input" name="content" placeholder="在这里输入评价内容，限150字～"/>
 
-            <van-cell title="总评">
 
-                <van-radio-group bind:change="onChange1" value="{{ star }}">
-                    <van-radio name="five">棒</van-radio>
-                    <van-radio name="three">一般</van-radio>
-                    <van-radio name="one">差</van-radio>
-                </van-radio-group>
+            <van-cell title="评分">
+                <van-rate bind:change="onRateChange" name="rate" size="{{ 30 }}" value="{{rate}}"/>
 
             </van-cell>
 
