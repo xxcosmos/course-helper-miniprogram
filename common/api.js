@@ -13,7 +13,7 @@ module.exports = {
   CourseSearch: baseURL + '/course/search',
     HottestCourse: baseURL + '/course/hot',
     RecommendCourse: baseURL + '/course/recommend',
-
+    CourseByCollegeCode: baseURL + '/course/college',
   Comment: baseURL + '/comment',
 
     Like: baseURL + '/like',

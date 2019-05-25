@@ -122,11 +122,12 @@ function requestWithoutDataNoAuth(method, url, funcCallback) {
 }
 
 /**
- * 得到课程列表
+ *
  * @param url
+ * @param getCourseListCallback
  */
-function getCourseList(url, callback) {
-    requestWithoutDataNoAuth("GET", url, callback);
+function getCourseList(url, getCourseListCallback) {
+    requestWithoutDataNoAuth("GET", url, getCourseListCallback);
 }
 
 /**
@@ -145,6 +146,8 @@ function goToLogin() {
     let userInfo = wx.getStorageSync("userInfo");
     //缓存中无用户信息
     if (isNull(userInfo)) {
+        console.log("hey i  i")
+        Toast.fail("请登录后再操作")
         wx.navigateTo({
             url: '/pages/login/login',
         });
@@ -182,24 +185,35 @@ function userInfoCallback(res) {
 }
 
 let getAuthorization = function (options, callback) {
-    requestWithoutDataAuth("GET", api.CosAuth, getAuthCallback(callback));
+    let token = wx.getStorageSync('token');
+    //处理token为空的情况
+    if (isNull(token)) {
+        goToLogin();
+        return
+    }
 
-
-};
-
-function getAuthCallback(res, callback) {
-    let credentials = res.credentials;
-    callback({
-        TmpSecretId: credentials.tmpSecretId,
-        TmpSecretKey: credentials.tmpSecretKey,
-        XCosSecurityToken: credentials.sessionToken,
-        ExpiredTime: data.expiredTime, // SDK 在 ExpiredTime 时间前，不会再次调用 getAuthorization
+    wx.request({
+        url: api.CosAuth,
+        method: "GET",
+        header: {
+            "authorization": token,
+        },
+        success: function (result) {
+            let data = result.data.data;
+            console.log(data);
+            let credentials = data.credentials;
+            callback({
+                TmpSecretId: credentials.tmpSecretId,
+                TmpSecretKey: credentials.tmpSecretKey,
+                XCosSecurityToken: credentials.sessionToken,
+                ExpiredTime: data.expiredTime, // SDK 在 ExpiredTime 时间前，不会再次调用 getAuthorization
+            })
+        }
     })
-}
+};
 let cos = new COS({
     getAuthorization: getAuthorization
 });
-
 // 回调统一处理函数
 let requestCallback = function (err, data) {
     console.log(err || data);
@@ -223,7 +237,6 @@ let requestCallback = function (err, data) {
         });
     }
 };
-
 // 展示的所有接口
 let dao = {
     // 上传文件

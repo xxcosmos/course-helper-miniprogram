@@ -1,4 +1,6 @@
 <wxs src="../../wxs/utils.wxs" module="filters" />
+<van-toast id="van-toast"/>
+
 <van-search bind:cancel="onCancel" bind:change="onChange" bind:clear="onClear" bind:search="onSearch" focus show-action
             value="{{searchValue}}"/>
 

@@ -32,7 +32,12 @@ Page({
     },
     uploadCallback(response) {
         let that = this;
-        utils.CosDao.postObject(that.data.tempFile, response);
+        if (response == '文件已存在') {
+            Toast.fail(response)
+        } else {
+            utils.CosDao.postObject(that.data.tempFile, response);
+
+        }
         utils.GoBackWithTimeout();
     },
 

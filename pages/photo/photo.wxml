@@ -1,4 +1,6 @@
 <wux-fab-button actionRotate="{{false}}" bind:change="goToUpload" theme="energized"></wux-fab-button>
+<van-toast id="van-toast"/>
+
 <view>
 
 </view>

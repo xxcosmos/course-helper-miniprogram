@@ -31,10 +31,16 @@ Page({
     },
 
     onDownload(e) {
-        let url = this.getUrl(e);
-        wx.setClipboardData({
-            data: url
-        });
+        let token = wx.getStorageSync('token')
+        if (utils.IsNull(token)) {
+            utils.Login()
+            console.log("hey i am")
+        } else {
+            let url = this.getUrl(e);
+            wx.setClipboardData({
+                data: url
+            });
+        }
     },
 
     getUrl(e) {
@@ -46,16 +52,21 @@ Page({
     },
 
     onPreview(e) {
-        let url = this.getUrl(e);
-        wx.downloadFile({
-            url: url,
-            success(res) {
-                const filePath = res.tempFilePath;
-                wx.openDocument({
-                    filePath
-                })
-            }
-        })
+        let token = wx.getStorageSync('token')
+        if (utils.IsNull(token)) {
+            utils.Login()
+        } else {
+            let url = this.getUrl(e);
+            wx.downloadFile({
+                url: url,
+                success(res) {
+                    const filePath = res.tempFilePath;
+                    wx.openDocument({
+                        filePath
+                    })
+                }
+            })
+        }
     },
 
     addDownloadCount(id, index) {

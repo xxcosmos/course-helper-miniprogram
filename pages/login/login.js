@@ -11,6 +11,9 @@ Page({
         let userInfo = e.detail.userInfo;
         wx.setStorageSync("userInfo", userInfo);
         utils.Login()
+        wx.navigateBack({
+            delta: 1
+        })
     },
 
 

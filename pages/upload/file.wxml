@@ -1,4 +1,5 @@
 <wxs module="filters" src="../../wxs/utils.wxs"/>
+<van-toast id="van-toast"/>
 
 <view wx:if="{{tempFile!=null}}">
     <van-card title="{{tempFile.name}}">

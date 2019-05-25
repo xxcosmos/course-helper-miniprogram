@@ -38,13 +38,15 @@ Page({
         })
     },
     getHistory(e) {
-        this.setData({
+        let that = this;
+        that.setData({
             searchValue: e.currentTarget.dataset.history
         });
         let event = {
             detail: e.currentTarget.dataset.history
         };
-        this.onSearch(event)
+        console.log(event)
+        that.onSearch(event)
     },
     /**
      * 点击搜索事件
@@ -52,35 +54,41 @@ Page({
      */
     onSearch: function (e) {
         let that = this;
-        let keyword = e.detail;
-        that.setData({
-            keyword: keyword
-        });
-
+        let searchValue = e.detail;
         //处理为空的情况
-        if (utils.IsNull(keyword)) {
+        if (utils.IsNull(searchValue)) {
             Toast.fail("请输入搜索内容");
             return
         }
+        that.setData({
+            searchValue: searchValue
+        });
 
-        utils.RequestWithDataNoAuth('GET', api.CourseSearch, {keyword: keyword}, that.searchCallback);
+
+        Toast.loading("正在搜索")
+        utils.RequestWithDataNoAuth('GET', api.CourseSearch, {keyword: searchValue}, that.searchCallback);
 
     },
     searchCallback(response) {
         let that = this;
-        let keyword = that.data.keyword;
+        let searchValue = that.data.searchValue;
         //设置搜索历史
         let searchHistory = wx.getStorageSync("searchHistory") || [];
         //数组去重
-        if (searchHistory.indexOf(keyword) === -1) { //判断在arr数组中是否存在，不存在则unshift到arr数组中
-            searchHistory.push(keyword);
+        if (searchHistory.indexOf(searchValue) === -1) { //判断在arr数组中是否存在，不存在则unshift到arr数组中
+            searchHistory.push(searchValue);
             wx.setStorageSync("searchHistory", searchHistory);
             that.setData({
                 searchHistory: searchHistory,
                 courseList: response
             })
 
+        } else {
+            that.setData({
+                courseList: response
+            })
         }
+        Toast.clear()
     },
 
     clearHistory(e) {

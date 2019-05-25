@@ -1,6 +1,7 @@
 <wux-fab-button actionRotate="{{false}}" bind:change="onChooseFile" theme="energized" xmlns:wx=""
                 xmlns:wx=""></wux-fab-button>
 <wxs module="filters" src="../../wxs/utils.wxs"></wxs>
+<van-toast id="van-toast"/>
 
 <block wx:if="{{fileList!=null}}">
     <!-- 搜索筛选 -->

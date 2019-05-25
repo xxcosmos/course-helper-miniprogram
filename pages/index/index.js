@@ -177,6 +177,7 @@ Page({
             page: that.data.pageInfo.nextPage,
             size: that.data.pageInfo.pageSize
         };
+        Toast.loading("正在加载");
         utils.RequestWithDataNoAuth('GET', api.Course, data, that.getAllCourseCallback);
 
 
@@ -194,6 +195,7 @@ Page({
                 pageInfo: response
             })
         }
+        Toast.clear();
     },
 
     onClick: function (e) {
