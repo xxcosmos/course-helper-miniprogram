@@ -34,6 +34,7 @@
             <van-row style="padding: 6rpx; ">
 
                 <van-col span='6'>
+                {{filters.subStr(item.course.courseName,0,1)}}
                     <view class="avatar-box">
                         <avatar body-style="background-color: #ef473a; width: 100rpx; height: 100rpx; border-radius: 100rpx; line-height: 100rpx;"
                                 scale>{{filters.subStr(item.course.courseName,0,1)}}

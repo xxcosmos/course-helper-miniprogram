@@ -1,19 +1,19 @@
 /* pages/index/index.wxss */
 .title-uni {
-    padding: 20 rpx;
+    padding: 20rpx;
 
 }
 
 
 .hot-box {
-    padding: 10 rpx;
-    padding-left: 42 rpx;
+    padding: 10rpx;
+    padding-left: 42rpx;
 }
 
 .avatar-box {
     position: relative;
-    top: 15 rpx;
-    left: 25 rpx;
+    top: 15rpx;
+    left: 25rpx;
 }
 
 
@@ -21,5 +21,5 @@
     width: 95%;
     height: 95%;
     overflow: hidden;
-    border-radius: 20 rpx;
+    border-radius: 20rpx;
 }
