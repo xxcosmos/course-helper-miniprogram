@@ -100,7 +100,6 @@ Page({
             commentList: response.commentVOList,
             averageRate: response.averageRate
         })
-        console.log(response.commentVOList)
         Toast.clear()
     },
 
