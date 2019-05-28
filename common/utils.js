@@ -181,7 +181,7 @@ function loginCallback(res) {
   if(res!=null){
     wx.setStorageSync("token", res);
     goBackWithTimeout()
-    getWxUserInfo();
+    getWxUserInfo()
   }
 }
 
