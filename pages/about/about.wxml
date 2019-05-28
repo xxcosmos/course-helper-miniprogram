@@ -1,2 +1,33 @@
 <!--pages/about/about.wxml-->
-<text>pages/about/about.wxml</text>
+
+
+<view class="about-box">
+    <image 
+        class="logo"
+        src='https://inwust-1251756217.cos.ap-chengdu.myqcloud.com/654b2f4b797b4b91b5fdc6ae774f9a10.PNG'
+    />
+
+    <view class="title">
+        知课
+    </view>
+
+    <view class="version">
+        1.1.0
+    </view>
+
+    <view class="intro">
+        哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈
+    </view>
+
+    <view class="info">
+        <van-cell-group>
+            <van-cell title="简介" value="武科大教务系统" />
+            <van-cell title="联系我们" value="qwq@xx.com" />
+        </van-cell-group>
+    </view>
+
+    <view class="copyright">
+        <view style="margin: 30rpx;">版权所有</view>
+        <view >copyright</view>
+    </view>
+</view>

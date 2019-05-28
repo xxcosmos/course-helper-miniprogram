@@ -17,7 +17,7 @@
                 <van-row class='card-body' gutter='2'>
                     <van-col class='course-cover' offset="2" span="8">
                         <image src='https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640'
-                               style='height: 250rpx; width: 200rpx; border: 1px solid black'></image>
+                               style='height: 250rpx; width: 200rpx;'></image>
                     </van-col>
                     <van-col class='course-info' span="10">
                         <view class="info-list">课程名称：{{course.courseName}}</view>
