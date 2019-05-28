@@ -12,15 +12,19 @@ Page({
     },
 
     onTapButton(e) {
-        wx.chooseMessageFile({
-            count: 1,
-            success(res) {
-                wx.setStorageSync('tempFile', res.tempFiles[0]);
-                wx.navigateTo({
-                    url: '/pages/upload/upload',
-                })
-            }
-        })
+
+      wx.chooseImage({
+        success: function(res) {},
+      })
+        // wx.chooseMessageFile({
+        //     count: 1,
+        //     success(res) {
+        //         wx.setStorageSync('tempFile', res.tempFiles[0]);
+        //         wx.navigateTo({
+        //             url: '/pages/upload/upload',
+        //         })
+        //     }
+        // })
     },
     /**
      * 生命周期函数--监听页面加载

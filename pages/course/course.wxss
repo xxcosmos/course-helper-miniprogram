@@ -59,7 +59,7 @@
 
 .comment-content {
     position: absolute;
-    width: 100%;
+    width: 60%;
     left: 145rpx;
     top: 75rpx;
     font-size: 30rpx;
