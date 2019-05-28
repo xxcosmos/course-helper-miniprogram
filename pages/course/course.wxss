@@ -14,8 +14,10 @@
 
 .info-list {
     margin: 10rpx;
-    font-size: 28rpx;
+    font-size: 26rpx;
 }
+
+
 
 .rate-box {
     padding: 50rpx;
@@ -34,6 +36,7 @@
 .file-up-down {
     text-align: center;
     padding: 50rpx;
+    color: gray;
 }
 
 
@@ -67,7 +70,7 @@
 }
 
 .comment-text {
-    width: 65%;
+    width: 100%;
     display: inline-block;
     overflow: hidden;
     text-overflow: ellipsis;

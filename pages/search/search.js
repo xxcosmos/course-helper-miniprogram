@@ -69,6 +69,12 @@ Page({
     },
     searchCallback(response) {
         console.log(response);
+        if(response==null){
+          //Todo 这里处理 服务器出现错误 或者网络故障
+          
+          Toast.clear()
+          return;
+        }
         let that = this;
         let keyword = that.data.tempKeyword;
 

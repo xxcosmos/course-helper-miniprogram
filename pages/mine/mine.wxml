@@ -1,26 +1,8 @@
-<!-- <van-card title="{{userInfo.nickname}}" desc="{{item.gender}}">
+<wxs src="../../wxs/utils.wxs" module="filters" />
+<van-toast id="van-toast" />
 
 
-  <view slot="tags">
-    <block wx:if="{{userInfo.gender==1}}">
-      <van-tag mark plain type="danger">男</van-tag>
-    </block>
-    <block wx:elif="{{userInfo.gender==2}}">
-      <van-tag mark plain type="danger">女</van-tag>
-    </block>
-    <block wx:else>
-        <van-tag mark plain type="danger">未知</van-tag>
-    </block>
-  </view>
-  <view slot="thumb">
-      <avatar scale size="large" src="{{userInfo.avatarUrl}}"/>
-  </view>
-    <view slot="footer">
-    <van-button size="normal" type="primary" bind:click="goToAuth">{{userInfo.state==1?"已认证":"未认证"}}</van-button>
-  </view>
-</van-card> -->
-
-<view bindtap='goToModify' class="my-card">
+<view class="my-card">
     <van-row>
         <van-col span='10'>
             <view class="avatar-box">
@@ -41,27 +23,35 @@
                         <image src='../../statics/iconfont/girl.png' style='width: 100%; height: 100%'/>
                     </view>
                 </block>
-                <block wx:else>
+                <!-- <block wx:else>
                     <view class="gender-box">
                         未知
                     </view>
-                </block>
+                </block> -->
             </view>
-            <view class="major-box">
+            <!-- <view class="major-box">
                 专业: {{major}}
-            </view>
+            </view> -->
             <view>
                 <block wx:if="{{userInfo.state==1}}">
-                    <view class='identity-box'>
+                    <!-- <view class='identity-box'>
                         已认证
                         <van-icon color="#F0D807" custom-style='top: 18rpx' name="passed" size='60rpx'/>
+                    </view> -->
+                    <view class='identity-box'>已认证</view>
+                    <view class="to-auth" style="line-height: 170rpx;">
+                        <van-icon size="60rpx" name="success"></van-icon>
                     </view>
 
                 </block>
-                <block wx:else>
+                <block wx:elif="{{userInfo.state==0}}">
                     <view class='identity-box'>未认证</view>
                     <view bindtap="goToAuth" class="to-auth">去认证</view>
                 </block>
+                <block wx:elif="{{userInfo.state==-1}}">
+                    <view bindtap="goToAuth" class="to-auth">登录</view>
+                </block>
+                
             </view>
         </van-col>
     </van-row>
@@ -69,7 +59,6 @@
 
 <van-panel>
     <van-cell is-link title="我的收藏" url="/pages/collection/collection"/>
-    <van-cell is-link title="我的评论" url="/pages/myComment/myComment"/>
 
     <van-cell is-link title="意见反馈" url="/pages/feedback/feedback"/>
 

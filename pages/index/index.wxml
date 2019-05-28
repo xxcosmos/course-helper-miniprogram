@@ -1,19 +1,31 @@
 <wxs src="../../wxs/utils.wxs" module="filters" />
 <van-toast id="van-toast" />
 <!-- Todo 上面两个为js操作页面必备-->
-<view class="title-uni">
+<!-- <view class="title-uni">
     <van-icon custom-style='top: 5rpx; padding: 10rpx;' name='bookmark'/>
-    武汉科技大学
-</view>
+    <view style='font-size:26rpx;'></view> 武汉科技大学
+</view> -->
 <view bindtap='toSearch'>
     <van-search disabled placeholder="请输入搜索关键词"/>
 </view>
 <view class='hot-box'>
-    <swiper autoplay='{{autoplay}}' indicator-dots='{{indicatorDots}}'>
+    <swiper 
+    autoplay='{{autoplay}}' 
+    indicator-dots='{{indicatorDots}}'
+    previous-margin='20rpx'
+    next-margin='0rpx'
+    circular='{{true}}'
+    style="height:{{imgHeights[current]}}rpx;"
+    bindchange='onSwip'
+    >
         <block wx:for="{{imgUrls}}" wx:key="*this">
             <swiper-item>
-                <view class="swiper-box">
-                    <image src="{{item}}" style='width: 100%'/>
+                <view class="swiper-box" bindtap='onTapSwiper'>
+                    <image src="{{item}}" 
+                      style="height:{{imgHeights[current]}}rpx;width:{{imgWidth}}rpx;"
+                      data-src='{{item}}'
+                      bindload="imageLoad"
+                      />
                 </view>
             </swiper-item>
         </block>
@@ -34,11 +46,8 @@
             <van-row style="padding: 6rpx; ">
 
                 <van-col span='6'>
-                {{filters.subStr(item.course.courseName,0,1)}}
                     <view class="avatar-box">
-                        <avatar body-style="background-color: #ef473a; width: 100rpx; height: 100rpx; border-radius: 100rpx; line-height: 100rpx;"
-                                scale>{{filters.subStr(item.course.courseName,0,1)}}
-                        </avatar>
+                            {{item.course.courseName[0]}}
                     </view>
                 </van-col>
 
@@ -46,7 +55,7 @@
                     <view style="font-size: 26rpx; font-weight: 600;">
                         {{item.course.courseName}}
                     </view>
-                    <view style="font-size: 24rpx;">
+                    <view style="font-size: 20rpx;">
                         {{item.course.unitName}}
                     </view>
                     <view>
@@ -58,7 +67,7 @@
                             <van-tag plain type="danger">选修</van-tag>
                         </block>
                     </view>
-                    <view wx:if="{{item.commentNum!=0}}">
+                    <view wx:if="{{item.commentNum!=0}}"  class='comment-num'>
                         {{item.commentNum}}条评价
                     </view>
 

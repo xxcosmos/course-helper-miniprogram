@@ -10,28 +10,29 @@
     "pages/file/file",
     "pages/upload/upload",
     "pages/collection/collection",
-    "pages/myComment/myComment",
     "pages/feedback/feedback",
     "pages/about/about",
     "pages/modify/modify"
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "课程评价",
-    "navigationBarTextStyle": "black"
+    "navigationBarBackgroundColor": "#ef473a",
+    "navigationBarTitleText": "知课",
+    "navigationBarTextStyle": "white"
+    
   },
   "tabBar": {
+    "selectedColor": "#ef473a",
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "",
+        "text": "首页",
         "iconPath": "statics/iconfont/1.png",
         "selectedIconPath": "statics/iconfont/_1.png"
       },
       {
         "pagePath": "pages/mine/mine",
-        "text": "",
+        "text": "我的",
         "iconPath": "statics/iconfont/4.png",
         "selectedIconPath": "statics/iconfont/_4.png"
       }
@@ -63,7 +64,10 @@
     "van-field": "/component/zanui/field/index",
     "van-rate": "/component/zanui/rate/index",
     "van-radio": "/component/zanui/radio/index",
-    "van-radio-group": "/component/zanui/radio-group/index"
+    "van-radio-group": "/component/zanui/radio-group/index",
+    "van-notify": "/component/zanui/notify/index",
+    "van-dialog": "/component/zanui/dialog/index",
+    "wux-popover": "/component/wux/popover/index"
   },
   "sitemapLocation": "sitemap.json"
 }

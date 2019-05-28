@@ -14,6 +14,13 @@
     position: relative;
     top: 15rpx;
     left: 25rpx;
+    background-color: #ef473a; 
+    width: 100rpx; 
+    height: 100rpx; 
+    border-radius: 100rpx; 
+    line-height: 100rpx;
+    color: white;
+    text-align: center;
 }
 
 
@@ -22,4 +29,9 @@
     height: 95%;
     overflow: hidden;
     border-radius: 20rpx;
+}
+
+.comment-num {
+    font-size: 26rpx;
+    color: #ef473a;
 }

@@ -10,6 +10,14 @@ Page({
     data: {
         tempFile: null,
         courseCode: null,
+        currentFileName: null
+    },
+
+    refreshFileName(e) {
+      //  console.log(e.detail.value)
+        this.setData({
+            currentFileName: e.detail.value
+        })
     },
 
     onUploadFile(e) {
@@ -19,24 +27,27 @@ Page({
             Toast.fail("请输入文件描述哦");
             return
         }
+        if (utils.IsNull(that.data.currentFileName)) {
+            Toast.fail("请输入文件名");
+            return
+        }
 
         let data = {
             ownerId: that.data.courseCode,
-            type: that.data.tempFile.type,
             fileDescription: fileDescription,
-            fileName: that.data.tempFile.name,
+            // fileName: that.data.tempFile.name,
+            fileName: that.data.currentFileName+that.data.extension,
             size: that.data.tempFile.size
         };
+         console.log(data);
         let response = utils.RequestWithDataByAuth('POST', api.File, data, that.uploadCallback);
 
     },
     uploadCallback(response) {
         let that = this;
-        if (response == '文件已存在') {
-            Toast.fail(response)
-        } else {
+        if (!utils.IsNull(response)) {
             utils.CosDao.postObject(that.data.tempFile, response);
-
+          Toast.success("上传成功！")
         }
         utils.GoBackWithTimeout();
     },
@@ -46,12 +57,34 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+      let that = this
         let tempFile = wx.getStorageSync("tempFile");
         let courseCode = wx.getStorageSync("courseCode");
+        console.log(tempFile)
+        if(!utils.IsNull(tempFile.path)){
+          if(!utils.IsNull(tempFile.name)){
+            //文件
+            let pieces = tempFile.name.split('.')
+            let extension = '.'+pieces[pieces.length - 1]
+            that.setData({
+              currentFileName: pieces[0],
+              extension: extension
+            })
+          }else{
+            //图片
+            let pieces = tempFile.path.split('.')
+            let extension = '.'+pieces[pieces.length-1]
+            that.setData({
+              extension: extension,
+              currentFileName: ''
+            })
+          }
+        }
         this.setData({
             courseCode: courseCode,
-            tempFile: tempFile
+            tempFile: tempFile,
         })
+        // console.log(tempFile.name)
     },
 
 

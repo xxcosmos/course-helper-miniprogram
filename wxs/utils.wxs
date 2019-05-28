@@ -47,7 +47,7 @@ var filters = {
 
     isValidExtension: function (fileName) {
         var fileExtension = fileName.split('.').pop().toLowerCase();
-        return ['doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'pdf'].indexOf(fileExtension) !== -1
+        return ['doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'pdf', 'png', 'jpg','jpeg'].indexOf(fileExtension) !== -1
     },
 
     isNull:function(o){

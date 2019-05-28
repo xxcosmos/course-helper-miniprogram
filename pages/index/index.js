@@ -4,281 +4,216 @@ import Toast from '../../component/zanui/toast/toast';
 
 Page({
 
-    data: {
-        autoplay: true,
-        indicatorDots: true,
-        imgUrls: [
-            'https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640',
-            'https://images.unsplash.com/photo-1551214012-84f95e060dee?w=640',
-            'https://images.unsplash.com/photo-1551446591-142875a901a1?w=640'
-        ],
-        courseList: null,
-        pageInfo: {
-            hasNextPage: true,
-            nextPage: 1,
-            pageSize: 10
-        },
-        index: 0,
-        items: [{
-            type: 'text',
-            label: '最新评价',
-            value: 'time',
-            groups: ['001'],
-        },
-            {
-                type: 'sort',
-                label: '评价数',
-                value: 'num',
-                groups: ['002'],
-            }, {
-                type: 'filter',
-                label: '筛选',
-                value: 'filter',
-                children: [{
-                    type: 'radio',
-                    label: '开课学院（单选）',
-                    value: 'college',
-                    children: [{
-                        label: '资源与环境工程',
-                        value: '1',
-                    },
-                        {
-                            label: '材料与冶金',
-                            value: '2',
-                        },
-                        {
-                            label: '机械自动化',
-                            value: '3',
-                        },
-                        {
-                            label: '信息科学与工程',
-                            value: '4',
-                        },
-                        {
-                            label: '管理',
-                            value: '5',
-                        },
-                        {
-                            label: '文法与经济',
-                            value: '6',
-                        },
-                        {
-                            label: '理学院',
-                            value: '7',
-                        },
-
-                    ],
-                },
-                    {
-                        type: 'checkbox',
-                        label: 'Query（复选）',
-                        value: 'query',
-                        children: [{
-                            label: 'Angular',
-                            value: 'angular',
-                        },
-                            {
-                                label: 'Vue',
-                                value: 'vue',
-                            },
-                            {
-                                label: 'React',
-                                value: 'react',
-                            },
-                            {
-                                label: 'Avalon',
-                                value: 'avalon',
-                            },
-                        ],
-                    },
-                ],
-                groups: ['001', '002'],
-            },
-        ],
+  data: {
+    autoplay: true,
+    indicatorDots: true,
+    current: 0,
+    imgHeights: [],
+    imgUrls: [
+      api.CosURL + '/d2a54f254d87419eafde7ffd22364fbb.png',
+      api.CosURL + '/banner2.png',
+      api.CosURL + '/banner3.png'
+    ],
+    courseList: null,
+    pageInfo: {
+      hasNextPage: true,
+      nextPage: 1,
+      pageSize: 20
     },
+    index: 0,
+  },
+  onSwip: function(e) {
+    this.setData({
+      current: e.detail.current
+    })
 
-    toSearch: function (e) {
-        wx.navigateTo({
-            url: '../search/search',
-        })
-    },
-    onChange(e) {
-        const {
-            checkedItems,
-            items
-        } = e.detail;
-        const params = {};
+  },
 
-        checkedItems.forEach((n) => {
-            if (n.checked) {
-                if (n.value === 'num') {
-                    params.sort = n.value;
-                    params.order = n.sort === 1 ? 'asc' : 'desc'
-                } else if (n.value === 'time') {
-                    params.sort = n.value
-                } else if (n.value === 'filter') {
-                    n.children.filter((n) => n.selected).forEach((n) => {
-                        if (n.value === 'college') {
-                            params.college = n.children.filter((n) => n.checked).map((n) => n.value).join(' ')
-                        } else if (n.value === 'query') {
-                            params.query = n.children.filter((n) => n.checked).map((n) => n.value).join(' ')
-                        }
-                    })
-                }
-            }
-        });
-
-        this.getFilterCourse(params)
-    },
-
-    goToCourse: function (e) {
-        wx.setStorageSync('courseCode', e.currentTarget.dataset.code);
-
-        wx.navigateTo({
-            url: "../course/course",
-        })
-    },
-
-    getFilterCourse(params = {}) {
-        const sort = params.sort || 'time';
-        const query = params.query || '必修';
-        const q = `${query}+sort=${sort}`;
-        const data = Object.assign(params);
-        console.log(data)
-
-    },
-
-    getRecommendCourse: function (e) {
-        let that = this;
-        let token = wx.getStorageSync('token');
-        let response = null;
-        if (utils.IsNull(token)) {
-            utils.GetCourseList(api.RecommendCourse, that.getCourseListCallback);
-        } else {
-            utils.GetRecommendCourseListByAuth(that.getCourseListCallback);
-        }
-
-    },
-
-    getHottestCourse: function (e) {
-        let that = this;
-        utils.GetCourseList(api.HottestCourse, that.getCourseListCallback);
-
-    },
-    getCourseListCallback(response) {
-        let that = this;
-        that.setData({
-            courseList: response
-        })
-    },
-    getAllCourse: function () {
-        Toast.loading("正在加载");
-
-        let that = this;
-        let data = {
-            page: that.data.pageInfo.nextPage,
-            size: that.data.pageInfo.pageSize
-        };
-        utils.RequestWithDataNoAuth('GET', api.Course, data, that.getAllCourseCallback);
-
-
-    },
-    getAllCourseCallback(response) {
-        let that = this;
-        if (that.data.courseList == null) {
-            that.setData({
-                courseList: response.list,
-                pageInfo: response
-            })
-        } else {
-            that.setData({
-                courseList: that.data.courseList.concat(response.list),
-                pageInfo: response
-            })
-        }
-        Toast.clear();
-    },
-
-    onClick: function (e) {
-        let index = e.detail.index;
-        this.setData({
-            index: index
-        });
-        if (index === 0) {
-            this.getHottestCourse()
-        } else if (index === 1) {
-            this.getRecommendCourse()
-        } else if (index === 2) {
-            this.setData({
-                courseList: null
-            });
-            this.getAllCourse()
-        }
-    },
-
-    /**
-     * 生命周期函数--监听页面加载
-     */
-    onLoad: function (options) {
-        this.getHottestCourse()
+  onTapSwiper:function(e){
+    let current = this.data.current
+    if(current==2){
+      wx.navigateTo({
+        url: '../about/about',
+      })
     }
-    ,
+  },
+  imageLoad: function(e) {
+    //获取图片真实宽度
+    let imgWidth = e.detail.width
+    let imgHeight = e.detail.height
+    //宽高比
+    let ratio = imgWidth / imgHeight
+    //计算的高度值
+    var viewHeight = 750 / ratio;
+    imgHeight = viewHeight
+    var imgHeights = this.data.imgHeights
+    //把每一张图片的高度记录到数组里
+    imgHeights.push(imgHeight)
+    this.setData({
+      imgHeights: imgHeights,
+    })
+  },
+  toSearch: function(e) {
+    wx.navigateTo({
+      url: '../search/search',
+    })
+  },
 
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function () {
+  goToCourse: function(e) {
+    wx.setStorageSync('courseCode', e.currentTarget.dataset.code);
 
+    wx.navigateTo({
+      url: "../course/course",
+    })
+  },
+
+  getFilterCourse(params = {}) {
+    const sort = params.sort || 'time';
+    const query = params.query || '必修';
+    const q = `${query}+sort=${sort}`;
+    const data = Object.assign(params);
+    console.log(data)
+
+  },
+
+  getRecommendCourse: function(e) {
+    let that = this;
+    let token = wx.getStorageSync('token');
+    let response = null;
+    if (utils.IsNull(token)) {
+      utils.GetCourseList(api.RecommendCourse, that.getCourseListCallback);
+    } else {
+      utils.GetRecommendCourseListByAuth(that.getCourseListCallback);
     }
-    ,
 
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function () {
+  },
 
+  getHottestCourse: function(e) {
+    let that = this;
+    utils.GetCourseList(api.HottestCourse, that.getCourseListCallback);
+
+  },
+  getCourseListCallback(response) {
+    let that = this;
+    that.setData({
+      courseList: response
+    })
+  },
+  getAllCourse: function() {
+    Toast.loading("正在加载");
+
+    let that = this;
+    let data = {
+      page: that.data.pageInfo.nextPage,
+      size: that.data.pageInfo.pageSize
+    };
+    utils.RequestWithDataNoAuth('GET', api.Course, data, that.getAllCourseCallback);
+
+
+  },
+  getAllCourseCallback(response) {
+    let that = this;
+    if (response == null) {
+      Toast.clear();
+      return
     }
-    ,
-
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function () {
-
+    if (that.data.courseList == null) {
+      that.setData({
+        courseList: response.list,
+        pageInfo: response
+      })
+    } else {
+      that.setData({
+        courseList: that.data.courseList.concat(response.list),
+        pageInfo: response
+      })
     }
-    ,
+    Toast.clear();
+  },
 
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function () {
-
+  onClick: function(e) {
+    let index = e.detail.index;
+    this.setData({
+      index: index
+    });
+    if (index === 0) {
+      this.getHottestCourse()
+    } else if (index === 1) {
+      this.getRecommendCourse()
+    } else if (index === 2) {
+      this.setData({
+        courseList: null
+      });
+      this.getAllCourse()
     }
-    ,
+  },
 
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function () {
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function(options) {
+    this.getHottestCourse()
+  },
 
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function() {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function() {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function() {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function() {
+
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function() {
+    if (this.data.index == 0) {
+      this.getHottestCourse()
+      return
     }
-    ,
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
-        console.log(this.data.pageInfo.hasNextPage, this.data.index)
-        if (this.data.pageInfo.hasNextPage && this.data.index === 2) {
-            this.getAllCourse()
-        }
+    if (this.data.index == 1) {
+      this.getRecommendCourse()
+      return
     }
-    ,
-
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function () {
-
+    if (this.data.pageInfo.hasNextPage && this.data.index === 2) {
+      this.getAllCourse()
     }
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function() {
+    console.log(this.data.pageInfo.hasNextPage, this.data.index)
+    if (this.data.pageInfo.hasNextPage && this.data.index === 2) {
+      this.getAllCourse()
+    }
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function() {
+
+  }
 });

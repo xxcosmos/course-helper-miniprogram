@@ -18,32 +18,17 @@ Page({
     },
     submit: function (e) {
         let that = this;
-        let star = e.detail.value.one;
         let content = e.detail.value.content;
-        if (star === "one") {
-            star = 1;
-        } else if (star === "three") {
-            star = 3;
-        } else if (star === "five") {
-            star = 5;
-        }
+        
         if (utils.IsNull(content)) {
             Toast.fail("请输入评价内容")
             return
         }
 
-        let userInfo = wx.getStorageSync("userInfo");
-        if (utils.IsNull(userInfo)) {
-            utils.Login();
-            return
-        }
         let data = {
-            ownerId: that.data.course.courseCode,
-            fromId: userInfo.id,
             content: content,
-            star: star
         };
-        utils.RequestWithDataByAuth('POST', api.Comment, data, that.commentCallback);
+        utils.RequestWithDataNoAuth('POST', api.Feedback, data, that.commentCallback);
 
     },
     commentCallback(response) {

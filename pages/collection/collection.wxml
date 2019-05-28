@@ -1,35 +1,50 @@
-<block wx:if="{{courseList!=null}}">
+<wxs src="../../wxs/utils.wxs" module="filters" />
+<van-toast id="van-toast"/>
+<block wx:if="{{ !filters.isNull(courseList) }}">
     <block wx:for="{{courseList}}" wx:key="courseCode">
-        <view bindtap="goToCourse" data-code="{{item.courseCode}}" style='border-bottom: 1rpx solid #f5f5f5;'>
+        <view bindtap="goToCourse" data-code="{{item.course.courseCode}}" style='border-bottom: 1rpx solid #f5f5f5;'>
             <van-row style="padding: 6rpx; ">
 
                 <van-col span='6'>
                     <view class="avatar-box">
-                        <avatar body-style="background-color: #ef473a; width: 100rpx; height: 100rpx; border-radius: 100rpx; line-height: 100rpx;"
-                                scale>
-                            {{filters.subStr(item.courseName,0,1)}}
-                        </avatar>
+                            {{item.course.courseName[0]}}
                     </view>
                 </van-col>
 
                 <van-col span='18'>
                     <view style="font-size: 26rpx; font-weight: 600;">
-                        {{item.courseName}}
+                        {{item.course.courseName}}
                     </view>
                     <view style="font-size: 24rpx;">
-                        {{item.unitName}}
+                        {{item.course.unitName}}
                     </view>
                     <view>
-                        <block wx:if="{{item.courseType==1}}">
+                        <!--课程属性标签 -->
+                        <block wx:if="{{item.course.courseType==1}}">
                             <van-tag plain type="danger">必修</van-tag>
                         </block>
-                        <block wx:elif="{{item.courseType==2}}">
+                        <block wx:elif="{{item.course.courseType==2}}">
                             <van-tag plain type="danger">选修</van-tag>
                         </block>
+                    </view>
+                    <view wx:if="{{item.commentNum!=0}}"  class='comment-num'>
+                        {{item.commentNum}}条评价
                     </view>
 
                 </van-col>
             </van-row>
         </view>
     </block>
+</block>
+<block wx:else>
+    <van-panel>
+        <view class='noinfo-box'>
+            <image 
+                style='width: 300rpx; height: 300rpx;'
+                src="https://s2.ax1x.com/2019/05/25/VAVOcd.png"
+            ></image>
+            <view>你没有收藏的课程嗷</view>
+        </view>
+        
+    </van-panel>
 </block>

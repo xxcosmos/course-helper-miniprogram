@@ -12,8 +12,8 @@ Page({
         teacherList: null,
         averageRate: 5,
         commentList: null,
-        fileNum: 9
-
+        fileNum: 0,
+        collected: null
     },
 
     onLike(e) {
@@ -60,17 +60,8 @@ Page({
         })
     },
 
-    goToPhoto() {
-        wx.navigateTo({
-            url: '../photo/photo',
-        })
-    },
+  
 
-    onChangeCollapse: function (e) {
-        this.setData({
-            activeNames: e.detail
-        });
-    },
 
     getCourseData() {
         let that = this;
@@ -98,16 +89,46 @@ Page({
             course: response.course,
             teacherList: response.teacherList,
             commentList: response.commentVOList,
-            averageRate: response.averageRate
+            averageRate: response.averageRate,
+            collected: response.collected,
+            fileNum: response.fileNum
         })
+        // console.log(response)
         Toast.clear()
     },
 
+    toStar(e) {
+        let that = this;
+        
+        let data={
+            ownerId: wx.getStorageSync("courseCode"),
+            type: 0,
+        }
+        console.log(e)
+        utils.RequestWithDataByAuth('POST', api.Star, data, that.toStarCallBack)
+    },
+    toStarCallBack(response) {
+        let that = this;
+        console.log(response)
+        if(response === 1){
+            that.setData({
+                collected: true
+            })
+            Toast.success('收藏成功');
+        }else if(response === 0){
+            Toast.success('取消收藏成功');
+            that.setData({
+                collected: false
+            })
+        }else{
+            Toast.fail('收藏失败');
+        }
+        
+    },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
     }
     ,
 

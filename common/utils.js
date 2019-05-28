@@ -25,7 +25,7 @@ function errorHandle(res) {
         Toast.fail("服务器错误");
         return;
     }
-    Toast.fail(res.message)
+    console.log(res.message)
 }
 
 /**
@@ -35,7 +35,7 @@ function errorHandle(res) {
  */
 function resultHandle(res) {
     if (res.statusCode !== 200) {
-        Toast.fail("服务器出现问题，请稍后再试");
+        Toast("服务器出现问题");
         return null;
     }
     if (res.data.code !== 200) {
@@ -147,10 +147,19 @@ function goToLogin() {
     //缓存中无用户信息
     if (isNull(userInfo)) {
         console.log("hey i  i")
-        Toast.fail("请登录后再操作")
-        wx.navigateTo({
-            url: '/pages/login/login',
-        });
+        wx.showModal({
+          title: '提示',
+          content: '请登录后再操作',
+          confirmText: '登录',
+          success(res){
+            if(res.confirm){
+              wx.navigateTo({
+                url: '/pages/login/login',
+              });
+            }
+          }
+        })
+        
         return
     }
 
@@ -169,8 +178,11 @@ function goToLogin() {
 }
 
 function loginCallback(res) {
+  if(res!=null){
     wx.setStorageSync("token", res);
+    goBackWithTimeout()
     getWxUserInfo();
+  }
 }
 
 /**
@@ -181,7 +193,10 @@ function getWxUserInfo() {
 }
 
 function userInfoCallback(res) {
+  if(res!=null){
     wx.setStorageSync("userInfo", res);
+
+  }
 }
 
 let getAuthorization = function (options, callback) {
@@ -292,7 +307,18 @@ function goBackWithTimeout() {
 function isNull(o) {
     return o === undefined || o == null || o === '' || o === [];
 }
+function isValidExtension(fileName) {
+  return isFile(fileName)||isImage(fileName)
+}
+function isFile(fileName){
+  var fileExtension = fileName.split('.').pop().toLowerCase();
+  return ['doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'pdf'].indexOf(fileExtension) !== -1
+}
 
+function isImage(fileName){
+  var fileExtension = fileName.split('.').pop().toLowerCase();
+  return [ 'png', 'jpg', 'jpeg'].indexOf(fileExtension) !== -1
+}
 module.exports = {
     RequestWithoutDataAuth: requestWithoutDataAuth,
     RequestWithDataByAuth: requestWithDataByAuth,
@@ -305,5 +331,8 @@ module.exports = {
     CosDao: dao,
     ToDate: toDate,
     GoBackWithTimeout: goBackWithTimeout,
-    IsNull: isNull
+    IsNull: isNull,
+    IsValidExtension: isValidExtension,
+    IsFile: isFile,
+    IsImage: isImage,
 };
