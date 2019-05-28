@@ -41,7 +41,7 @@
         <view class='noinfo-box'>
             <image 
                 style='width: 300rpx; height: 300rpx;'
-                src="https://s2.ax1x.com/2019/05/25/VAVOcd.png"
+                src="../../statics/images/tip-empty.png"
             ></image>
             <view>你没有收藏的课程嗷</view>
         </view>
