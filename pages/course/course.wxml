@@ -82,7 +82,7 @@
 
         <van-panel title="课程评价">
             <view wx:if="{{filters.isNull(commentList)}}">
-                <view>快来做第一个评价的人吧</view>
+                <view class="no-comment">快来做第一个评价的人吧</view>
             </view>
             <view wx:else>
                 <view class='comment-box' wx:for="{{commentList}}" wx:key="comment.id">
@@ -114,18 +114,16 @@
                     </view>
 
 
-                    <view class="like-icon">
+                    <view class="like-icon" bindtap="onLike" data-index='{{index}}' data-id='{{item.comment.id}}'>
 
                         <view wx:if="{{item.like==true}}">
-                            <van-icon bind:click="onLike" color='#ef473a' data-id='{{item.comment.id}}'
-                                      data-index='{{index}}' name="like"
+                            <van-icon color='#ef473a' name="like"
                                       size='36rpx'/>
                             有用 {{item.comment.likeNum}}
                         </view>
 
                         <view wx:else>
-                            <van-icon bind:click="onLike" data-id='{{item.comment.id}}' data-index='{{index}}'
-                                      name="like-o"
+                            <van-icon name="like-o"
                                       size='36rpx'/>
                             有用{{item.comment.likeNum}}
                         </view>

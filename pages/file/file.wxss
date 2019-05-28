@@ -44,3 +44,11 @@
     white-space: nowrap;
     font-size: 28rpx;
 }
+
+.no-file {
+    position: relative;
+    top: 10rpx;
+    color: gray;
+    font-size: 30rpx;
+    text-align: center;
+}

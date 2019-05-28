@@ -19,7 +19,8 @@ Page({
 
     onLike(e) {
         let that = this;
-        let index = e.target.dataset.index;
+        let index = e.currentTarget.dataset.index;
+        // console.log(e.currentTarget.dataset.index)
         that.setData({
             index: index
         });
@@ -28,7 +29,7 @@ Page({
             utils.Login();
             return
         }
-        utils.RequestWithDataByAuth('POST', api.Like, {ownerId: e.target.dataset.id}, that.likeCallback);
+        utils.RequestWithDataByAuth('POST', api.Like, {ownerId: e.currentTarget.dataset.id}, that.likeCallback);
 
     },
     likeCallback(res) {

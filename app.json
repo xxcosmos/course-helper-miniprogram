@@ -1,6 +1,6 @@
 {
   "pages": [
-    
+    "pages/file/file",
     "pages/index/index",
     "pages/login/login",
     "pages/search/search",
@@ -8,7 +8,7 @@
     "pages/mine/mine",
     "pages/auth/auth",
     "pages/comment/comment",
-    "pages/file/file",
+    
     "pages/upload/upload",
     "pages/collection/collection",
     "pages/feedback/feedback",
