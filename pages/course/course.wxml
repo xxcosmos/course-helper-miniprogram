@@ -1,16 +1,14 @@
 <wxs src="../../wxs/utils.wxs" module="filters"/>
 <van-toast id="van-toast"/>
+    <wux-fab-button
+        position="bottomRight" 
+        actionRotate="{{ false }}"
+        bind:change="goToComment"
+        theme="assertive"
+    />
+
 <!-- Todo 上面两个为js操作页面必备-->
 <view style="width: 100%">
-    <wux-fab-button
-            actionRotate="{{ false }}"
-            backdrop="{{ true }}"
-            bind:change="goToComment"
-            bind:click="onClick"
-            buttons="{{ buttons }}"
-            theme="assertive">
-    </wux-fab-button>
-
     <van-panel>
         <view slot="header">
             <view class='course-card'>

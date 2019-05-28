@@ -2,6 +2,7 @@ const api = require('../../common/api.js');
 const utils = require('../../common/utils.js');
 import Toast from '../../component/zanui/toast/toast';
 
+
 Page({
 
     /**
@@ -13,7 +14,7 @@ Page({
         averageRate: 5,
         commentList: null,
         fileNum: 0,
-        collected: null
+        collected: null,
     },
 
     onLike(e) {
@@ -46,8 +47,8 @@ Page({
         })
     },
 
-
     goToComment: function () {
+        console.log('goToComment')
         wx.setStorageSync("course", this.data.course);
         wx.navigateTo({
             url: '../comment/comment',
