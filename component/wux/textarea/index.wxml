@@ -1,0 +1,47 @@
+<view class="wux-class {{ classes.wrap }}">
+    <view class="{{ classes.label }}" wx:if="{{ label }}">{{ label }}</view>
+    <block wx:else>
+        <slot></slot>
+    </block>
+    <view class="{{ classes.control }}">
+		<textarea
+                adjust-position="{{ adjustPosition }}"
+                auto-height="{{ autoHeight }}"
+                bindblur="onBlur"
+                bindconfirm="onConfirm"
+                bindfocus="onFocus"
+                bindinput="onChange"
+                bindlinechange="onLineChange"
+                class="{{ classes.item }}"
+                cursor="{{ cursor }}"
+                cursor-spacing="{{ cursorSpacing }}"
+                disabled="{{ disabled }}"
+                fixed="{{ fixed }}"
+                focus="{{ focus }}"
+                maxlength="{{ maxlength }}"
+                placeholder="{{ placeholder }}"
+                placeholder-class="{{ placeholderClass }}"
+                placeholder-style="{{ extStyle }}"
+                selection-end="{{ selectionEnd }}"
+                selection-start="{{ selectionStart }}"
+                show-confirm-bar="{{ showConfirmBar }}"
+                style="{{ inputRows > 1 && !!inputHeight ? 'height: ' + inputHeight + 'px' : '' }}"
+                value="{{ inputValue }}"
+        />
+    </view>
+    <view bindtap="onClear" class="{{ classes.clear }}"
+          wx:if="{{ clear && !disabled && inputValue && inputValue.length > 0 }}">
+        <icon color="#B2B2B2" size="14" type="clear"/>
+    </view>
+    <view bindtap="onError" class="{{ classes.error }}" wx:if="{{ error }}">
+        <icon color="#ef473a" size="14" type="warn"/>
+    </view>
+    <view class="{{ classes.extra }}" wx:if="{{ extra }}">{{ extra }}</view>
+    <block wx:else>
+        <slot name="footer"></slot>
+    </block>
+    <view class="{{ classes.count }}" wx:if="{{ hasCount }}">
+        <text class="{{ classes.current }}">{{ inputValue.length }}</text>
+        /{{ maxlength === -1 ? '∞' : maxlength }}
+    </view>
+</view>

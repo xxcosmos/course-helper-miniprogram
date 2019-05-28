@@ -1,0 +1,108 @@
+/* pages/course/course.wxss */
+
+
+.course-card {
+    margin-top: 50rpx;
+    height: 300rpx;
+}
+
+.course-info {
+    color: gray;
+    text-align: left;
+    padding-top: 20rpx;
+}
+
+.info-list {
+    margin: 10rpx;
+    font-size: 26rpx;
+}
+
+
+
+.rate-box {
+    padding: 50rpx;
+    text-align: center;
+}
+
+.rate-num {
+    font-size: 28rpx;
+    color: gray;
+    text-align: right;
+    width: 95%;
+    display: block;
+    padding: 5rpx;
+}
+
+.file-up-down {
+    text-align: center;
+    padding: 50rpx;
+    color: gray;
+}
+
+
+.comment-box {
+    position: relative;
+    height: 200rpx;
+    border-bottom: 1rpx solid #f5f5f5;
+}
+
+.avatar-box {
+    position: absolute;
+    left: 35rpx;
+    top: 55rpx;
+}
+
+.comment-info {
+    position: absolute;
+    width: 80%;
+    left: 145rpx;
+    top: 10rpx;
+}
+
+
+.comment-content {
+    position: absolute;
+    width: 60%;
+    left: 145rpx;
+    top: 75rpx;
+    font-size: 30rpx;
+
+}
+
+.comment-text {
+    width: 100%;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.comment-time {
+    font-size: 26rpx;
+    color: grey;
+    position: absolute;
+    right: 10rpx;
+}
+
+.like-icon {
+    position: absolute;
+    font-size: 28rpx;
+    color: gray;
+    right: 30rpx;
+    top: 65rpx;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

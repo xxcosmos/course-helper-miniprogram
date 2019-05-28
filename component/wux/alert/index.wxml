@@ -1,0 +1,25 @@
+<wux-animation-group classNames="{{ classNames }}" in="{{ visible }}">
+    <view bindtap="onClick" class="wux-class {{ classes.wrap }}">
+        <view class="{{ classes.hd }}">
+            <block wx:if="{{ thumb }}">
+                <image class="{{ classes.thumb }}" src="{{ thumb }}"/>
+            </block>
+            <block wx:else>
+                <slot name="header"></slot>
+            </block>
+        </view>
+        <view class="{{ classes.bd }}">
+            <view class="{{ classes.text }}" wx:if="{{ title }}">{{ title }}</view>
+            <view class="{{ classes.desc }}" wx:if="{{ label }}">{{ label }}</view>
+            <slot></slot>
+        </view>
+        <view class="{{ classes.ft }}">
+            <block wx:if="{{ closable }}">
+                <view catchtap="onClose" class="{{ classes.closable }}">×</view>
+            </block>
+            <block wx:else>
+                <slot name="footer"></slot>
+            </block>
+        </view>
+    </view>
+</wux-animation-group>

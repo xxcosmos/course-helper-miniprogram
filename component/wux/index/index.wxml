@@ -1,0 +1,14 @@
+<view class="wux-class {{ classes.wrap }}" style="{{ extStyle }}">
+    <scroll-view bindscroll="onScroll" scroll-top="{{ scrollTop }}" scroll-y style="{{ extStyle }}">
+        <slot></slot>
+        <view catchtouchend="onTouchEnd" catchtouchmove="onTouchMove" catchtouchstart="onTouchStart"
+              class="{{ classes.nav }}" wx:if="{{ sections.length > 0 }}">
+            <block wx:for="{{ sections }}" wx:key="">
+                <view class="{{ classes.navItem }}" data-index="{{ index }}" data-name="{{ item.name }}">{{ item.name
+                    }}
+                </view>
+            </block>
+        </view>
+        <div class="{{ classes.indicator }}" wx:if="{{ showIndicator && moving }}">{{ currentName }}</div>
+    </scroll-view>
+</view>

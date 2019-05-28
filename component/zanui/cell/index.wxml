@@ -1,0 +1,43 @@
+<wxs module="utils" src="../wxs/utils.wxs"/>
+
+<view
+        bind:tap="onClick"
+        class="custom-class {{ utils.bem('cell', [size, { center, required, borderless: !border, clickable: isLink || clickable }]) }}"
+        hover-class="van-cell--hover hover-class"
+        hover-stay-time="70"
+        style="{{ customStyle }}"
+>
+    <van-icon
+            class="van-cell__left-icon-wrap"
+            custom-class="van-cell__left-icon"
+            name="{{ icon }}"
+            wx:if="{{ icon }}"
+    />
+    <slot name="icon" wx:else/>
+
+    <view
+            class="van-cell__title title-class"
+            style="{{ titleWidth ? 'max-width:' + titleWidth + ';min-width:' + titleWidth : '' }}"
+    >
+        <block wx:if="{{ title }}">
+            {{ title }}
+            <view class="van-cell__label label-class" wx:if="{{ label }}">{{ label }}</view>
+        </block>
+        <slot name="title" wx:else/>
+    </view>
+
+    <view class="van-cell__value value-class">
+        <block wx:if="{{ value || value === 0 }}">{{ value }}</block>
+        <slot wx:else/>
+    </view>
+
+    <van-icon
+            class="van-cell__right-icon-wrap right-icon-class"
+            custom-class="van-cell__right-icon"
+            name="{{ arrowDirection ? 'arrow' + '-' + arrowDirection : 'arrow' }}"
+            wx:if="{{ isLink }}"
+    />
+    <slot name="right-icon" wx:else/>
+
+    <slot name="extra"/>
+</view>

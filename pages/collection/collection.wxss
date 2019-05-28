@@ -1,0 +1,25 @@
+.avatar-box {
+    position: relative;
+    top: 15rpx;
+    left: 25rpx;
+    background-color: #ef473a; 
+    width: 100rpx; 
+    height: 100rpx; 
+    border-radius: 100rpx; 
+    line-height: 100rpx;
+    color: white;
+    text-align: center;
+}
+
+.comment-num {
+    font-size: 26rpx;
+    color: #ef473a;
+}
+
+.noinfo-box {
+    position: relative;
+    top: 10rpx;
+    color: gray;
+    font-size: 30rpx;
+    text-align: center;
+}

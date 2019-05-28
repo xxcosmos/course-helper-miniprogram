@@ -1,0 +1,19 @@
+<view class="van-panel van-hairline--top-bottom custom-class">
+    <van-cell
+            custom-class="header-class"
+            label="{{ desc }}"
+            title="{{ title }}"
+            value="{{ status }}"
+            value-class="van-panel__header-value"
+            wx:if="{{ title || desc || status }}"
+    />
+    <slot name="header" wx:else/>
+
+    <view class="van-panel__content">
+        <slot/>
+    </view>
+
+    <view class="van-panel__footer van-hairline--top footer-class" wx:if="{{ useFooterSlot }}">
+        <slot name="footer"/>
+    </view>
+</view>

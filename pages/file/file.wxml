@@ -1,0 +1,76 @@
+<wxs module="filters" src="../../wxs/utils.wxs"></wxs>
+<van-toast id="van-toast" />
+<van-dialog id="van-dialog" />
+<wux-fab-button 
+  position="bottomRight" 
+  theme="assertive" 
+  buttons="{{ buttons }}" 
+  bind:click="onClickButton" 
+/>
+<van-dialog 
+  use-slot 
+  close-on-click-overlay 
+  title="文件描述" 
+  show="{{ showModal }}" 
+  bind:close="onCloseModal" 
+  bind:confirm="onConfirmModal" 
+  confirm-button-text="{{canPreview?'预览':'确认'}}"
+>
+  <view class="file-info">{{currentFile.fileDescription}}</view>
+</van-dialog>
+
+<!-- 页面主体 -->
+<view style="width: 100%" wx:if="{{!filters.isNull(fileList)}}">
+
+  <!-- 提示条 -->
+  <van-notice-bar 
+    mode="" 
+    left-icon="/statics/iconfont/notify.png" 
+    text="由于小程序限制，无法直接下载，请获取链接。" 
+  />
+
+
+  <block wx:for="{{fileList}}" wx:key="id">
+    <view style='border-bottom: 1rpx solid #f5f5f5;'>
+      <van-row style="padding: 6rpx; ">
+
+        <view bindtap="onShowModal" data-index="{{index}}">
+
+          <van-col span='5'>
+            <view class="avatar-box">{{filters.subStr(item.fileName,0,1)}}</view>
+          </van-col>
+
+          <van-col span='12'>
+            <view class="fileName-box">{{item.fileName}}</view>
+            <!-- 课程属性标签 -->
+            <view class="property-tag">
+              <van-tag plain mark type="primary">文件大小：{{filters.convertByte(item.size)}}</van-tag>
+            </view>
+            <view class="property-tag">
+              <van-tag plain mark type="danger">下载次数：{{item.downloadCount}}</van-tag>
+            </view>
+            <view class="property-tag">
+              <van-tag plain mark color="gray">上传时间：{{item.createTime}}</van-tag>
+            </view>
+          </van-col>
+
+        </view>
+        <van-col span='7'>
+          <!-- <view wx:if="{{filters.isValidExtension(item.cosName)}}"> -->
+          <view class="eye-box">
+            <van-icon name="{{filters.isValidExtension(item.cosName) ? 'eye-o' : 'closed-eye'}}" size="55rpx" color="gray" data-index='{{index}}'></van-icon>
+          </view>
+          <!-- </view> -->
+          <button class="get-info-btn" bindtap="onDownload" data-index='{{index}}' type="warn" plain>
+            获取链接
+          </button>
+
+        </van-col>
+      </van-row>
+    </view>
+  </block>
+
+</view>
+<view wx:else>
+<!-- Todo 无文件的时候 提示页面 -->
+</view>

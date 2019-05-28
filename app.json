@@ -1,0 +1,73 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/login/login",
+    "pages/search/search",
+    "pages/course/course",
+    "pages/mine/mine",
+    "pages/auth/auth",
+    "pages/comment/comment",
+    "pages/file/file",
+    "pages/upload/upload",
+    "pages/collection/collection",
+    "pages/feedback/feedback",
+    "pages/about/about",
+    "pages/modify/modify"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#ef473a",
+    "navigationBarTitleText": "知课",
+    "navigationBarTextStyle": "white"
+    
+  },
+  "tabBar": {
+    "selectedColor": "#ef473a",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "statics/iconfont/1.png",
+        "selectedIconPath": "statics/iconfont/_1.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "statics/iconfont/4.png",
+        "selectedIconPath": "statics/iconfont/_4.png"
+      }
+    ]
+  },
+  "usingComponents": {
+    "van-toast": "/component/zanui/toast/index",
+    "van-row": "/component/zanui/row/index",
+    "van-col": "/component/zanui/col/index",
+    "van-card": "/component/zanui/card/index",
+    "van-button": "/component/zanui/button/index",
+    "van-search": "/component/zanui/search/index",
+    "van-tag": "/component/zanui/tag/index",
+    "avatar": "/component/wux/avatar/index",
+    "van-panel": "/component/zanui/panel/index",
+    "van-cell": "/component/zanui/cell/index",
+    "van-cell-group": "/component/zanui/cell-group/index",
+    "van-icon": "/component/zanui/icon/index",
+    "van-collapse": "/component/zanui/collapse/index",
+    "van-collapse-item": "/component/zanui/collapse-item/index",
+    "filter-bar": "/component/wux/filterbar/index",
+    "wux-card": "/component/wux/card/index",
+    "wux-timeago": "/component/wux/timeago/index",
+    "wux-wing-blank": "/component/wux/wing-blank/index",
+    "wux-fab-button": "/component/wux/fab-button/index",
+    "van-tab": "/component/zanui/tab/index",
+    "van-tabs": "/component/zanui/tabs/index",
+    "van-notice-bar": "/component/zanui/notice-bar/index",
+    "van-field": "/component/zanui/field/index",
+    "van-rate": "/component/zanui/rate/index",
+    "van-radio": "/component/zanui/radio/index",
+    "van-radio-group": "/component/zanui/radio-group/index",
+    "van-notify": "/component/zanui/notify/index",
+    "van-dialog": "/component/zanui/dialog/index",
+    "wux-popover": "/component/wux/popover/index"
+  },
+  "sitemapLocation": "sitemap.json"
+}

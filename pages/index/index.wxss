@@ -1,0 +1,37 @@
+/* pages/index/index.wxss */
+.title-uni {
+    padding: 20rpx;
+
+}
+
+
+.hot-box {
+    padding: 10rpx;
+    padding-left: 42rpx;
+}
+
+.avatar-box {
+    position: relative;
+    top: 15rpx;
+    left: 25rpx;
+    background-color: #ef473a; 
+    width: 100rpx; 
+    height: 100rpx; 
+    border-radius: 100rpx; 
+    line-height: 100rpx;
+    color: white;
+    text-align: center;
+}
+
+
+.swiper-box {
+    width: 95%;
+    height: 95%;
+    overflow: hidden;
+    border-radius: 20rpx;
+}
+
+.comment-num {
+    font-size: 26rpx;
+    color: #ef473a;
+}

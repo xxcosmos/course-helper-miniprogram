@@ -1,0 +1,142 @@
+<wxs src="../../wxs/utils.wxs" module="filters"/>
+<van-toast id="van-toast"/>
+<!-- Todo 上面两个为js操作页面必备-->
+<view style="width: 100%">
+    <wux-fab-button
+            actionRotate="{{ false }}"
+            backdrop="{{ true }}"
+            bind:change="goToComment"
+            bind:click="onClick"
+            buttons="{{ buttons }}"
+            theme="assertive">
+    </wux-fab-button>
+
+    <van-panel>
+        <view slot="header">
+            <view class='course-card'>
+                <van-row class='card-body' gutter='2'>
+                    <van-col class='course-cover' offset="2" span="8">
+                        <image src='https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640'
+                               style='height: 250rpx; width: 200rpx; border: 1px solid black'></image>
+                    </van-col>
+                    <van-col class='course-info' span="10">
+                        <view class="info-list">课程名称：{{course.courseName}}</view>
+                        <view class='info-list'>课程代码：{{course.courseCode}}</view>
+                        <view class='info-list'>课程性质：{{course.courseType==1?'必修':'选修'}}</view>
+                    </van-col>
+                    <van-col>
+                        <van-icon
+                                name="{{collected ? 'like' : 'like-o'}}"
+                                span='2'
+                                color="#ef473a"
+                                size="50rpx"
+                                custom-style="font-weight: 600; padding: 10rpx"
+                                bind:click="toStar"
+                                data-star="{{collected}}"
+                        ></van-icon>
+
+                    </van-col>
+                </van-row>
+            </view>
+        </view>
+        <van-panel>
+            <view class="rate-box">
+                <van-rate readonly size="{{ 30 }}" value="{{ averageRate }}"/>
+            </view>
+            <view wx:if="{{commentList.length==0}}">
+                <text class='rate-num'>暂无评价</text>
+            </view>
+            <view wx:else>
+                <text class='rate-num'>共{{commentList.length}}条评价</text>
+            </view>
+        </van-panel>
+
+
+        <van-tabs>
+            <van-tab title="课程信息">
+                <van-cell-group>
+                    <van-cell icon="smile-o" title="学分：" value="{{course.courseCredit}}"/>
+                    <van-cell icon="smile-o" title="总学时：" value="{{course.courseHour}}"/>
+                    <van-cell icon="smile-o" title="课程类别：" value="{{course.courseTypeName}}"/>
+                    <van-cell icon="smile-o" title="开课单位： " value="{{course.unitName}}"/>
+                </van-cell-group>
+            </van-tab>
+            <van-tab title="授课教师">
+                <block wx:if="{{teacherList!=null}}">
+                    <van-cell-group>
+                        <block wx:for="{{teacherList}}" wx:key="teacherName">
+                            <van-cell icon="smile-o" label="" title="{{item.teacherName}}"
+                                      value="平均分：{{filters.toFix(item.average)}}"/>
+                        </block>
+                    </van-cell-group>
+                </block>
+            </van-tab>
+            <van-tab class='file-up-down' title="教学资源">
+                <view bindtap="goToFile">
+                    <van-icon name="description" size="100rpx"/>
+
+                    <text style="font-size: 30rpx; ">点击查看文件列表</text>
+
+                </view>
+            </van-tab>
+        </van-tabs>
+
+
+        <van-panel title="课程评价">
+            <view wx:if="{{filters.isNull(commentList)}}">
+                <view>快来做第一个评价的人吧</view>
+            </view>
+            <view wx:else>
+                <view class='comment-box' wx:for="{{commentList}}" wx:key="comment.id">
+                    <view class='avatar-box'>
+                        <avatar scale size="large" src="{{item.userVO.avatarUrl}}"/>
+                    </view>
+                    <view class="comment-info">
+                        <van-row>
+                            <van-col style="font-size: 28rpx;">
+                                {{item.userVO.nickname}}
+                                <van-tag plain type="danger" wx:if="{{item.userVO.state==1}}">认证用户</van-tag>
+                            </van-col>
+                            <van-col class="comment-time">
+                                <wux-timeago to="{{item.comment.createTime}}"/>
+                            </van-col>
+                        </van-row>
+                    </view>
+                    <view class="comment-content">
+                        <van-row class="comment-text">
+                            <van-col>
+                                <van-rate readonly size="{{ 12 }}" value="{{item.comment.rate}}"/>
+                            </van-col>
+                        </van-row>
+                        <van-row>
+                            <van-col class="comment-text">
+                                {{item.comment.content}}
+                            </van-col>
+                        </van-row>
+                    </view>
+
+
+                    <view class="like-icon">
+
+                        <view wx:if="{{item.like==true}}">
+                            <van-icon bind:click="onLike" color='#ef473a' data-id='{{item.comment.id}}'
+                                      data-index='{{index}}' name="like"
+                                      size='36rpx'/>
+                            有用 {{item.comment.likeNum}}
+                        </view>
+
+                        <view wx:else>
+                            <van-icon bind:click="onLike" data-id='{{item.comment.id}}' data-index='{{index}}'
+                                      name="like-o"
+                                      size='36rpx'/>
+                            有用{{item.comment.likeNum}}
+                        </view>
+
+                    </view>
+                </view>
+            </view>
+
+        </van-panel>
+
+    </van-panel>
+</view>

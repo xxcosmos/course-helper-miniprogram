@@ -1,0 +1,60 @@
+<view class="van-picker custom-class">
+    <view
+            class="van-picker__toolbar van-hairline--top-bottom toolbar-class"
+            wx:if="{{ showToolbar }}"
+    >
+        <view
+                bindtap="emit"
+                class="van-picker__cancel"
+                data-type="cancel"
+                hover-class="van-picker__cancel--hover"
+                hover-stay-time="70"
+        >
+            {{ cancelButtonText || '取消' }}
+        </view>
+        <view class="van-picker__title van-ellipsis" wx:if="{{ title }}">{{ title }}</view>
+        <view
+                bindtap="emit"
+                class="van-picker__confirm"
+                data-type="confirm"
+                hover-class="van-picker__confirm--hover"
+                hover-stay-time="70"
+        >
+            {{ confirmButtonText || '确认' }}
+        </view>
+    </view>
+    <view class="van-picker__loading" wx:if="{{ loading }}">
+        <loading color="#1989fa"/>
+    </view>
+    <view
+            catch:touchmove="noop"
+            class="van-picker__columns"
+            style="height: {{ itemHeight * visibleItemCount }}px"
+    >
+        <picker-column
+                active-class="active-class"
+                bind:change="onChange"
+                class="van-picker__column"
+                custom-class="column-class"
+                data-index="{{ index }}"
+                default-index="{{ item.defaultIndex }}"
+                initial-options="{{ isSimple(columns) ? item : item.values }}"
+                item-height="{{ itemHeight }}"
+                value-key="{{ valueKey }}"
+                visible-item-count="{{ visibleItemCount }}"
+                wx:for="{{ isSimple(columns) ? [columns] : columns }}"
+                wx:key="{{ index }}"
+        />
+        <view
+                class="van-picker__frame van-hairline--top-bottom"
+                style="height: {{ itemHeight }}px"
+        />
+    </view>
+</view>
+
+<wxs module="isSimple">
+    function isSimple(columns) {
+    return columns.length && !columns[0].values;
+    }
+    module.exports = isSimple;
+</wxs>

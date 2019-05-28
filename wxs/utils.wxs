@@ -1,0 +1,68 @@
+var filters = {
+    //保留两位小数
+    toFix: function (value) {
+        return value.toFixed(2) //此处2为保留两位小数
+    },
+    
+    sub: function (val) {
+        if (val.length === 0) {
+            return;
+        }
+        if (val.length > 17) {
+            return val.substring(0, 17) + "...";
+        } else {
+            return val;
+        }
+    },
+    
+    subStr: function (val, begin, end) {
+        if (val.length === 0) {
+            return;
+        }
+        return val.substring(begin, end);
+
+    },
+
+    convertByte: function (limit) {
+        var size = "";
+        if (limit < 0.1 * 1024) { //如果小于0.1KB转化成B
+            size = limit.toFixed(2) + "B";
+        } else if (limit < 0.1 * 1024 * 1024) { //如果小于0.1MB转化成KB
+            size = (limit / 1024).toFixed(2) + "KB";
+        } else if (limit < 0.1 * 1024 * 1024 * 1024) { //如果小于0.1GB转化成MB
+            size = (limit / (1024 * 1024)).toFixed(2) + "MB";
+        } else { //其他转化成GB
+            size = (limit / (1024 * 1024 * 1024)).toFixed(2) + "GB";
+        }
+
+        var sizestr = size + "";
+        var len = sizestr.indexOf("\.");
+        var dec = sizestr.substring(len + 1, 2);
+        if (dec === "00") { //当小数点后为00时 去掉小数部分
+            return sizestr.substring(0, len) + sizestr.substring(len + 3, 2);
+        }
+        return sizestr;
+    },
+
+
+    isValidExtension: function (fileName) {
+        var fileExtension = fileName.split('.').pop().toLowerCase();
+        return ['doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'pdf', 'png', 'jpg','jpeg'].indexOf(fileExtension) !== -1
+    },
+
+    isNull:function(o){
+      return o==null ||o==[]||o==''||o==undefined
+    }
+
+
+};
+
+module.exports = {
+    toFix: filters.toFix,
+    sub: filters.sub,
+    subStr: filters.subStr,
+    isValidExtension: filters.isValidExtension,
+    convertByte: filters.convertByte,
+    isNull: filters.isNull
+
+};

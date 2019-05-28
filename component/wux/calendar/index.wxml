@@ -1,0 +1,68 @@
+<wux-popup bind:close="close" position="bottom" visible="{{ in }}" zIndex="1010">
+    <view class="wux-class {{ classes.wrap }}">
+        <view class="{{ classes.content }}">
+            <view class="{{ classes.hd }}" wx:if="{{ toolbar }}">
+                <view class="{{ classes.toolbar }}">
+                    <view class="{{ classes.picker }}">
+                        <view bindtap="prevMonth" class="{{ classes.link }}">
+                            <view class="{{ classes.prev }}"></view>
+                        </view>
+                        <view class="{{ classes.value }}">{{ currentMonthName }}</view>
+                        <view bindtap="nextMonth" class="{{ classes.link }}">
+                            <view class="{{ classes.next }}"></view>
+                        </view>
+                    </view>
+                    <view class="{{ classes.picker }}">
+                        <view bindtap="prevYear" class="{{ classes.link }}">
+                            <view class="{{ classes.prev }}"></view>
+                        </view>
+                        <text class="{{ classes.value }}">{{ currentYear }}</text>
+                        <view bindtap="nextYear" class="{{ classes.link }}">
+                            <view class="{{ classes.next }}"></view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="{{ classes.bd }}">
+                <view class="{{ classes.weekdays }}" wx:if="{{ weekHeader }}">
+                    <block wx:for="{{ weeks }}" wx:key="">
+                        <view class="{{ classes.weekday }} {{ item.weekend ? prefixCls + '__weekday--weekend' : '' }}">
+                            {{ item.dayName }}
+                        </view>
+                    </block>
+                </view>
+                <view class="{{ classes.months }}">
+                    <view bindtouchend="onTouchEnd" bindtouchmove="onTouchMove" bindtouchstart="onTouchStart"
+                          class="{{ classes.monthsContent }}" style="{{ wrapperTranslate }}">
+                        <block wx:for="{{ months }}" wx:for-item="month" wx:key="">
+                            <view
+                                    class="{{ classes.month }} {{ index === 0 ? (prefixCls + '__month--prev') : index === 1 ? (prefixCls + '__month--current') : (prefixCls + '__month--next') }}"
+                                    data-month="{{ month.month }}"
+                                    data-year="{{ month.year }}"
+                                    style="{{ monthsTranslate[index] }}"
+                            >
+                                <block wx:for="{{ month.items }}" wx:for-item="row" wx:key="">
+                                    <view class="{{ classes.days }}">
+                                        <block wx:for="{{ row }}" wx:for-item="col" wx:key="">
+                                            <view
+                                                    bindtap="onDayClick"
+                                                    class="{{ classes.day }} {{ col.type.prev ? prefixCls + '__day--prev' : '' }} {{ col.type.next ? prefixCls + '__day--next' : '' }} {{ col.type.today ? prefixCls + '__day--today' : '' }} {{ col.type.selected ? prefixCls + '__day--selected' : '' }} {{ col.type.weekend ? prefixCls + '__day--weekend' : '' }} {{ col.type.disabled ? prefixCls + '__day--disabled' : '' }}"
+                                                    data-date="{{ col.date }}"
+                                                    data-day="{{ col.day }}"
+                                                    data-month="{{ col.month }}"
+                                                    data-type="{{ col.type }}"
+                                                    data-year="{{ col.year }}"
+                                            >
+                                                <text class="{{ classes.text }}">{{ col.day }}</text>
+                                            </view>
+                                        </block>
+                                    </view>
+                                </block>
+                            </view>
+                        </block>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</wux-popup>

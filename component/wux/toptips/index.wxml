@@ -1,0 +1,6 @@
+<wux-animation-group classNames="{{ classNames }}" in="{{ in }}" wux-class="{{ classes.wrap }}">
+    <view class="{{ classes.content }}">
+        <icon class="{{ classes.icon }}" color="#fff" size="21" type="{{ icon }}" wx:if="{{ icon && !hidden }}"/>
+        <text>{{ text }}</text>
+    </view>
+</wux-animation-group>

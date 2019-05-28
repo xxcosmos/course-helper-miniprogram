@@ -1,0 +1,14 @@
+<view class="wux-class {{ classes.wrap }}">
+    <view bindtap="onClick" class="{{ classes.left }}" data-type="left">
+        <view class="{{ classes.text }}" wx:if="{{ leftText }}">{{ leftText }}</view>
+        <slot name="left" wx:else></slot>
+    </view>
+    <view class="{{ classes.title }}">
+        <block wx:if="{{ title }}">{{ title }}</block>
+        <slot wx:else></slot>
+    </view>
+    <view bindtap="onClick" class="{{ classes.right }}" data-type="right">
+        <view class="{{ classes.text }}" wx:if="{{ rightText }}">{{ rightText }}</view>
+        <slot name="right" wx:else></slot>
+    </view>
+</view>

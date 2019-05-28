@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "van-icon": "/component/zanui/icon/index",
+    "van-button": "/component/zanui/button/index"
+  },
+  "navigationBarTitleText": "课程详情",
+  
+  "enablePullDownRefresh": true
+}

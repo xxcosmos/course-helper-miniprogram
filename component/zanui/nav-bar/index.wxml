@@ -1,0 +1,39 @@
+<wxs module="utils" src="../wxs/utils.wxs"/>
+
+<view
+        class="{{ utils.bem('nav-bar', { fixed }) }} custom-class {{ border ? 'van-hairline--bottom' : '' }}"
+        style="z-index: {{ zIndex }}; {{ safeAreaInsetTop ? 'padding-top: ' + statusBarHeight + 'px;' : '' }}"
+>
+    <view bind:tap="onClickLeft" class="van-nav-bar__left">
+        <block wx:if="{{ leftArrow || leftText }}">
+            <van-icon
+                    custom-class="van-nav-bar__arrow"
+                    name="arrow-left"
+                    size="16px"
+                    wx:if="{{ leftArrow }}"
+            />
+            <view
+                    class="van-nav-bar__text"
+                    hover-class="van-nav-bar__text--hover"
+                    hover-stay-time="70"
+                    wx:if="{{ leftText }}"
+            >{{ leftText }}
+            </view>
+        </block>
+        <slot name="left" wx:else/>
+    </view>
+    <view class="van-nav-bar__title title-class van-ellipsis">
+        <block wx:if="{{ title }}">{{ title }}</block>
+        <slot name="title" wx:else/>
+    </view>
+    <view bind:tap="onClickRight" class="van-nav-bar__right">
+        <view
+                class="van-nav-bar__text"
+                hover-class="van-nav-bar__text--hover"
+                hover-stay-time="70"
+                wx:if="{{ rightText }}"
+        >{{ rightText }}
+        </view>
+        <slot name="right" wx:else/>
+    </view>
+</view>

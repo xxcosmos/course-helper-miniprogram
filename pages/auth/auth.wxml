@@ -1,0 +1,9 @@
+<van-toast id="van-toast"/>
+<form bindsubmit='auth'>
+    <van-cell-group>
+        <van-field name="name" value="{{ name }}" required clearable label="姓名" icon="question-o" placeholder="请输入姓名" bind:click-icon="onClickIcon" />
+
+        <van-field name="studentId" value="{{ studentId }}" type="number" label="学号" clearable placeholder="请输入学号" maxlength="12" required border="{{ false }}" />
+        <button type="primary" block form-type="submit">认证</button>
+    </van-cell-group>
+</form>

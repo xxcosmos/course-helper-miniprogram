@@ -1,0 +1,109 @@
+<wxs src="../../wxs/utils.wxs" module="filters" />
+<van-toast id="van-toast" />
+
+
+<view class="my-card">
+    <van-row>
+        <van-col span='10'>
+            <view class="avatar-box">
+                <avatar body-style="width: 180rpx; height: 180rpx; border-radius: 180rpx; line-height: 100rpx;" scale
+                        src="{{userInfo.avatarUrl}}"></avatar>
+            </view>
+        </van-col>
+        <van-col span='14'>
+            <view>
+                {{userInfo.nickname}}
+                <block wx:if="{{userInfo.gender==1}}">
+                    <view class="gender-box">
+                        <image src='../../statics/iconfont/boy.png' style='width: 100%; height: 100%'/>
+                    </view>
+                </block>
+                <block wx:elif="{{userInfo.gender==2}}">
+                    <view class="gender-box">
+                        <image src='../../statics/iconfont/girl.png' style='width: 100%; height: 100%'/>
+                    </view>
+                </block>
+                <!-- <block wx:else>
+                    <view class="gender-box">
+                        未知
+                    </view>
+                </block> -->
+            </view>
+            <!-- <view class="major-box">
+                专业: {{major}}
+            </view> -->
+            <view>
+                <block wx:if="{{userInfo.state==1}}">
+                    <!-- <view class='identity-box'>
+                        已认证
+                        <van-icon color="#F0D807" custom-style='top: 18rpx' name="passed" size='60rpx'/>
+                    </view> -->
+                    <view class='identity-box'>已认证</view>
+                    <view class="to-auth" style="line-height: 170rpx;">
+                        <van-icon size="60rpx" name="success"></van-icon>
+                    </view>
+
+                </block>
+                <block wx:elif="{{userInfo.state==0}}">
+                    <view class='identity-box'>未认证</view>
+                    <view bindtap="goToAuth" class="to-auth">去认证</view>
+                </block>
+                <block wx:elif="{{userInfo.state==-1}}">
+                    <view bindtap="goToAuth" class="to-auth">登录</view>
+                </block>
+                
+            </view>
+        </van-col>
+    </van-row>
+</view>
+
+<van-panel>
+    <van-cell is-link title="我的收藏" url="/pages/collection/collection"/>
+
+    <van-cell is-link title="意见反馈" url="/pages/feedback/feedback"/>
+
+    <van-cell is-link title="关于我们" url="/pages/about/about"/>
+</van-panel>
+<!-- <van-tabs sticky animated swipeable bind:click="onClick">
+    <van-tab title="我的收藏">
+
+    </van-tab>
+    <van-tab title="我的评论">
+
+    </van-tab>
+
+</van-tabs> -->
+
+
+<!-- <block wx:if="{{courseList!=null}}">
+    <block wx:for="{{courseList}}" wx:key="courseCode">
+        <view style='border-bottom: 1rpx solid #f5f5f5;' bindtap="goToCourse" data-code="{{item.courseCode}}">
+            <van-row style="padding: 6rpx; ">
+
+                <van-col span='6'>
+                    <view class="avatar-box">
+                        <avatar scale body-style="background-color: #ef473a; width: 100rpx; height: 100rpx; border-radius: 100rpx; line-height: 100rpx;" >{{filters.subStr(item.courseName,0,1)}}</avatar>
+                    </view>
+                </van-col>
+
+                <van-col span='18' >
+                    <view style="font-size: 26rpx; font-weight: 600;">
+                        {{item.courseName}}
+                    </view>
+                    <view style="font-size: 24rpx;">
+                        {{item.unitName}}
+                    </view>
+                    <view>
+                        <block wx:if="{{item.courseType==1}}">
+                            <van-tag plain type="danger">必修</van-tag>
+                        </block>
+                        <block wx:elif="{{item.courseType==2}}">
+                            <van-tag plain type="danger">选修</van-tag>
+                        </block>
+                    </view>
+
+                </van-col>
+            </van-row>
+        </view>
+    </block>
+</block> -->

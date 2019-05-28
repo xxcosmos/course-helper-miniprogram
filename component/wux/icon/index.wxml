@@ -1,0 +1,2 @@
+<view class="wux-class ion {{ type ? 'ion-' + type : '' }}" hidden="{{ hidden }}"
+      style="font-size: {{ fontSize }}; {{ color ? 'color: ' + color : '' }}"></view>

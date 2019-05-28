@@ -1,0 +1,35 @@
+<van-button
+        app-parameter="{{ appParameter }}"
+        bind:click="onClick"
+        bindcontact="bindContact"
+        binderror="bindError"
+        bindgetphonenumber="bindGetPhoneNumber"
+        bindgetuserinfo="bindGetUserInfo"
+        bindlaunchapp="bindLaunchApp"
+        bindopensetting="bindOpenSetting"
+        business-id="{{ businessId }}"
+        custom-class="van-goods-action-icon"
+        disabled="{{ disabled }}"
+        id="{{ id }}"
+        lang="{{ lang }}"
+        loading="{{ loading }}"
+        open-type="{{ openType }}"
+        send-message-img="{{ sendMessageImg }}"
+        send-message-path="{{ sendMessagePath }}"
+        send-message-title="{{ sendMessageTitle }}"
+        session-from="{{ sessionFrom }}"
+        show-message-card="{{ showMessageCard }}"
+        size="large"
+        square
+>
+    <view class="van-goods-action-icon__content van-hairline--right">
+        <van-icon
+                class="van-goods-action-icon__icon"
+                custom-class="icon-class"
+                info="{{ info }}"
+                name="{{ icon }}"
+                size="20px"
+        />
+        <text class="text-class">{{ text }}</text>
+    </view>
+</van-button>

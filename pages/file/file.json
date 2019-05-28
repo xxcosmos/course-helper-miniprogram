@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+  },
+  "navigationBarTitleText": "文件列表",
+  "enablePullDownRefresh": true
+}

@@ -1,0 +1,26 @@
+<button
+        app-parameter="{{ appParameter }}"
+        bindcontact="bindcontact"
+        binderror="onError"
+        bindgetphonenumber="bindgetphonenumber"
+        bindgetuserinfo="bindgetuserinfo"
+        bindopensetting="bindopensetting"
+        bindtap="onTap"
+        class="wux-class {{ classes.wrap }}"
+        disabled="{{ disabled }}"
+        form-type="{{ formType }}"
+        hover-class="wux-hover-class {{ !disabled ? classes.hover : 'none' }}"
+        hover-start-time="{{ hoverStartTime }}"
+        hover-stay-time="{{ hoverStayTime }}"
+        hover-stop-propagation="{{ hoverStopPropagation }}"
+        lang="{{ lang }}"
+        loading="{{ loading }}"
+        open-type="{{ openType }}"
+        send-message-img="{{ sendMessageImg }}"
+        send-message-path="{{ sendMessagePath }}"
+        send-message-title="{{ sendMessageTitle }}"
+        session-from="{{ sessionFrom }}"
+        show-message-card="{{ showMessageCard }}"
+>
+    <slot></slot>
+</button>

@@ -1,0 +1,43 @@
+<wxs module="utils" src="../wxs/utils.wxs"/>
+
+<view class="van-collapse-item custom-class {{ index !== 0 ? 'van-hairline--top' : '' }}">
+    <van-cell
+            bind:click="onClick"
+            border="{{ border && expanded }}"
+            class="{{ utils.bem('collapse-item__title', { disabled, expanded }) }}"
+            custom-class="van-cell"
+            hover-class="van-cell--hover"
+            icon="{{ icon }}"
+            is-link="{{ isLink }}"
+            label="{{ label }}"
+            right-icon-class="van-cell__right-icon"
+            title="{{ title }}"
+            title-class="title-class"
+            value="{{ value }}"
+    >
+        <slot
+                name="title"
+                slot="title"
+        />
+        <slot
+                name="icon"
+                slot="icon"
+        />
+        <slot name="value"/>
+        <slot
+                name="right-icon"
+                slot="right-icon"
+        />
+    </van-cell>
+    <view
+            bind:transitionend="onTransitionEnd"
+            class="{{ utils.bem('collapse-item__wrapper', { transition }) }}"
+            style="height: {{ contentHeight }};"
+    >
+        <view
+                class="van-collapse-item__content content-class"
+        >
+            <slot/>
+        </view>
+    </view>
+</view>

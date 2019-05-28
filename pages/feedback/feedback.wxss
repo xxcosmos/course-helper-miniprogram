@@ -1,0 +1,13 @@
+/* pages/comment/comment.wxss */
+.feedback-input {
+    height: 500rpx;
+    width: 95%;
+    font-size: 30rpx;
+    padding: 20rpx;
+    border-top: 1rpx solid #f5f5f5;
+    border-bottom: 1rpx solid #f5f5f5;
+}
+
+.van-cell__title {
+    width: 60%;
+}

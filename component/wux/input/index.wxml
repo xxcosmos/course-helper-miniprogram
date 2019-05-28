@@ -1,0 +1,42 @@
+<view class="wux-class {{ classes.wrap }}">
+    <view class="{{ classes.label }}" wx:if="{{ label }}">{{ label }}</view>
+    <block wx:else>
+        <slot></slot>
+    </block>
+    <view class="{{ classes.control }}">
+        <input
+                adjust-position="{{ adjustPosition }}"
+                bindblur="onBlur"
+                bindconfirm="onConfirm"
+                bindfocus="onFocus"
+                bindinput="onChange"
+                class="{{ classes.item }}"
+                confirm-hold="{{ confirmHold }}"
+                confirm-type="{{ confirmType }}"
+                cursor="{{ cursor }}"
+                cursor-spacing="{{ cursorSpacing }}"
+                disabled="{{ disabled }}"
+                focus="{{ focus }}"
+                maxlength="{{ maxlength }}"
+                password="{{ password }}"
+                placeholder="{{ placeholder }}"
+                placeholder-class="{{ placeholderClass }}"
+                placeholder-style="{{ extStyle }}"
+                selection-end="{{ selectionEnd }}"
+                selection-start="{{ selectionStart }}"
+                type="{{ type }}"
+                value="{{ inputValue }}"
+        />
+    </view>
+    <view bindtap="onClear" class="{{ classes.clear }}"
+          wx:if="{{ clear && !disabled && inputValue && inputValue.length > 0 }}">
+        <icon color="#B2B2B2" size="14" type="clear"/>
+    </view>
+    <view bindtap="onError" class="{{ classes.error }}" wx:if="{{ error }}">
+        <icon color="#ef473a" size="14" type="warn"/>
+    </view>
+    <view class="{{ classes.extra }}" wx:if="{{ extra }}">{{ extra }}</view>
+    <block wx:else>
+        <slot name="footer"></slot>
+    </block>
+</view>

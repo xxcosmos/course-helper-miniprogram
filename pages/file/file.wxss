@@ -1,0 +1,46 @@
+/* pages/file/file.wxss */
+.avatar-box {
+    position: relative;
+    top: 15rpx;
+    left: 25rpx;
+    background-color: #ef473a; 
+    width: 100rpx; 
+    height: 100rpx; 
+    border-radius: 100rpx; 
+    line-height: 100rpx;
+    color: white;
+    text-align: center;
+}
+
+.property-tag {
+    display: inline-block;
+    margin-right: 10rpx;
+}
+
+.eye-box {
+    position: relative;
+    left: 135rpx;
+}
+
+.get-info-btn {
+    width: 80%;
+    height: 60rpx;
+    font-size: 28rpx;
+    /* color: white; */
+    line-height: 60rpx;
+    /* background-color: white;
+    border: 1rpx solid #ef473a; */
+}
+
+.file-info {
+    font-size: 26rpx;
+    text-align: center;
+    line-height: 70rpx;
+}
+
+.fileName-box {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 28rpx;
+}

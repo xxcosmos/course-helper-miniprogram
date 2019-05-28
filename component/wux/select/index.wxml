@@ -1,0 +1,36 @@
+<wux-popup bind:close="onCancel" position="bottom" visible="{{ in }}">
+    <view class="{{ classes.wrap }}">
+        <view class="{{ classes.toolbar }}" wx:if="{{ toolbar }}">
+            <view class="{{ classes.inner }}">
+                <view bindtap="onCancel" class="{{ classes.cancel }}" hover-class="{{ classes.hover }}"
+                      wx:if="{{ toolbar.cancelText }}">{{ toolbar.cancelText }}
+                </view>
+                <view class="{{ classes.title }}">{{ toolbar.title }}</view>
+                <view bindtap="onConfirm" class="{{ classes.confirm }}" hover-class="{{ classes.hover }}"
+                      wx:if="{{ toolbar.confirmText }}">{{ toolbar.confirmText }}
+                </view>
+            </view>
+        </view>
+        <scroll-view class="{{ classes.scrollView }}" scroll-into-view="{{ activeIndex }}" scroll-y>
+            <wux-radio-group bind:change="onRadioChange" value="{{ value }}" wx:if="{{ !multiple }}">
+                <block wx:for="{{ common.getItems(options) }}" wx:key="index">
+                    <wux-radio color="{{ item.color }}" disabled="{{ item.disabled }}" id="{{ 'select-' + index }}"
+                               label="{{ item.label }}" thumb="{{ item.thumb }}" title="{{ item.title }}"
+                               value="{{ item.value }}"/>
+                </block>
+            </wux-radio-group>
+            <wux-checkbox-group bind:change="onCheckboxChange" value="{{ value }}" wx:else>
+                <block wx:for="{{ common.getItems(options) }}" wx:key="index">
+                    <wux-checkbox color="{{ item.color }}" disabled="{{ item.disabled }}" extra="{{ item.extra }}"
+                                  id="{{ 'select-' + index }}" label="{{ item.label }}" title="{{ item.title }}"
+                                  value="{{ item.value }}"/>
+                </block>
+            </wux-checkbox-group>
+        </scroll-view>
+    </view>
+</wux-popup>
+
+<wxs module="common">
+    module.exports.getItems = function(array) { return array.map(function(n) { if (n.constructor !== 'Object') { return
+    { value: n, title: n } } return n }) }
+</wxs>
