@@ -1,11 +1,20 @@
 <van-toast id="van-toast"/>
 
-<view class="container">
-    <view class="userinfo">
-        <button wx:if="{{userInfo==null}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 请先登录 </button>
-        <block wx:else>
-            <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-            <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-        </block>
+<view class="about-box">
+    <image 
+        class="logo"
+        src='https://inwust-1251756217.cos.ap-chengdu.myqcloud.com/654b2f4b797b4b91b5fdc6ae774f9a10.PNG'
+    />
+
+    <view class="title">
+        知课iKnow
     </view>
+
+   
+<view class="userinfo">
+        <button wx:if="{{userInfo==null}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" plain> 登录 </button>
+    </view>
+
+
+   
 </view>

@@ -1,8 +1,8 @@
 //const baseURL = 'http://127.0.0.1:8080';
 //const baseURL = 'https://xiaoyuu.ngrok.xiaomiqiu.cn';
-const baseURL = 'http://xiaoyuu.nat300.top';
+//const baseURL = 'http://xiaoyuu.nat300.top';
 const cosURL = 'https://inwust-1251756217.cos.ap-chengdu.myqcloud.com';
-
+const baseURL = 'https://course.xiaoyuu.me';
 module.exports = {
     CosURL: cosURL,
 

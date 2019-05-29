@@ -8,26 +8,25 @@
     />
 
     <view class="title">
-        知课
+        知课iKnow
     </view>
 
     <view class="version">
-        1.1.0
+        Version 1.1.0
     </view>
 
     <view class="intro">
-        哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈
+      100%的真实评价，200%了解一门课程。不用再四处焦急“道听途说”，不用在选课时茫然不知所措。在知课，你可以给出自己的评价，你可以获得每门课程的学习资料，选课，从未如此轻松。
     </view>
 
     <view class="info">
         <van-cell-group>
-            <van-cell title="简介" value="武科大教务系统" />
-            <van-cell title="联系我们" value="qwq@xx.com" />
+            <van-cell title="简介" value="Code with love" />
+            <van-cell title="联系我们" value="公众号：@in武科" />
         </van-cell-group>
     </view>
 
     <view class="copyright">
-        <view style="margin: 30rpx;">版权所有</view>
-        <view >copyright</view>
+        <view style="margin: 30rpx;">copyright 版权所有 @in武科</view>
     </view>
 </view>

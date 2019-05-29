@@ -31,11 +31,7 @@ Page({
       })
     }
   },
-  goToModify(e) {
-    wx.navigateTo({
-      url: '../modify/modify'
-    })
-  },
+  
   myGetUserInfo() {
     utils.GetUserInfo();
     let userInfo = wx.getStorageSync("userInfo");
@@ -50,7 +46,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.myGetUserInfo()
   },
 
   /**
@@ -65,6 +60,7 @@ Page({
    */
   onShow: function() {
 
+    this.myGetUserInfo()
 
 
   },

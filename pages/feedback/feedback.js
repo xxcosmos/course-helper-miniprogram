@@ -8,14 +8,8 @@ Page({
      * 页面的初始数据
      */
     data: {
-        course: {},
-        star: "five"
     },
-    onChange1: function (e) {
-        this.setData({
-            star: e.detail
-        })
-    },
+   
     submit: function (e) {
         let that = this;
         let content = e.detail.value.content;
@@ -41,10 +35,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        let course = wx.getStorageSync("course");
-        this.setData({
-            course: course
-        })
+      
     },
     /**
      * 生命周期函数--监听页面初次渲染完成

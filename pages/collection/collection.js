@@ -13,10 +13,15 @@ Page({
         // },
         // collected: false
     },
+
     getCollectedCourse: function () {
+      let token = wx.getStorageSync(token)
+      if(!utils.IsNull(token)){
         Toast.loading("正在加载");
         let that = this;
         utils.RequestWithoutDataAuth('GET', api.Collection, that.getCollectedCourseCallback);
+      }
+       
     },
     getCollectedCourseCallback(response) {
         let that = this;

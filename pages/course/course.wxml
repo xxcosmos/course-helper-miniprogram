@@ -68,6 +68,9 @@
                         </block>
                     </van-cell-group>
                 </block>
+                <block wx:else>
+                 <view>暂无教师信息</view>
+                </block>
             </van-tab>
             <van-tab class='file-up-down' title="教学资源">
                 <view bindtap="goToFile">

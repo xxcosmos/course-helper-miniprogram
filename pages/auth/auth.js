@@ -17,11 +17,11 @@ Page({
         let name = e.detail.value.name;
         let studentId = e.detail.value.studentId;
         if (utils.IsNull(name)) {
-            Toast.fail("姓名不能为空哦")
+            Toast.fail("姓名不能为空")
             return
         }
         if (utils.IsNull(studentId)) {
-            Toast.fail("学号不能为空哦")
+            Toast.fail("学号不能为空")
         }
         let that = this;
         let data = {
