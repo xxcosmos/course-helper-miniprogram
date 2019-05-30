@@ -11,8 +11,16 @@
     </view>
 
    
-<view class="userinfo">
-        <button wx:if="{{userInfo==null}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" plain> 登录 </button>
+    <view class="login-btn">
+        <button 
+            wx:if="{{userInfo==null}}" 
+            open-type="getUserInfo" 
+            bindgetuserinfo="getUserInfo" 
+            plain type="warn"
+            style="width: 300rpx"
+        > 
+            立即登录 
+        </button>
     </view>
 
 

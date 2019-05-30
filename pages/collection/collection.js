@@ -15,7 +15,7 @@ Page({
     },
 
     getCollectedCourse: function () {
-      let token = wx.getStorageSync(token)
+      let token = wx.getStorageSync("token")
       if(!utils.IsNull(token)){
         Toast.loading("正在加载");
         let that = this;
@@ -43,7 +43,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        // this.getCollectedCourse()
+        this.getCollectedCourse()
     }
     ,
 
@@ -83,6 +83,7 @@ Page({
      */
     onPullDownRefresh: function () {
       this.getCollectedCourse()
+      wx.stopPullDownRefresh();
     }
     ,
 

@@ -1,26 +1,54 @@
 <wxs src="../../wxs/utils.wxs" module="filters"/>
 <van-toast id="van-toast"/>
-    <wux-fab-button
-        position="bottomRight" 
-        actionRotate="{{ false }}"
-        bind:change="goToComment"
-        theme="assertive"
-    />
+<wux-fab-button
+    position="bottomRight" 
+    actionRotate="{{ false }}"
+    bind:change="goToComment"
+    theme="assertive"
+/>
+<van-popup
+  show="{{ showComment }}"
+  position="bottom"
+  bind:close="onCloseComment"
+  custom-style="border-radius: 50rpx 50rpx 0 0; width: 101%;"
+>
+    <view class="pop-comment-content">
+        <image class="pop-avatar" src="{{commentContent.avatarurl}}" />
+        <view class="pop-who">
+            <view class="pop-nick">{{commentContent.nickname}}</view>
+            <view class="pop-state">
+                <van-tag plain type="danger" wx:if="{{commentContent.state==1}}">认证用户</van-tag>
+            </view>
+        </view>
+         
+        <view class="pop-content">{{commentContent.content}}</view>
+        <view style="padding: 20rpx;">
+            <van-rate readonly size="{{ 25 }}" value="{{commentContent.rate}}"/>
+        </view>
+        
+        <view class="pop-time">
+            <wux-timeago to="{{commentContent.createTime}}"/>
+        </view>
+        
+    </view>
+  
+</van-popup>
 
 <!-- Todo 上面两个为js操作页面必备-->
 <view style="width: 100%">
-    <van-panel>
         <view slot="header">
             <view class='course-card'>
                 <van-row class='card-body' gutter='2'>
                     <van-col class='course-cover' offset="2" span="8">
-                        <image src='https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640'
-                               style='height: 250rpx; width: 200rpx;'></image>
+                        <!-- <image src='https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640'
+                               style='height: 250rpx; width: 200rpx;'></image> -->
+                        <view class="book-cover">
+                            暂无封面
+                        </view>
                     </van-col>
                     <van-col class='course-info' span="10">
-                        <view class="info-list">课程名称：{{course.courseName}}</view>
+                        <view class="info-title">{{course.courseName}}</view>
                         <view class='info-list'>课程代码：{{course.courseCode}}</view>
-                        <view class='info-list'>课程性质：{{course.courseType==1?'必修':'选修'}}</view>
                     </van-col>
                     <van-col>
                         <van-icon
@@ -52,18 +80,18 @@
 
         <van-tabs>
             <van-tab title="课程信息">
-                <van-cell-group>
-                    <van-cell icon="smile-o" title="学分：" value="{{course.courseCredit}}"/>
-                    <van-cell icon="smile-o" title="总学时：" value="{{course.courseHour}}"/>
-                    <van-cell icon="smile-o" title="课程类别：" value="{{course.courseTypeName}}"/>
-                    <van-cell icon="smile-o" title="开课单位： " value="{{course.unitName}}"/>
-                </van-cell-group>
+                    <van-cell icon="smile-o" title="课程名称：" value="{{course.courseName}}"/>
+                    <van-cell icon="award-o" title="学分：" value="{{course.courseCredit}}"/>
+                    <van-cell icon="info-o" title="课程性质" value="{{course.courseType==1?'必修':'选修'}}"/>
+                    <van-cell icon="underway-o" title="总学时：" value="{{course.courseHour}}"/>
+                    <van-cell icon="orders-o" title="课程类别：" value="{{course.courseTypeName}}"/>
+                    <van-cell icon="location-o" title="开课单位： " value="{{course.unitName}}"/>
             </van-tab>
             <van-tab title="授课教师">
                 <block wx:if="{{teacherList!=null}}">
                     <van-cell-group>
                         <block wx:for="{{teacherList}}" wx:key="teacherName">
-                            <van-cell icon="smile-o" label="" title="{{item.teacherName}}"
+                            <van-cell icon="user-o" label="" title="{{item.teacherName}}"
                                       value="平均分：{{filters.toFix(item.average)}}"/>
                         </block>
                     </van-cell-group>
@@ -72,8 +100,8 @@
                  <view>暂无教师信息</view>
                 </block>
             </van-tab>
-            <van-tab class='file-up-down' title="教学资源">
-                <view bindtap="goToFile">
+            <van-tab title="教学资源">
+                <view bindtap="goToFile" class='file-up-down' >
                     <van-icon name="description" size="100rpx"/>
 
                     <text style="font-size: 30rpx; ">点击查看文件列表</text>
@@ -88,33 +116,44 @@
                 <view class="no-comment">快来做第一个评价的人吧</view>
             </view>
             <view wx:else>
-                <view class='comment-box' wx:for="{{commentList}}" wx:key="comment.id">
-                    <view class='avatar-box'>
-                        <avatar scale size="large" src="{{item.userVO.avatarUrl}}"/>
-                    </view>
-                    <view class="comment-info">
-                        <van-row>
-                            <van-col style="font-size: 28rpx;">
-                                {{item.userVO.nickname}}
-                                <van-tag plain type="danger" wx:if="{{item.userVO.state==1}}">认证用户</van-tag>
-                            </van-col>
-                            <van-col class="comment-time">
-                                <wux-timeago to="{{item.comment.createTime}}"/>
-                            </van-col>
-                        </van-row>
-                    </view>
-                    <view class="comment-content">
-                        <van-row class="comment-text">
-                            <van-col>
-                                <van-rate readonly size="{{ 12 }}" value="{{item.comment.rate}}"/>
-                            </van-col>
-                        </van-row>
-                        <van-row>
-                            <van-col class="comment-text">
+                <view 
+                    class='comment-box' 
+                    wx:for="{{commentList}}" 
+                    wx:key="comment.id"
+                >
+                    <view 
+                        bindtap="onShowComment" 
+                        data-avatarUrl="{{item.userVO.avatarUrl}}" 
+                        data-nickname="{{item.userVO.nickname}}"
+                        data-state="{{item.userVO.state}}"
+                        data-createTime="{{item.comment.createTime}}"
+                        data-rate="{{item.comment.rate}}"
+                        data-content="{{item.comment.content}}"
+                    >
+                        <view class='avatar-box'>
+                            <avatar scale size="large" src="{{item.userVO.avatarUrl}}"/>
+                        </view>
+                        <view class="comment-info">
+                            <van-row>
+                                <van-col style="font-size: 28rpx;">
+                                    {{item.userVO.nickname}}
+                                    <van-tag plain type="danger" wx:if="{{item.userVO.state==1}}">认证用户</van-tag>
+                                </van-col>
+                                <van-col class="comment-time">
+                                    <wux-timeago to="{{item.comment.createTime}}"/>
+                                </van-col>
+                            </van-row>
+                        </view>
+                        <view class="comment-content">
+                            <view class="comment-text">
+                                    <van-rate readonly size="{{ 12 }}" value="{{item.comment.rate}}"/>
+                            </view>
+                            <view class="comment-text">
                                 {{item.comment.content}}
-                            </van-col>
-                        </van-row>
+                            </view>
+                        </view>
                     </view>
+                    
 
 
                     <view class="like-icon" bindtap="onLike" data-index='{{index}}' data-id='{{item.comment.id}}'>
@@ -136,6 +175,6 @@
             </view>
 
         </van-panel>
-
-    </van-panel>
 </view>
+
+

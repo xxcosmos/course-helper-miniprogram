@@ -7,10 +7,29 @@ Page({
     /**
      * 页面的初始数据
      */
-    data: {},
+    data: {
+        userInfo: {
+            avatarUrl: null,
+            nickname: null,
+            gender: 0,
+            state: -1,
+            studentId: null,
+      
+        },
+    },
 
     onClickIcon: function (e) {
         Toast("就是输入你的姓名啦")
+    },
+    myGetUserInfo() {
+        utils.GetUserInfo();
+        let userInfo = wx.getStorageSync("userInfo");
+        if (!utils.IsNull(userInfo)) {
+
+            this.setData({
+            userInfo: userInfo
+            })
+        }
     },
 
     auth(e) {
@@ -44,7 +63,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+        this.myGetUserInfo()
     },
 
     /**

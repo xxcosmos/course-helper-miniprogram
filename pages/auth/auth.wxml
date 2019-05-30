@@ -1,9 +1,17 @@
 <van-toast id="van-toast"/>
-<form bindsubmit='auth'>
-    <van-cell-group>
-        <van-field name="name" value="{{ name }}" required clearable label="姓名" icon="question-o" placeholder="请输入姓名" bind:click-icon="onClickIcon" />
 
-        <van-field name="studentId" value="{{ studentId }}" type="number" label="学号" clearable placeholder="请输入学号" maxlength="12" required border="{{ false }}" />
-        <button plain block form-type="submit">认证</button>
-    </van-cell-group>
-</form>
+<view class="auth-box">
+    <view style="width: 200rpx; margin: 0 auto;">
+        <image 
+            src="{{userInfo.avatarUrl}}" 
+            style="width: 200rpx; height: 200rpx; border-radius: 100%;"
+        />
+    </view>
+    <form bindsubmit='auth'>
+        <view style="margin-top: 10rpx; margin-bottom: 20rpx;">
+            <van-field name="name" value="{{ name }}" required clearable label="姓名" icon="question-o" placeholder="请输入姓名" bind:click-icon="onClickIcon" />
+            <van-field name="studentId" value="{{ studentId }}" type="number" label="学号" clearable placeholder="请输入学号" maxlength="12" required border="{{ false }}" />
+        </view>    
+        <button plain block type="warn" form-type="submit">认证</button>
+    </form>
+</view>

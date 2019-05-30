@@ -1,6 +1,6 @@
 let api = require('../../common/api');
 let utils = require('../../common/utils');
-import Dialog from '../../component/zanui/dialog/dialog';
+import Toast from '../../component/zanui/toast/toast';
 
 
 Page({
@@ -130,7 +130,7 @@ Page({
    */
   onPullDownRefresh: function () {
     this.getFileList()
-
+    wx.stopPullDownRefresh();
   },
 
   /**
@@ -180,6 +180,7 @@ Page({
       utils.Login()
     } else {
       //已登录
+      Toast.loading("正在加载")
       let url = this.getUrl();
       //下载文件到本地
       wx.downloadFile({
@@ -189,13 +190,28 @@ Page({
           //判断文件类型
           if (utils.IsFile(that.data.currentFile.fileName)) {
             //是文件
+            
             wx.openDocument({
               filePath,
+              fail () {
+                Toast.fail("预览失败")
+              },
+              success () {
+                Toast.clear()
+              }
             })
+            
           } else {
             //为图片
+            Toast.clear()
             wx.previewImage({
               urls: [url],
+              fail () {
+                Toast.fail("预览失败")
+              },
+              success () {
+                Toast.clear()
+              }
             })
           }
         }
@@ -222,6 +238,7 @@ Page({
   defaultCallback(res) {},
 
   getFileList() {
+    Toast.loading("正在加载");
     let courseCode = wx.getStorageSync("courseCode");
     utils.RequestWithoutDataNoAuth('GET', api.GetCourseFile + '/' + courseCode, this.getFileListCallback);
 
@@ -243,6 +260,7 @@ Page({
     that.setData({
       fileList: response
     })
+    Toast.clear();
   },
 
 

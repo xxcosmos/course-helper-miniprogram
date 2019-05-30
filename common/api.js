@@ -2,7 +2,7 @@
 //const baseURL = 'https://xiaoyuu.ngrok.xiaomiqiu.cn';
 //const baseURL = 'http://xiaoyuu.nat300.top';
 const cosURL = 'https://inwust-1251756217.cos.ap-chengdu.myqcloud.com';
-const baseURL = 'https://course.xiaoyuu.me';
+const baseURL = 'https://course.verly-badcw.top';
 module.exports = {
     CosURL: cosURL,
 

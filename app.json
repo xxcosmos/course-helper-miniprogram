@@ -1,5 +1,6 @@
 {
   "pages": [
+    
     "pages/index/index",
     "pages/login/login",
     "pages/search/search",
@@ -8,11 +9,11 @@
     "pages/auth/auth",
     "pages/comment/comment",
     "pages/file/file",
-    
+    "pages/about/about",
     "pages/upload/upload",
     "pages/collection/collection",
-    "pages/feedback/feedback",
-    "pages/about/about"
+    "pages/feedback/feedback"
+    
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -68,7 +69,8 @@
     "van-notify": "/component/zanui/notify/index",
     "van-dialog": "/component/zanui/dialog/index",
     "wux-popover": "/component/wux/popover/index",
-    "wux-prompt": "/component/wux/prompt/index"
+    "wux-prompt": "/component/wux/prompt/index",
+    "van-popup": "/component/zanui/popup/index"
   },
   "sitemapLocation": "sitemap.json"
 }

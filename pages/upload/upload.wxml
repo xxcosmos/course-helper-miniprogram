@@ -18,7 +18,7 @@
         <!-- <van-cell title="文件名">
             <view >{{tempFile.name}}</view>
         </van-cell> -->
-        <view >
+        <!-- <view >
             <view class="fileName-input-left">文件名</view>
             <input 
                 class="fileName-input" 
@@ -27,15 +27,37 @@
                 bindinput="refreshFileName"
             />
             <view class="fileName-extension">{{extension}}</view>
-        </view>
-        
+        </view> -->
+        <van-field
+            label="文件名"
+            required
+            clearable
+            input-align="right"
+            value="{{currentFileName}}"
+            placeholder="请输入文件名，限20字"
+            border="{{ false }}"
+            maxlength="20"
+            bind:change="refreshFileName"
+        />
+        <van-cell title="文件类型">
+            <view >{{extension}}</view>
+        </van-cell>
         <van-cell title="文件大小">
             <view >{{filters.convertByte(tempFile.size)}}</view>
         </van-cell>
+        
         <form bindsubmit='onUploadFile'>
-            <van-field autosize border="{{ false }}" clearable label="文件描述" name="fileDescription" placeholder="限 20 字以内"
-                required type="textarea"/>
-            <button form-type="submit">提交</button>
+            <van-field 
+                autosize 
+                border="{{ false }}" 
+                clearable 
+                label="文件描述" 
+                name="fileDescription" 
+                placeholder="限 20 字以内"
+                required 
+                type="textarea"
+            />
+            <button type="warn" plain form-type="submit">提交</button>
         </form>
 
     </van-cell-group>

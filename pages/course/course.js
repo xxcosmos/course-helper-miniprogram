@@ -15,6 +15,35 @@ Page({
         commentList: null,
         fileNum: 0,
         collected: null,
+        showComment: false,
+        commentContent: {
+            avatarurl: null,
+            content: null,
+            createTime: null,
+            nickname: null,
+            rate: 0,
+            state: 0,
+        }
+    },
+
+    onShowComment(e) {
+        let tmp = e.currentTarget.dataset
+        this.setData({ 
+            showComment: true,
+            commentContent: {
+                avatarurl: tmp.avatarurl,
+                content: tmp.content,
+                createTime: tmp.createtime,
+                nickname: tmp.nickname,
+                rate: tmp.rate,
+                state: tmp.state,
+            }
+        });
+        // console.log(tmp)
+    },
+
+    onCloseComment() {
+        this.setData({ showComment: false });
     },
 
     onLike(e) {
@@ -66,10 +95,11 @@ Page({
 
 
     getCourseData() {
+        Toast.loading("正在加载");
         let that = this;
         let courseCode = wx.getStorageSync('courseCode');
         let token = wx.getStorageSync('token')
-        Toast.loading('加载课程ing')
+        
         if (utils.IsNull(token)) {
             utils.RequestWithoutDataNoAuth('GET', api.Course + '/' + courseCode, that.getCourseDataCallback);
 
@@ -147,6 +177,7 @@ Page({
      */
     onShow: function () {
         this.getCourseData()
+        
     }
     ,
 
@@ -170,7 +201,8 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function () {
-
+        this.getCourseData();
+        wx.stopPullDownRefresh();
     }
     ,
 

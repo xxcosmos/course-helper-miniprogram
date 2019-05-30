@@ -1,1 +1,5 @@
 /* pages/auth/auth.wxss */
+.auth-box {
+    width: 80%;
+    margin: 200rpx auto;
+}

@@ -27,7 +27,7 @@
     width: 80%;
     word-wrap: break-word;
     white-space: pre-wrap; 
-    margin-left: 75rpx;
+    margin: 0 auto;
     font-size: 30rpx;
     line-height: 45rpx;
     color: gray;

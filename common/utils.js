@@ -16,7 +16,6 @@ function errorHandle(res) {
         return
     }
     if (res.code === 401) {
-        Toast.fail("请先登录");
         goToLogin();
         return;
     }

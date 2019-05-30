@@ -1,6 +1,7 @@
 // pages/mine/mine.js
 const api = require('../../common/api.js');
 const utils = require('../../common/utils.js');
+import Toast from '../../component/zanui/toast/toast';
 Page({
 
   /**
@@ -8,11 +9,11 @@ Page({
    */
   data: {
     userInfo: {
-      avatarUrl: 'https://inwust-1251756217.cos.ap-chengdu.myqcloud.com/654b2f4b797b4b91b5fdc6ae774f9a10.PNG',
+      avatarUrl: null,
       nickname: '',
       gender: 0,
       state: -1,
-      studentId: "333333333333",
+      studentId: null,
 
     },
     major: '工业设计'
@@ -33,6 +34,7 @@ Page({
   },
   
   myGetUserInfo() {
+    Toast.loading("正在加载");
     utils.GetUserInfo();
     let userInfo = wx.getStorageSync("userInfo");
     if (!utils.IsNull(userInfo)) {
@@ -40,7 +42,9 @@ Page({
       this.setData({
         userInfo: userInfo
       })
+      Toast.clear()
     }
+    console.log(userInfo)
   },
   /**
    * 生命周期函数--监听页面加载
@@ -84,6 +88,7 @@ Page({
    */
   onPullDownRefresh: function() {
     this.myGetUserInfo()
+    wx.stopPullDownRefresh();
   },
 
   /**

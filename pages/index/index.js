@@ -77,6 +77,7 @@ Page({
   },
 
   getRecommendCourse: function(e) {
+    Toast.loading("正在加载");
     let that = this;
     let token = wx.getStorageSync('token');
     let response = null;
@@ -87,8 +88,8 @@ Page({
     }
 
   },
-
   getHottestCourse: function(e) {
+    Toast.loading("正在加载");
     let that = this;
     utils.GetCourseList(api.HottestCourse, that.getCourseListCallback);
 
@@ -98,6 +99,7 @@ Page({
     that.setData({
       courseList: response
     })
+    Toast.clear();
   },
   getAllCourse: function() {
     Toast.loading("正在加载");
@@ -112,7 +114,7 @@ Page({
 
   },
   getAllCourseCallback(response) {
-    let that = this;
+    let that = this
     if (response == null) {
       Toast.clear();
       return
@@ -189,14 +191,17 @@ Page({
   onPullDownRefresh: function() {
     if (this.data.index == 0) {
       this.getHottestCourse()
+      wx.stopPullDownRefresh();
       return
     }
     if (this.data.index == 1) {
       this.getRecommendCourse()
+      wx.stopPullDownRefresh();
       return
     }
     if (this.data.pageInfo.hasNextPage && this.data.index === 2) {
       this.getAllCourse()
+      wx.stopPullDownRefresh();
     }
   },
 
