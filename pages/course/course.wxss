@@ -6,12 +6,31 @@
     height: 300rpx;
 }
 
+
+.book-cover {
+    background: hsla(4, 85%, 58%, 0.623);
+    text-align: center;
+    color: white;
+    height: 250rpx; 
+    width: 200rpx;
+    border-radius: 7rpx;
+    line-height: 230rpx;
+}
 .course-info {
     color: gray;
     text-align: left;
     padding-top: 20rpx;
 }
 
+
+.info-title {
+    margin: 10rpx;
+    font-size: 37rpx;
+    line-height: 65rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 .info-list {
     margin: 10rpx;
     font-size: 26rpx;
@@ -72,7 +91,7 @@
     width: 60%;
     left: 145rpx;
     top: 75rpx;
-    font-size: 30rpx;
+    font-size: 28rpx;
 
 }
 
@@ -96,11 +115,47 @@
     font-size: 28rpx;
     color: gray;
     right: 30rpx;
-    top: 65rpx;
+    top: 90rpx;
 }
 
 
+.pop-comment-content {
+    font-size: 28rpx;
+    font-size: 28rpx; 
+    width: 80%;
+    word-wrap: break-word; 
+    white-space: pre-wrap; 
+    margin: 50rpx auto;
+    text-align: center;
+}
 
+.pop-avatar {
+    width: 150rpx;
+    height: 150rpx;
+    border-radius: 100%;
+}
+
+.pop-who {
+    font-size: 30rpx;
+    line-height: 80rpx;
+}
+
+.pop-nick, .pop-state {
+    display: inline-block;
+}
+
+.pop-nick{
+    padding: 20rpx;
+}
+
+.pop-content {
+    font-size: 28rpx;
+}
+
+.pop-time {
+    font-size: 26rpx;
+    color: gray;
+}
 
 
 

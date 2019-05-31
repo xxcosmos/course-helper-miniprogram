@@ -71,17 +71,17 @@
 
 </view>
 <view wx:else>
-  
-  <van-panel>
-    <view class='no-file'>
-      <image 
-          style='width: 300rpx; height: 300rpx;'
-          src="../../statics/images/tip-empty.png"
-      ></image>
-      <view>
-        暂时没有任何文件嗷
-      </view>
+  <view class='no-file'>
+    <image 
+        style='width: 300rpx; height: 300rpx;'
+        src="../../statics/images/tip-empty.png"
+    ></image>
+    <view>
+      暂时没有任何文件嗷
     </view>
-  </van-panel>
+    <view>
+      右下角可以手动添加文件！
+    </view>
+  </view>
   
 </view>

@@ -14,9 +14,9 @@ Page({
     },
 
     refreshFileName(e) {
-      //  console.log(e.detail.value)
+       console.log(e.detail)
         this.setData({
-            currentFileName: e.detail.value
+            currentFileName: e.detail
         })
     },
 

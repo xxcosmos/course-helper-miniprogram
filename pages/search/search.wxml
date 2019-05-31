@@ -43,7 +43,6 @@
 </block>
 <block wx:else>
     <block wx:if="{{!filters.isNull(keyword)}}">
-        <van-panel>
             <view class='noinfo-box'>
                 <image 
                     style='width: 300rpx; height: 300rpx;'
@@ -51,12 +50,10 @@
                 ></image>
                 <view>搜索不到结果，换一个关键词吧</view>
             </view>
-            
-        </van-panel>
 
     </block>
     <block wx:elif="{{!filters.isNull(searchHistory)}}">
-        <view style="padding: 10rpx; margin-bottom: 10rpx;">
+        <view style="padding-left: 20rpx; margin-bottom: 10rpx;">
             <block wx:for="{{searchHistory}}" wx:key="item">
                 <view class="history-tag" data-history='{{item}}' ontap="getHistory">
                     <van-tag plain size="large" type="danger">{{item}}</van-tag>

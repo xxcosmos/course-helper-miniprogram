@@ -23,21 +23,9 @@
                         <image src='../../statics/iconfont/girl.png' style='width: 100%; height: 100%'/>
                     </view>
                 </block>
-                <!-- <block wx:else>
-                    <view class="gender-box">
-                        未知
-                    </view>
-                </block> -->
             </view>
-            <!-- <view class="major-box">
-                专业: {{major}}
-            </view> -->
             <view>
                 <block wx:if="{{userInfo.state==1}}">
-                    <!-- <view class='identity-box'>
-                        已认证
-                        <van-icon color="#F0D807" custom-style='top: 18rpx' name="passed" size='60rpx'/>
-                    </view> -->
                     <view class='identity-box'>已认证</view>
                     <view class="to-auth" style="line-height: 170rpx;">
                         <van-icon size="60rpx" name="success"></van-icon>
@@ -74,36 +62,3 @@
 
 </van-tabs> -->
 
-
-<!-- <block wx:if="{{courseList!=null}}">
-    <block wx:for="{{courseList}}" wx:key="courseCode">
-        <view style='border-bottom: 1rpx solid #f5f5f5;' bindtap="goToCourse" data-code="{{item.courseCode}}">
-            <van-row style="padding: 6rpx; ">
-
-                <van-col span='6'>
-                    <view class="avatar-box">
-                        <avatar scale body-style="background-color: #ef473a; width: 100rpx; height: 100rpx; border-radius: 100rpx; line-height: 100rpx;" >{{filters.subStr(item.courseName,0,1)}}</avatar>
-                    </view>
-                </van-col>
-
-                <van-col span='18' >
-                    <view style="font-size: 26rpx; font-weight: 600;">
-                        {{item.courseName}}
-                    </view>
-                    <view style="font-size: 24rpx;">
-                        {{item.unitName}}
-                    </view>
-                    <view>
-                        <block wx:if="{{item.courseType==1}}">
-                            <van-tag plain type="danger">必修</van-tag>
-                        </block>
-                        <block wx:elif="{{item.courseType==2}}">
-                            <van-tag plain type="danger">选修</van-tag>
-                        </block>
-                    </view>
-
-                </van-col>
-            </van-row>
-        </view>
-    </block>
-</block> -->

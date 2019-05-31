@@ -8,6 +8,6 @@
 
         </van-cell-group>
 
-        <button form-type="submit" type="primary">提交</button>
+        <button plain form-type="submit" type="warn">提交</button>
     </form>
 </van-panel>

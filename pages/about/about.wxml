@@ -12,7 +12,7 @@
     </view>
 
     <view class="version">
-        Version 1.1.0
+        Version 1.2.0
     </view>
 
     <view class="intro">
@@ -27,6 +27,6 @@
     </view>
 
     <view class="copyright">
-        <view style="margin: 30rpx;">copyright 版权所有 @in武科</view>
+        <view style="margin: 30rpx; font-size: 26rpx">copyright 版权所有 @in武科</view>
     </view>
 </view>

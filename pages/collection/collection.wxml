@@ -37,14 +37,11 @@
     </block>
 </block>
 <block wx:else>
-    <van-panel>
-        <view class='noinfo-box'>
-            <image 
-                style='width: 300rpx; height: 300rpx;'
-                src="../../statics/images/tip-empty.png"
-            ></image>
-            <view>你没有任何的收藏哦</view>
-        </view>
-        
-    </van-panel>
+    <view class='noinfo-box'>
+        <image 
+            style='width: 300rpx; height: 300rpx;'
+            src="../../statics/images/tip-empty.png"
+        ></image>
+        <view>你没有任何的收藏哦</view>
+    </view>
 </block>
